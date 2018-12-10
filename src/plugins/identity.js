@@ -26,8 +26,8 @@ module.exports = new Identity({
           return null
         }
     },
-    fakeUrls: [],
-    fakeTokens: [],
+    fakeTokens: ['DEBUG'],
+    fakeUrls: [/\/api\/v1\/apidoc\/.*$/, /\/api\/v1\/upload\/.*$/, /\/api\/v1\/test$/, /\/api\/v1\/favicon\.ico$/, /\/api\/v1\/login$/],
     store: {
       saveToken: async function(item) {
         const AuthToken = mongoose.model('AuthToken')
