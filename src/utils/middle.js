@@ -8,7 +8,7 @@
 const serve = require('koa-static')
 const moment = require('moment')
 const path = require('path')
-const Juglans = require('juglans')
+const Juglans = require('../juglans')
 const mongoose = Juglans.mongoose
 const apiDesc = {}
 

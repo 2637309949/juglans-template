@@ -6,7 +6,7 @@
  * @desc [只保留6个月内的Token, 分析Token]
 */
 const moment = require('moment')
-const Juglans = require('juglans')
+const Juglans = require('../../juglans')
 const mongoose = Juglans.mongoose
 
 const defineSchedule = {

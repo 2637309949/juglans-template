@@ -1,6 +1,6 @@
 # Juglans Framework
 
-![Juglans flash](./asserts/flash.jpeg)
+![Juglans flash](./assets/flash.jpeg)
 
 ## MIT License
 

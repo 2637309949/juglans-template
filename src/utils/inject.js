@@ -6,7 +6,7 @@
  * @desc [注入对象]
 */
 const schedule = require('node-schedule')
-const Juglans = require('juglans')
+const Juglans = require('../juglans')
 const consts = Juglans.consts
 const mongoose = Juglans.mongoose
 const { taskEnv, NODE_ENV = 'local' } = process.env

@@ -7,6 +7,7 @@ const dest = 'build'
 const env = process.env.NODE_ENV || 'local'
 
 console.log(`============= ${env} =============\n`)
+
 // 清空输出目录
 gulp.task('clean', function () {
   fsx.emptyDirSync(dest)
@@ -24,17 +25,17 @@ gulp.task('build:apidoc', function (cb) {
 
 // 编译服务端
 gulp.task('build:server', function (cb) {
-  return exec('npm run binLx', function (err, stdout, stderr) {
-    console.log(stdout)
-    console.log(stderr)
-    cb(err)
-  })
+  return gulp.src(['*src/**/*.js'])
+  .pipe(gulp.dest(dest));
 })
 
 // 复制其余文件
 gulp.task('copy:others', function () {
   return gulp.src([
-    'Dockerfile'
+    'package.json',
+    'Dockerfile',
+    '*assets/**/*',
+    '*node_modules/**/*'
   ]).pipe(gulp.dest(dest))
 })
 

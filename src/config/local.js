@@ -1,7 +1,5 @@
 const path = require('path')
 
-// 避开PKG虚拟文件系统
-const __actDirName = __dirname.replace('snapshot', '')
 module.exports = {
   name: 'Juglans V1.0',
   port: 3001,
@@ -16,7 +14,7 @@ module.exports = {
     }
   },
   redis: {
-    uri: 'redis://:F7B73743E7AEDD58E58900F4782550BF@www.wosoft.me:6412',
+    uri: 'redis://127.0.0.1:6379',
     retryCount: 5,
     opts: {
       maxRetriesPerRequest: 3,
@@ -27,9 +25,10 @@ module.exports = {
   },
   depInject: {
     path: [
+      path.join(__dirname, '../plugins/**/*.js'),
       path.join(__dirname, '../models/**/*.js'),
       path.join(__dirname, '../routes/**/*.js'),
-      path.join(__dirname, '../tasks/**/*.js')
+      path.join(__dirname, '../tasks/**/*.js'),
     ],
     ignore: [
       '**/node_modules/**'
@@ -50,7 +49,7 @@ module.exports = {
     multipart: true,
     formidable: {
       keepExtensions: true,
-      uploadDir: path.join(__actDirName, '../assets/public/upload')
+      uploadDir: path.join(__dirname, '../../assets/public/upload')
     }
   }
 }

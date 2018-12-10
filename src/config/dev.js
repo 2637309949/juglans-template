@@ -1,15 +1,13 @@
 const path = require('path')
 
-// 避开PKG虚拟文件系统
-const __actDirName = __dirname.replace('snapshot', '')
 module.exports = {
   name: 'Juglans V1.0',
   port: 3001,
   debug: true,
   mongo: {
     uri: 'mongodb://127.0.0.1:27017/test?authSource=admin',
-    retryCount: 5,
     opts: {
+      retryCount: 5,
       useNewUrlParser: true,
       poolSize: 1000,
       reconnectTries: Number.MAX_VALUE
@@ -17,8 +15,8 @@ module.exports = {
   },
   redis: {
     uri: 'redis://:F7B73743E7AEDD58E58900F4782550BF@www.wosoft.me:6412',
-    retryCount: 5,
     opts: {
+      retryCount: 5,
       maxRetriesPerRequest: 3,
       retryStrategy: function (times) {
         return null
@@ -50,7 +48,7 @@ module.exports = {
     multipart: true,
     formidable: {
       keepExtensions: true,
-      uploadDir: path.join(__actDirName, '../assets/public/upload')
+      uploadDir: path.join(__dirname, '../../assets/public/upload')
     }
   }
 }

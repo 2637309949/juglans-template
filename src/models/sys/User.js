@@ -1,5 +1,5 @@
 
-const Juglans = require('juglans')
+const Juglans = require('../../juglans')
 const CommonFields = require('../CommonFields')
 const mongoose = Juglans.mongoose
 const Schema = mongoose.Schema
