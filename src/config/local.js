@@ -25,7 +25,6 @@ module.exports = {
   },
   depInject: {
     path: [
-      path.join(__dirname, '../plugins/**/*.js'),
       path.join(__dirname, '../models/**/*.js'),
       path.join(__dirname, '../routes/**/*.js'),
       path.join(__dirname, '../tasks/**/*.js'),

@@ -52,9 +52,3 @@ module.exports = function ({ router }) {
     }
   })
 }
-
-/**
- * Schema 模型
- * 方便后期寻址
- */
-module.exports.defineSchema = defineSchema

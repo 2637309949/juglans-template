@@ -15,17 +15,6 @@ const defineSchedule = {
   }
 }
 
-/**
- * Test 模型
- * @param {Object} mongoose
- * @param {Object} router
- */
 module.exports = function ({ schedule }) {
   schedule.scheduleJob(defineSchedule)
 }
-
-/**
- * Schedule 模型
- * 方便后期寻址
- */
-module.exports.defineSchedule = defineSchedule
