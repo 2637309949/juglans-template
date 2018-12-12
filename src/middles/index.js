@@ -54,7 +54,7 @@ const logs = async function ({ router }) {
         } catch (err) {
           throw err
         }
-      })
+    })
 }
 
 const deli = Delivery({
