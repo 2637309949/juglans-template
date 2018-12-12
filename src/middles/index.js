@@ -1,12 +1,12 @@
-const serve = require('koa-static')
 const moment = require('moment')
 const path = require('path')
 const _ = require('lodash')
-const Juglans = require('../juglans')
 const redis = require('../utils/redis')
+const Juglans = require('../juglans')
+
 const mongoose = Juglans.mongoose
 const Identity = Juglans.Plugins.Identity
-
+const Delivery = Juglans.Plugins.Delivery
 const apiDesc = {}
 function measure (start, end, ctx) {
   const delta = end - start
@@ -40,9 +40,9 @@ const logs = async function ({ router }) {
               logInfo = `${moment().format('YYYY-MM-DD HH:mm:ss')} Log: ${user.username} ${user.id}, ${form.requestMethod} ${form.requestUrl} ${form.requestDesc}`
               await SystemLog.create([form])
             }
-          } else if (ctx.state.token && ctx.state.token.fakeToken) {
+          } else if (ctx.state.fakeToken) {
             logInfo = `${moment().format('YYYY-MM-DD HH:mm:ss')} Log (fake token): ${ctx.req.method.toUpperCase()} ${ctx.request.url}`
-          } else if (ctx.state.token && ctx.state.token.fakeUrl) {
+          } else if (ctx.state.fakeUrl) {
             logInfo = `${moment().format('YYYY-MM-DD HH:mm:ss')} Log (fake url): ${ctx.req.method.toUpperCase()} ${ctx.request.url}`
           } else {
             logInfo = `${moment().format('YYYY-MM-DD HH:mm:ss')} Log (unauthorized): ${ctx.req.method.toUpperCase()} ${ctx.request.url}`
@@ -57,12 +57,12 @@ const logs = async function ({ router }) {
       })
 }
 
-const static = async function ({ router }) {
-    router.use(serve(path.join(__dirname, '../assets/public')))
-}
+const deli = Delivery({
+  root: path.join(__dirname, '../../assets')
+})
 
 const iden = Identity({
-  expiresIn: '24h',
+  expiresIn: 24,
   auth: async function auth (ctx) {
       const form = _.pick(ctx.request.body, 'username', 'password')
       const User = mongoose.model('User')
@@ -82,16 +82,23 @@ const iden = Identity({
       }
   },
   fakeTokens: ['DEBUG'],
-  fakeUrls: [/\/api\/v1\/apidoc\/.*$/, /\/api\/v1\/upload\/.*$/, /\/api\/v1\/test$/, /\/api\/v1\/favicon\.ico$/, /\/api\/v1\/login$/],
+  fakeUrls: [
+    /\/api\/v1\/upload\/.*$/,
+    /\/api\/v1\/favicon\.ico$/,
+  ],
   store: {
-    saveToken: redis.saveToken,
-    revokeToken: redis.revokeToken,
-    findToken: redis.findToken,
+    saveToken: redis.hooks.saveToken,
+    revokeToken: redis.hooks.revokeToken,
+    findToken: redis.hooks.findToken,
+  },
+  route: {
+    obtainToken:  "/login",
+    revokeToken:  "/logout",
   }
 })
 
 module.exports = [
     iden,
     logs,
-    static,
+    deli,
 ]

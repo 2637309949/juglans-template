@@ -10,7 +10,6 @@ const Juglans = require('../../juglans')
 const mongoose = Juglans.mongoose
 
 const defineSchedule = {
-  path: __filename,
   name: 'revokeToken',
   spec: '9 * * *',
   callback: async function () {

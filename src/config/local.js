@@ -2,6 +2,7 @@ const path = require('path')
 
 module.exports = {
   name: 'Juglans V1.0',
+  prefix: '/api/v1',
   port: 3001,
   debug: true,
   mongo: {
@@ -32,13 +33,6 @@ module.exports = {
     ignore: [
       '**/node_modules/**'
     ]
-  },
-  security: {
-    secret: 'EF6D85D2A46311E8AA557555C34AD35A',
-    login: '/login',
-    logout: '/logout',
-    fakeTokens: ['DEBUG'],
-    fakeUrls: [/\/apidoc\/.*$/, /\/upload\/.*$/, /\/test$/, /\/favicon\.ico$/]
   },
   bodyParser: {
     strict: false,
