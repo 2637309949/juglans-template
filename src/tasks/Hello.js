@@ -7,7 +7,6 @@
 */
 
 const defineSchedule = {
-  path: __filename,
   name: 'Hello',
   spec: '*/5 * * * * *',
   callback: async function () {
