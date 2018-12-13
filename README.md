@@ -2,6 +2,18 @@
 
 ![Juglans flash](./assets/flash.jpeg)
 
+## Usage
+#### 1. For Dev
+```shell
+$ npm install
+$ npm run dev
+```
+#### 2. For Prod
+```shell
+$ npm install
+$ npm run build
+```
+
 ## MIT License
 
 Copyright (c) 2016 Freax
