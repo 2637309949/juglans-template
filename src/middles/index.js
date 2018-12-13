@@ -71,11 +71,15 @@ const iden = Identity({
         username: form.username,
         password: form.password
       })
+      // .populate('department')
+      // .populate('roles')
       if (one) {
         return {
           id: one._id,
           email: one.email,
-          username: one.username
+          username: one.username,
+          departments: one.department,
+          roles: one.roles
         }
       } else {
         return null
@@ -92,8 +96,9 @@ const iden = Identity({
     findToken: redis.hooks.findToken,
   },
   route: {
-    obtainToken:  "/login",
-    revokeToken:  "/logout",
+    obtainToken:  "/obtainToken",
+    revokeToken:  "/revokeToken",
+    refleshToken:  "/refleshToken",
   }
 })
 
