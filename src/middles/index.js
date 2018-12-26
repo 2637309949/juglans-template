@@ -8,9 +8,6 @@ const Juglans = require('../juglans')
 const mongoose = Juglans.mongoose
 const Identity = Juglans.Plugins.Identity
 const Delivery = Juglans.Plugins.Delivery
-const Logs = Juglans.Plugins.Logs
-
-const logs = Logs({ record: () => {} })
 
 const deli = Delivery({
   root: path.join(__dirname, '../../assets')
@@ -57,6 +54,5 @@ const iden = Identity({
 
 module.exports = [
     iden,
-    logs,
     deli,
 ]

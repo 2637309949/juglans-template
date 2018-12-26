@@ -5,18 +5,23 @@ const Juglans = require('./juglans')
 const config = require('./config')
 const middle = require('./middles')
 const inject = require('./utils/inject')
+const Logs = Juglans.Plugins.Logs
 
 const app = new Juglans({ name: 'Juglans V1.0' })
-app
-  .config(config)
-  .inject(inject)
-  .middle(...middle)
-  .run(function (err, config) {
-    if (err) {
-      console.error(err)
-    } else {
+app.config(config)
+app.inject(inject)
+app.use(Logs({
+  record: async form => {
+    // console.log(form)
+  }
+}))
+app.use(...middle)
+app.run(function (err, config) {
+    if (!err) {
       console.log(`App:${config.name}`)
       console.log(`App:${config.NODE_ENV}`)
       console.log(`App:runing on Port:${config.port}`)
+    } else {
+      console.error(err)
     }
-  })
+})
