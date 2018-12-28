@@ -31,6 +31,8 @@ const defineSchema = new Schema(Object.assign({}, CommonFields, {
   }]
 }))
 
+mongoose.model(name, defineSchema)
+
 /**
  * Role 模型
  * @param {Object} mongoose
@@ -39,7 +41,6 @@ const defineSchema = new Schema(Object.assign({}, CommonFields, {
 module.exports = function ({ router }) {
   const name = 'Role'
   const rPath = '/Role'
-  mongoose.model(name, defineSchema)
   router.get(rPath, mongoose.hooks.list(name))
   router.post(rPath, mongoose.hooks.create(name))
   router.delete(rPath, mongoose.hooks.softDelMany(name))

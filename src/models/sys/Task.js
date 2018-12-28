@@ -23,27 +23,3 @@ const defineSchema = new Schema(Object.assign({}, CommonFields, {
 }))
 
 mongoose.model('Task', defineSchema)
-
-/**
- * Role 模型
- * @param {Object} mongoose
- * @param {Object} router
- */
-module.exports = function ({ router }) {
-  router.get('/Task', async ctx => {
-    try {
-      const Task = mongoose.model('Task')
-      const action = ctx.query.action
-      const name = ctx.query.name
-      const taskDoc = await Task.findOne({ name })
-      if (action === 'callback') {
-        const task = require(taskDoc.path).defineSchedule
-        task.callback()
-      }
-      ctx.body = { errcode: null, errmsg: null, data: 'executing...' }
-    } catch (error) {
-      console.error(error.stack)
-      ctx.body = { errcode: 500, errmsg: error.message }
-    }
-  })
-}
