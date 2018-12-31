@@ -16,6 +16,11 @@ app.use(Logs({
   }
 }))
 app.use(...plugins)
+app.use(function({ router }) {
+  router.get('/test555', ctx => {
+    ctx.body = 'test555'
+  })
+})
 app.run(function (err, config) {
     if (!err) {
       console.log(`App:${config.name}`)
