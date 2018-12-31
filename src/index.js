@@ -3,7 +3,7 @@ require('./utils/mgo')()
 
 const Juglans = require('./juglans')
 const config = require('./config')
-const middle = require('./middles')
+const plugins= require('./plugins')
 const inject = require('./utils/inject')
 const Logs = Juglans.Plugins.Logs
 
@@ -15,7 +15,7 @@ app.use(Logs({
     // console.log(form)
   }
 }))
-app.use(...middle)
+app.use(...plugins)
 app.run(function (err, config) {
     if (!err) {
       console.log(`App:${config.name}`)
