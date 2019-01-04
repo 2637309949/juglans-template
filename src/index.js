@@ -1,5 +1,5 @@
-require('./utils/redis')()
-require('./utils/mgo')()
+require('./utils/redis')
+require('./utils/mgo')
 
 const Juglans = require('./juglans')
 const config = require('./config')
@@ -8,20 +8,20 @@ const inject = require('./utils/inject')
 const Logs = Juglans.Plugins.Logs
 
 const app = new Juglans({ name: 'Juglans V1.0' })
-app.config(config)
-app.inject(inject)
-app.use(Logs({
+app.Config(config)
+app.Inject(inject)
+app.Use(Logs({
   record: async form => {
     // console.log(form)
   }
 }))
-app.use(...plugins)
-app.use(function({ router }) {
+app.Use(...plugins)
+app.Use(function({ router }) {
   router.get('/test555', ctx => {
     ctx.body = 'test555'
   })
 })
-app.run(function (err, config) {
+app.Run(function (err, config) {
     if (!err) {
       console.log(`App:${config.name}`)
       console.log(`App:${config.NODE_ENV}`)
