@@ -1,24 +1,30 @@
+/**
+ * @author [Double]
+ * @email [2637309949@qq.com]
+ * @create date 2019-01-05 14:31:34
+ * @modify date 2019-01-05 14:31:34
+ * @desc [Example Instance]
+ */
 require('./utils/redis')
 require('./utils/mgo')
 
-const Juglans = require('./juglans')
 const config = require('./config')
 const plugins= require('./plugins')
+const Juglans = require('./juglans')
 const inject = require('./utils/inject')
-const Logs = Juglans.Plugins.Logs
 
+const { Logs } = Juglans.Plugins
 const app = new Juglans({ name: 'Juglans V1.0' })
 app.Config(config)
 app.Inject(inject)
 app.Use(Logs({
-  record: async form => {
-    // console.log(form)
+  record: async () => {
   }
 }))
 app.Use(...plugins)
 app.Use(function({ router }) {
-  router.get('/test555', ctx => {
-    ctx.body = 'test555'
+  router.get('/juglansWeb', ctx => {
+    ctx.body = 'juglansWeb'
   })
 })
 app.Run(function (err, config) {
