@@ -15,7 +15,7 @@ const redis = require('./utils/redis')
 const inject = require('./utils/inject')
 
 const mongoose = Juglans.mongoose
-const { Logs, Identity, Delivery, Roles } = Juglans.Plugins
+const { Logs, Identity, Delivery, Upload } = Juglans.Plugins
 
 const app = new Juglans({ name: 'Juglans V1.0' })
 app.Config(cfg)
@@ -60,6 +60,16 @@ app.Use(Identity({
     findToken: redis.hooks.findToken,
   }
 }))
+app.Use(
+  Upload({
+    async saveAnalysis(files) {
+      console.log(files)
+    },
+    async findAnalysis() {
+
+    }
+  })
+)
 app.Run(function (err, config) {
     if (!err) {
       console.log(`App:${config.name}`)
