@@ -60,16 +60,6 @@ app.Use(Identity({
     findToken: redis.hooks.findToken,
   }
 }))
-app.Use(
-  Upload({
-    async saveAnalysis(files) {
-      console.log(files)
-    },
-    async findAnalysis() {
-
-    }
-  })
-)
 app.Run(function (err, config) {
     if (!err) {
       console.log(`App:${config.name}`)
