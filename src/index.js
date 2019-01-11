@@ -8,25 +8,58 @@
 require('./utils/redis')
 require('./utils/mgo')
 
-const config = require('./config')
-const plugins= require('./plugins')
+const _ = require('lodash')
+const cfg = require('./config')
 const Juglans = require('./juglans')
+const redis = require('./utils/redis')
 const inject = require('./utils/inject')
 
-const { Logs } = Juglans.Plugins
+const mongoose = Juglans.mongoose
+const { Logs, Identity, Delivery } = Juglans.Plugins
+
 const app = new Juglans({ name: 'Juglans V1.0' })
-app.Config(config)
+app.Config(cfg)
 app.Inject(inject)
-app.Use(Logs({
-  record: async () => {
+app.Use(
+  Logs({
+    record: async () => {}
+  }),
+  Delivery(),
+  function({ router }) {
+    router.get('/hello', ctx => {
+      ctx.body = 'juglans'
+    })
+  }
+)
+app.Use(Identity({
+  auth: async function auth (ctx) {
+      const form = _.pick(ctx.request.body, 'username', 'password')
+      const User = mongoose.model('User')
+      const one = await User.findOne({
+        _dr: { $ne: true },
+        username: form.username,
+        password: form.password
+      })
+      if (one) {
+        return {
+          id: one._id,
+          email: one.email,
+          username: one.username,
+          departments: one.department,
+          roles: one.roles
+        }
+      } else {
+        return null
+      }
+  },
+  fakeTokens: ['DEBUG'],
+  fakeUrls: [ /\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/ ],
+  store: {
+    saveToken: redis.hooks.saveToken,
+    revokeToken: redis.hooks.revokeToken,
+    findToken: redis.hooks.findToken,
   }
 }))
-app.Use(...plugins)
-app.Use(function({ router }) {
-  router.get('/juglansWeb', ctx => {
-    ctx.body = 'juglansWeb'
-  })
-})
 app.Run(function (err, config) {
     if (!err) {
       console.log(`App:${config.name}`)

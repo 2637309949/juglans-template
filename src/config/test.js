@@ -5,6 +5,7 @@ module.exports = {
   prefix: '/api/v1',
   port: 3001,
   debug: true,
+  assetsDir: path.join(__dirname, '../../assets'),
   mongo: {
     uri: 'mongodb://127.0.0.1:27017/test?authSource=admin',
     retryCount: 5,
