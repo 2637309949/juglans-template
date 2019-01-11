@@ -3,7 +3,7 @@
  */
 const userServices = require('../services/user')
 
-module.exports = function ({ router, test }) {
+module.exports = function ({ router, test, roles }) {
   /**
      * @api {get} /test 测试接口
      * @apiGroup Test

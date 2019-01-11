@@ -15,7 +15,7 @@ const redis = require('./utils/redis')
 const inject = require('./utils/inject')
 
 const mongoose = Juglans.mongoose
-const { Logs, Identity, Delivery } = Juglans.Plugins
+const { Logs, Identity, Delivery, Roles } = Juglans.Plugins
 
 const app = new Juglans({ name: 'Juglans V1.0' })
 app.Config(cfg)
