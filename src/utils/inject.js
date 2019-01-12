@@ -1,3 +1,11 @@
+/**
+ * @author [author]
+ * @email [example@mail.com]
+ * @create date 2019-01-12 10:26:32
+ * @modify date 2019-01-12 10:26:32
+ * @desc [简单的后台任务scheduleJob, 复杂的任务管理推荐[http://www.xuxueli.com/xxl-job/#/?id=_35-glue%E6%A8%A1%E5%BC%8Fnodejs]]
+ */
+
 const schedule = require('node-schedule')
 const moment = require('moment')
 const Juglans = require('../juglans')
