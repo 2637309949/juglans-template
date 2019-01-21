@@ -16,7 +16,7 @@ $ npm run build
 
 ## MIT License
 
-Copyright (c) 2016 Freax
+Copyright (c) 2018-2020 Double
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
