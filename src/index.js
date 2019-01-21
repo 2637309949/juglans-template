@@ -18,8 +18,8 @@ const mongoose = Juglans.mongoose
 const { Logs, Identity, Delivery, Upload } = Juglans.Plugins
 
 const app = new Juglans({ name: 'Juglans V1.0' })
-app.Config(cfg)
-app.Inject(inject)
+app.Config(cfg, { name: 'juglans test v1.1' })
+app.Inject(inject, { test: 'xx' }, { test: 'xx' })
 app.Use(
   Logs({
     record: async () => {}
