@@ -10,6 +10,7 @@ module.exports = {
     uri: 'mongodb://127.0.0.1:27017/test?authSource=admin',
     retryCount: 5,
     opts: {
+      useCreateIndex: true,
       useNewUrlParser: true,
       poolSize: 1000,
       reconnectTries: Number.MAX_VALUE
