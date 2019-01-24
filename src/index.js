@@ -27,7 +27,10 @@ app.Use(
   Delivery(),
   function({ router }) {
     router.get('/hello', ctx => {
-      ctx.body = 'juglans'
+      ctx.status = 200
+      ctx.body = {
+        message: 'juglans'
+      }
     })
   }
 )

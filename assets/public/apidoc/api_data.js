@@ -9,35 +9,15 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP/1.1 200 OK",
-          "content": "HTTP/1.1 200 OK\n {\n     \"errcode\": null,\n     \"errmsg\": null,\n     \"data\": \"hello:test\"\n }",
+          "content": "HTTP/1.1 200 OK\n {\n     \"message\": 'hello:test'\n }",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes/test.js",
+    "filename": "src/routes/index.js",
     "groupTitle": "Test",
     "name": "GetHello"
-  },
-  {
-    "type": "get",
-    "url": "/test",
-    "title": "测试接口",
-    "group": "Test",
-    "description": "<p>无Token验证机制</p>",
-    "success": {
-      "examples": [
-        {
-          "title": "HTTP/1.1 200 OK",
-          "content": "HTTP/1.1 200 OK\n {\n     \"errcode\": null,\n     \"errmsg\": null,\n     \"data\": \"test\"\n }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/routes/test.js",
-    "groupTitle": "Test",
-    "name": "GetTest"
   },
   {
     "type": "get",
@@ -62,13 +42,13 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP/1.1 200 OK",
-          "content": "HTTP/1.1 200 OK\n {\n     \"errcode\": null,\n     \"errmsg\": null,\n     \"data\": true\n }",
+          "content": "HTTP/1.1 200 OK\n {\n     \"isManager\": true,\n }",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes/test.js",
+    "filename": "src/routes/user.js",
     "groupTitle": "Test",
     "name": "GetUserAuxManager"
   }

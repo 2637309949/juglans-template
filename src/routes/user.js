@@ -16,9 +16,7 @@ module.exports = function ({ router }) {
      * @apiSuccessExample {json}
      *   HTTP/1.1 200 OK
      *    {
-     *        "errcode": null,
-     *        "errmsg": null,
-     *        "data": true
+     *        "isManager": true,
      *    }
      */
   router.get('/user/aux/manager', async (ctx) => {
@@ -26,14 +24,12 @@ module.exports = function ({ router }) {
       let username = ctx.query.username
       username = username || ctx.request.body.username
       const isManager = await userServices.isManager(username)
-      ctx.body = {
-        errcode: null,
-        errmsg: null,
-        data: isManager
-      }
+      ctx.status = 200
+      ctx.body = { isManager }
     } catch (error) {
       console.error(error.stack)
-      ctx.body = { errcode: 500, errmsg: error.message }
+      ctx.status = 500
+      ctx.body = { message: error.message }
     }
   })
 }

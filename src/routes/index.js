@@ -13,12 +13,12 @@ module.exports = function ({ router, test }) {
      * @apiSuccessExample {json}
      *   HTTP/1.1 200 OK
      *    {
-     *        "errcode": null,
-     *        "errmsg": null,
-     *        "data": "hello:test"
+     *        "message": 'hello:test'
      *    }
      */
   router.get('/hello', (ctx, next) => {
-    ctx.body = 'hello:' + test
+    ctx.body = {
+      message: 'hello:' + test
+    }
   })
 }
