@@ -25,7 +25,7 @@ module.exports = {
       }
     }
   },
-  depInject: {
+  dependency: {
     path: [
       path.join(__dirname, '../models/**/*.js'),
       path.join(__dirname, '../routes/**/*.js'),
