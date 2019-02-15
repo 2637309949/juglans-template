@@ -1,5 +1,5 @@
 const Juglans = require('../juglans')
-const mongoose = Juglans.mongoose
+const mongoose = require('../addition').mongoose
 
 const repo = exports
 

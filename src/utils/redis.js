@@ -1,4 +1,4 @@
-const Redis = require('../juglans').Redis
+const Redis = require('../addition').Redis
 const config = require('../config')
 
 module.exports = Redis.retryConnect(config.redis.uri, config.redis.opts, function (err) {

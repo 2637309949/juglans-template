@@ -1,4 +1,4 @@
-const mongoose = require('../juglans').mongoose
+const mongoose = require('../addition').mongoose
 const config = require('../config')
 
 module.exports = mongoose.retryConnect(config.mongo.uri, config.mongo.opts, function (err) {

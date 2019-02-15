@@ -1,6 +1,6 @@
 const Juglans = require('../../juglans')
 const CommonFields = require('../CommonFields')
-const mongoose = Juglans.mongoose
+const mongoose = require('../../addition').mongoose
 const Schema = mongoose.Schema
 
 // 定义模型结构

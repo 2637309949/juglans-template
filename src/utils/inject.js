@@ -10,7 +10,7 @@ const schedule = require('node-schedule')
 const moment = require('moment')
 const Juglans = require('../juglans')
 
-const mongoose = Juglans.mongoose
+const mongoose = require('../addition').mongoose
 const { taskEnv, NODE_ENV = 'local' } = process.env
 
 // 任务实例建议单独部署
