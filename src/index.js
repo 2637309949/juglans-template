@@ -13,10 +13,11 @@ const cfg = require('./config')
 const Juglans = require('./juglans')
 const redis = require('./utils/redis')
 const inject = require('./utils/inject')
+const Identity = require('./plugins/Identity')
+const Delivery = require('./plugins/Delivery')
+const Logs = require('./plugins/Logs')
 
 const mongoose = Juglans.mongoose
-const { Logs, Identity, Delivery, Upload } = Juglans.Plugins
-
 const app = new Juglans({ name: 'Juglans V1.0' })
 app.Config(cfg, { name: 'juglans test v1.1' })
 app.Inject(inject, { test: 'xx' }, { test: 'xx' })
