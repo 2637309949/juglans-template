@@ -27,7 +27,7 @@ app.Use(
   }),
   Delivery(),
   function({ router }) {
-    router.get('/hello', ctx => {
+    router.get('/juglans', ctx => {
       ctx.status = 200
       ctx.body = {
         message: 'juglans'
@@ -56,7 +56,9 @@ app.Use(Identity({
         return null
       }
   },
-  fakeTokens: ['DEBUG'],
+  fakeTokens: async function() {
+    return  ['DEBUG']
+  },
   fakeUrls: [ /\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/ ],
   store: {
     saveToken: redis.hooks.saveToken,
