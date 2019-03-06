@@ -16,18 +16,28 @@ const inject = require('./utils/inject')
 const Identity = require('./plugins/Identity')
 const Delivery = require('./plugins/Delivery')
 const Logs = require('./plugins/Logs')
+const Roles = require('./plugins/Roles')
 
 const mongoose = require('./addition').mongoose
 const app = new Juglans({ name: 'Juglans V1.0' })
 app.Config(cfg, { name: 'juglans test v1.1' })
 app.Inject(inject, { test: 'xx' }, { test: 'xx' })
+
+app.Use(Roles({
+  roleHandler(ctx, action) {
+    const tfAction = Roles.transformAction(action)
+    console.log(tfAction)
+    return true
+  }
+}))
+
 app.Use(
   Logs({
     record: async () => {}
   }),
   Delivery(),
-  function({ router }) {
-    router.get('/juglans', ctx => {
+  function({ router, roles }) {
+    router.get('/juglans', roles.can('tf11@pr44;tf44'), ctx => {
       ctx.status = 200
       ctx.body = {
         message: 'juglans'
@@ -35,15 +45,12 @@ app.Use(
     })
   }
 )
+
 app.Use(Identity({
-  auth: async function auth (ctx) {
+  async auth (ctx) {
       const form = _.pick(ctx.request.body, 'username', 'password')
       const User = mongoose.model('User')
-      const one = await User.findOne({
-        _dr: { $ne: true },
-        username: form.username,
-        password: form.password
-      })
+      const one = await User.findOne({ username: form.username, password: form.password })
       if (one) {
         return {
           id: one._id,
@@ -56,15 +63,12 @@ app.Use(Identity({
         return null
       }
   },
-  fakeTokens: async function() {
+  async fakeTokens () {
     return  ['DEBUG']
   },
+  // fakeTokens: ['DEBUG'],
   fakeUrls: [ /\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/ ],
-  store: {
-    saveToken: redis.hooks.saveToken,
-    revokeToken: redis.hooks.revokeToken,
-    findToken: redis.hooks.findToken,
-  }
+  store: redis.hooks
 }))
 app.Run(function (err, config) {
     if (!err) {
