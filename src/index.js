@@ -9,6 +9,7 @@ require('./utils/redis')
 require('./utils/mgo')
 
 const _ = require('lodash')
+const path = require('path')
 const cfg = require('./config')
 const Juglans = require('./juglans')
 const redis = require('./utils/redis')
@@ -17,12 +18,14 @@ const Identity = require('./plugins/Identity')
 const Delivery = require('./plugins/Delivery')
 const Logs = require('./plugins/Logs')
 const Roles = require('./plugins/Roles')
+const Upload = require('./plugins/Upload')
 
 const mongoose = require('./addition').mongoose
 const app = new Juglans({ name: 'Juglans V1.0' })
 app.Config(cfg, { name: 'juglans test v1.1' })
 app.Inject(inject, { test: 'xx' }, { test: 'xx' })
 
+// Roles Plugin
 app.Use(Roles({
   roleHandler(ctx, action) {
     const tfAction = Roles.transformAction(action)
@@ -31,11 +34,13 @@ app.Use(Roles({
   }
 }))
 
+
+// Logs, Delivery Plugin
 app.Use(
   Logs({
     record: async () => {}
   }),
-  Delivery(),
+  Delivery({ root: path.join(__dirname, '../assets') }),
   function({ router, roles }) {
     router.get('/juglans', roles.can('tf11@pr44;tf44'), ctx => {
       ctx.status = 200
@@ -46,6 +51,7 @@ app.Use(
   }
 )
 
+// Identity Plugin
 app.Use(Identity({
   async auth (ctx) {
       const form = _.pick(ctx.request.body, 'username', 'password')
@@ -70,6 +76,18 @@ app.Use(Identity({
   fakeUrls: [ /\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/ ],
   store: redis.hooks
 }))
+
+// Upload Plugin
+Upload.strategys = [...Upload.strategys]
+app.Use(Upload({
+  saveAnalysis: async ret => {
+    console.log(JSON.stringify(ret[0].content))
+  },
+  findAnalysis: async cond => {
+  },
+  uploadPrefix: '/public/upload'
+}))
+
 app.Run(function (err, config) {
     if (!err) {
       console.log(`App:${config.name}`)
