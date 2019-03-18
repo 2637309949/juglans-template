@@ -34,7 +34,6 @@ app.Use(Roles({
   }
 }))
 
-
 // Logs, Delivery Plugin
 app.Use(
   Logs({
@@ -73,8 +72,7 @@ app.Use(Identity({
     return  ['DEBUG']
   },
   // fakeTokens: ['DEBUG'],
-  fakeUrls: [ /\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/ ],
-  store: redis.hooks
+  fakeUrls: [ /\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/ ]
 }))
 
 // Upload Plugin
