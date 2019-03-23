@@ -1,1 +1,10 @@
 
+pipeline:
+  master-build:
+    image: node:carbon
+    commands:
+      - npm install --registry=https://registry.npm.taobao.org
+      - CONFIG_ENV=dev npm run build
+    when:
+      branch: master
+      event: [push]
