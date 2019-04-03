@@ -16,6 +16,7 @@ const redis = require('./utils/redis')
 const inject = require('./utils/inject')
 const Identity = require('./plugins/Identity')
 const Delivery = require('./plugins/Delivery')
+const Proxy = require('./plugins/Proxy')
 const Logs = require('./plugins/Logs')
 const Roles = require('./plugins/Roles')
 const Upload = require('./plugins/Upload')
@@ -32,6 +33,13 @@ app.Use(Roles({
     console.log(tfAction)
     return true
   }
+}))
+
+// Proxy Plugin
+app.Use(Proxy({
+  host:  'http://xxx.com',
+  match: /^\/api\/v1\/proxy\//,
+  map: function(path) { return 'public/' + path; },
 }))
 
 // Logs, Delivery Plugin

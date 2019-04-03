@@ -4,7 +4,7 @@
   "description": "Juglans Example",
   "main": "src/index.js",
   "scripts": {
-    "dev": "set taskEnv=local&&nodemon --inspect ./src/index.js",
+    "dev": "export taskEnv=local&&nodemon --inspect ./src/index.js",
     "apidoc": "apidoc -i ./src/ -o ./assets/public/apidoc",
     "build": "gulp"
   },
