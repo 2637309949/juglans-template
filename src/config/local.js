@@ -6,6 +6,9 @@ module.exports = {
   port: 3001,
   debug: true,
   assetsDir: path.join(__dirname, '../../assets'),
+  logger: {
+    path: path.join(__dirname, '../../logger')
+  },
   mongo: {
     uri: 'mongodb://127.0.0.1:27017/test?authSource=admin',
     retryCount: 5,
@@ -30,7 +33,7 @@ module.exports = {
     path: [
       path.join(__dirname, '../models/**/*.js'),
       path.join(__dirname, '../routes/**/*.js'),
-      path.join(__dirname, '../tasks/**/*.js'),
+      path.join(__dirname, '../tasks/**/*.js')
     ],
     ignore: [
       '**/node_modules/**'

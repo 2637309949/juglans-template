@@ -29,7 +29,7 @@ module.exports = {
     path: [
       path.join(__dirname, '../models/**/*.js'),
       path.join(__dirname, '../routes/**/*.js'),
-      path.join(__dirname, '../tasks/**/*.js'),
+      path.join(__dirname, '../tasks/**/*.js')
     ],
     ignore: [
       '**/node_modules/**'
