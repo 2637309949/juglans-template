@@ -11,13 +11,6 @@ const mongoose = require('./addition').mongoose
 const logger = require('./addition').logger
 
 module.exports = function (app) {
-  // Proxy Plugin
-  // app.Use(Proxy({
-  //   host: 'http://xxx.com',
-  //   match: /^\/api\/v1\/proxy\//,
-  //   map: function (path) { return 'public/' + path }
-  // }))
-
   // Logs, Delivery Plugin
   app.Use(
     Logs({
@@ -25,6 +18,13 @@ module.exports = function (app) {
     }),
     Delivery({ root: path.join(__dirname, '../assets') })
   )
+
+  // Proxy Plugin
+  // app.Use(Proxy({
+  //   host: 'https://xxxx.com',
+  //   match: /\/api\/v1\/proxy/
+  //   map: function (path) { return 'public/' + path }
+  // }))
 
   // Identity Plugin
   app.Use(Identity({
