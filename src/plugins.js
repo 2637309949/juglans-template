@@ -8,14 +8,6 @@ const path = require('path')
 const mongoose = require('./addition').mongoose
 
 module.exports = function (app) {
-    // Roles Plugin
-    app.Use(Roles({
-        roleHandler(ctx, action) {
-            const tfAction = Roles.transformAction(action)
-            console.log(tfAction)
-            return true
-        }
-    }))
 
     // Proxy Plugin
     app.Use(Proxy({
@@ -29,15 +21,7 @@ module.exports = function (app) {
         Logs({
             record: async () => { }
         }),
-        Delivery({ root: path.join(__dirname, '../assets') }),
-        function ({ router, roles }) {
-            router.get('/juglans', roles.can('tf11@pr44;tf44'), ctx => {
-                ctx.status = 200
-                ctx.body = {
-                    message: 'juglans'
-                }
-            })
-        }
+        Delivery({ root: path.join(__dirname, '../assets') })
     )
 
     // Identity Plugin
@@ -64,6 +48,25 @@ module.exports = function (app) {
         // fakeTokens: ['DEBUG'],
         fakeUrls: [/\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/]
     }))
+
+    // Roles Plugin
+    app.Use(Roles({
+        roleHandler(ctx, action) {
+            const tfAction = Roles.transformAction(action)
+            console.log(tfAction)
+            return true
+        }
+    }))
+
+    // test roles
+    app.Use(function ({ router, roles }) {
+            router.get('/juglans', roles.can('tf11@pr44;tf44'), ctx => {
+                ctx.status = 200
+                ctx.body = {
+                    message: 'juglans'
+                }
+            })
+    })
 
     // Upload Plugin
     Upload.strategys = [...Upload.strategys]
