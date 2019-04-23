@@ -3,7 +3,6 @@ const path = require('path')
 
 const Identity = require('../../juglans-identity')
 const Delivery = require('../../juglans-delivery')
-// const Proxy = require('../../juglans-proxy')
 const Logs = require('../../juglans-logs')
 const Roles = require('../../juglans-roles')
 const Upload = require('../../juglans-upload')
@@ -18,13 +17,6 @@ module.exports = function (app) {
     }),
     Delivery({ root: path.join(__dirname, '../assets') })
   )
-
-  // Proxy Plugin
-  // app.Use(Proxy({
-  //   host: 'https://xxxx.com',
-  //   match: /\/api\/v1\/proxy/
-  //   map: function (path) { return 'public/' + path }
-  // }))
 
   // Identity Plugin
   app.Use(Identity({
