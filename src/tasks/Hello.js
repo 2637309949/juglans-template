@@ -1,6 +1,6 @@
 const defineSchedule = {
   name: 'Hello',
-  spec: '*/5 * * * * *',
+  spec: '*/60 * * * * *',
   callback: async function () {
     console.log('Hello job!')
   }
