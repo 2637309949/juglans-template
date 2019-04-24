@@ -6,6 +6,7 @@ const Delivery = require('../../juglans-delivery')
 const Logs = require('../../juglans-logs')
 const Roles = require('../../juglans-roles')
 const Upload = require('../../juglans-upload')
+const Captcha = require('../../juglans-captcha')
 const mongoose = require('./addition').mongoose
 const logger = require('./addition').logger
 
@@ -16,6 +17,25 @@ module.exports = function (app) {
       record: async () => { }
     }),
     Delivery({ root: path.join(__dirname, '../assets') })
+  )
+
+  // Captcha Plugin
+  app.Use(
+    Captcha({
+      urlPrefix: '/captcha',
+      maxAge: 60000,
+      config: {
+        size: 4,
+        ignoreChars: '0o1i',
+        noise: 1,
+        color: true,
+        background: '#cc9966'
+      },
+      cipher: {
+        key: '5cbd5f603fd886000e3bb75e',
+        iv: '5c9dbc4c9699fa000e1e0a98'
+      }
+    })
   )
 
   // Identity Plugin
@@ -52,7 +72,7 @@ module.exports = function (app) {
     }
   }))
 
-  // test roles
+  // Roles Plugin
   app.Use(function ({ router, roles }) {
     router.get('/juglans', roles.can('tf11@pr44;tf44'), async ctx => {
       logger.error('test error')
