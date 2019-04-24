@@ -15,10 +15,10 @@ results
 
 npm-debug.log
 node_modules
+build
 
 */assets/public/**
 */apidoc/**
-*/build/**
 
 .history
 .vscode

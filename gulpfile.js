@@ -7,14 +7,11 @@ const dest = 'build'
 const env = process.env.NODE_ENV || 'local'
 
 console.log(`============= ${env} =============\n`)
-
-// 清空输出目录
 gulp.task('clean', function () {
   fsx.emptyDirSync(dest)
   fsx.ensureDirSync(dest)
 })
 
-// 编译接口文档
 gulp.task('build:apidoc', function (cb) {
   return exec('npm run apidoc', function (err, stdout, stderr) {
     console.log(stdout)
@@ -23,20 +20,17 @@ gulp.task('build:apidoc', function (cb) {
   })
 })
 
-// 编译服务端
 gulp.task('build:server', function (cb) {
-  return gulp.src(['*src/**/*.js'])
-  .pipe(gulp.dest(dest));
+  return gulp.src(['*src/**/*.js']).pipe(gulp.dest(dest))
 })
 
-// 复制其余文件
 gulp.task('copy:others', function () {
   return gulp.src([
     'package.json',
     'Dockerfile',
+    '*logger/**/*',
     '*assets/**/*',
     '*node_modules/**/*'
   ]).pipe(gulp.dest(dest))
 })
-
 gulp.task('default', sequence('clean', 'build:apidoc', 'build:server', ['copy:others']))
