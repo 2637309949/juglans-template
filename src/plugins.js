@@ -44,6 +44,7 @@ module.exports = function (app) {
     async auth (ctx) {
       const form = _.pick(ctx.request.body, 'username', 'password')
       const User = mongoose.model('User')
+      // ctx.status.captcha
       const one = await User.findOne({ username: form.username, password: form.password })
       if (!one) return null
       return {
