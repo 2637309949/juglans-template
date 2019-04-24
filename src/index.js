@@ -16,7 +16,6 @@ app.Config(cfg, { name: 'juglans test v1.1' })
 app.Inject(inject, { test: 'xx' }, { test: 'xx' })
 
 require('./plugins')(app)
-
 app.Run(function (err, config) {
   if (!err) {
     console.log(`App:${config.name}`)

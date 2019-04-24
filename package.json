@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint --ext .js src",
-    "dev": "export taskEnv=local&&nodemon --inspect ./src/index.js",
+    "dev": "export TASK_ENV=1&&nodemon --inspect ./src/index.js",
     "apidoc": "apidoc -i ./src/ -o ./assets/public/apidoc",
     "build": "gulp"
   },

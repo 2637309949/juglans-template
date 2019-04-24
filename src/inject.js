@@ -9,15 +9,14 @@
 const schedule = require('node-schedule')
 const moment = require('moment')
 const mongoose = require('./addition').mongoose
-const { taskEnv, NODE_ENV = 'local' } = process.env
+const { TASK_ENV } = process.env
 
 // 任务实例建议单独部署
 const scheduleJob = schedule.scheduleJob
 schedule.scheduleJob = async function ({ path, name, spec, callback }) {
   const Task = mongoose.model('Task')
-  if (taskEnv === NODE_ENV) {
-    // 新增或更新
-    const entity = {
+  if (TASK_ENV) {
+    const task = {
       path,
       spec,
       name,
@@ -25,16 +24,24 @@ schedule.scheduleJob = async function ({ path, name, spec, callback }) {
       _creator: 'system',
       _created: moment().unix()
     }
-    await Task.updateOne({ name }, { $set: entity }, { upsert: true })
+    const doc = await Task.findOne({ name: task.name })
+    if (!doc) {
+      await Task.create([task])
+    }
     // 调度任务
-    scheduleJob(entity.spec, async function () {
-      const task = await Task.findOne({ name })
-      if (task && task.enable) {
-        // 新增或更新
-        entity.spec = task.spec
-        return callback()
+    let job = scheduleJob(task.spec, async function () {
+      const doc = await Task.findOne({ name })
+      if (doc && doc.enable) {
+        if (task.spec === doc.spec) {
+          console.info(`Task ${name} schedule.`)
+          await callback()
+        } else {
+          task.spec = doc.spec
+          job.reschedule(doc.spec)
+          console.info(`Task ${name} reschedule.`)
+        }
       } else {
-        console.info(`Task ${name} has been forbidden!`)
+        console.info(`Task ${name} has been forbidden.`)
       }
     })
   }
