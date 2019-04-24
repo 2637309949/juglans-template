@@ -1,6 +1,6 @@
 /**
  * @author [Double]
- * @email [example@mail.com]
+ * @email [2637309949@qq.com]
  * @create date 2018-10-11 21:13:32
  * @modify date 2018-10-11 21:13:32
  * @desc [模型共同属性]
