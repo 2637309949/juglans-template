@@ -3,21 +3,22 @@ const path = require('path')
 
 const Identity = require('../../juglans-identity')
 const Delivery = require('../../juglans-delivery')
-const Logs = require('../../juglans-logs')
-const Roles = require('../../juglans-roles')
-const Upload = require('../../juglans-upload')
 const Captcha = require('../../juglans-captcha')
-const mongoose = require('./addition').mongoose
-const logger = require('./addition').logger
+const Upload = require('../../juglans-upload')
+const Roles = require('../../juglans-roles')
+const Logs = require('../../juglans-logs')
+const { mongoose, logger } = require('./addition')
 
 module.exports = function (app) {
-  // Logs, Delivery Plugin
+  // Logs Plugin
   app.Use(
     Logs({
       record: async () => { }
-    }),
-    Delivery({ root: path.join(__dirname, '../assets') })
+    })
   )
+
+  // Delivery Plugin
+  app.Use(Delivery({ root: path.join(__dirname, '../assets') }))
 
   // Captcha Plugin
   app.Use(
@@ -44,30 +45,23 @@ module.exports = function (app) {
       const form = _.pick(ctx.request.body, 'username', 'password')
       const User = mongoose.model('User')
       const one = await User.findOne({ username: form.username, password: form.password })
-      if (one) {
-        return {
-          id: one._id,
-          email: one.email,
-          username: one.username,
-          departments: one.department,
-          roles: one.roles
-        }
-      } else {
-        return null
+      if (!one) return null
+      return {
+        id: one._id,
+        email: one.email,
+        username: one.username,
+        departments: one.department,
+        roles: one.roles
       }
     },
-    async fakeTokens () {
-      return ['DEBUG']
-    },
-    // fakeTokens: ['DEBUG'],
+    fakeTokens: ['DEBUG'],
     fakeUrls: [/\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/]
   }))
 
   // Roles Plugin
   app.Use(Roles({
     roleHandler (ctx, action) {
-      const tfAction = Roles.transformAction(action)
-      console.log(tfAction)
+      Roles.transformAction(action)
       return true
     }
   }))
