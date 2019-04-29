@@ -18,7 +18,10 @@ module.exports = function (app) {
   )
 
   // Delivery Plugin
-  app.Use(Delivery({ root: path.join(__dirname, '../assets') }))
+  app.Use(Delivery({
+    urlPrefix: '/public',
+    root: path.join(__dirname, '../assets')
+  }))
 
   // Captcha Plugin
   app.Use(
@@ -69,7 +72,7 @@ module.exports = function (app) {
 
   // Roles Plugin
   app.Use(function ({ router, roles }) {
-    router.get('/juglans', roles.can('tf11@pr44;tf44'), async ctx => {
+    router.get('/juglans*', roles.can('tf11@pr44;tf44'), async ctx => {
       logger.error('test error')
       logger.info('test info')
       ctx.status = 200
