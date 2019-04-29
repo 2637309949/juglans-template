@@ -90,6 +90,6 @@ module.exports = function (app) {
     },
     findAnalysis: async cond => {
     },
-    uploadPrefix: '/public/upload'
+    urlPrefix: '/public/upload'
   }))
 }
