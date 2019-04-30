@@ -20,7 +20,7 @@ module.exports = function (app) {
   // Delivery Plugin
   app.Use(Delivery({
     urlPrefix: '/public',
-    root: path.join(__dirname, '../assets')
+    root: path.join(__dirname, '../assets/public')
   }))
 
   // Captcha Plugin
