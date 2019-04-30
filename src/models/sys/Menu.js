@@ -1,8 +1,7 @@
 const CommonFields = require('../CommonFields')
 const mongoose = require('../../addition').mongoose
-const Schema = mongoose.Schema
 
-const defineSchema = new Schema(Object.assign({}, CommonFields, {
+mongoose.model('Menu', new mongoose.Schema(Object.assign({}, CommonFields, {
   name_sc: {
     type: String,
     displayName: '菜单名称'
@@ -46,6 +45,11 @@ const defineSchema = new Schema(Object.assign({}, CommonFields, {
     type: Number,
     displayName: '显示顺序'
   }
-}))
+})))
 
-mongoose.model('Menu', defineSchema)
+module.exports = function ({ router }) {
+  const rPath = '/Menu'
+  router.get(rPath, mongoose.hooks.list('Menu'))
+  router.post(rPath, mongoose.hooks.create('Menu'))
+  router.delete(rPath, mongoose.hooks.softDelMany('Menu'))
+}

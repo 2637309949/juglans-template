@@ -53,11 +53,6 @@ const defineSchema = new Schema(Object.assign({}, CommonFields, {
     ref: 'Role',
     displayName: '关联角色'
   }],
-  department: [{
-    displayName: '所属部门',
-    type: String,
-    ref: 'BdDepartment'
-  }],
   locale: {
     type: String,
     displayName: '当前语言',
@@ -91,3 +86,9 @@ defineSchema.statics.isManager = async (username) => {
 }
 
 mongoose.model('User', defineSchema)
+module.exports = function ({ router }) {
+  const rPath = '/User'
+  router.get(rPath, mongoose.hooks.list('User'))
+  router.post(rPath, mongoose.hooks.create('User'))
+  router.delete(rPath, mongoose.hooks.softDelMany('User'))
+}

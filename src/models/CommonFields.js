@@ -11,7 +11,6 @@ module.exports = {
     type: String,
     displayName: '创建人',
     ref: 'User',
-    index: true,
     require: true
   },
   _modifier: {
@@ -23,14 +22,12 @@ module.exports = {
     type: Number,
     displayName: '创建时间',
     remark: 'UNIX时间戳',
-    index: true,
     require: true
   },
   _modified: {
     type: Number,
     displayName: '修改时间',
-    remark: 'UNIX时间戳',
-    index: true
+    remark: 'UNIX时间戳'
   },
   _dr: {
     type: Boolean,

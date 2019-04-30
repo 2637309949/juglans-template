@@ -1,8 +1,7 @@
 const CommonFields = require('../CommonFields')
 const mongoose = require('../../addition').mongoose
-const Schema = mongoose.Schema
 
-const defineSchema = new Schema(Object.assign({}, CommonFields, {
+mongoose.model('Task', new mongoose.Schema(Object.assign({}, CommonFields, {
   spec: {
     type: String,
     displayName: '任务周期',
@@ -19,6 +18,11 @@ const defineSchema = new Schema(Object.assign({}, CommonFields, {
     displayName: '是否激活',
     default: true
   }
-}))
+})))
 
-mongoose.model('Task', defineSchema)
+module.exports = function ({ router }) {
+  const rPath = '/Task'
+  router.get(rPath, mongoose.hooks.list('Task'))
+  router.post(rPath, mongoose.hooks.create('Task'))
+  router.delete(rPath, mongoose.hooks.softDelMany('Task'))
+}
