@@ -5,7 +5,7 @@
  * @modify date 2019-01-12 01:24:38
  * @desc [description]
  */
-module.exports = function ({ router, test }) {
+module.exports = function ({ router, test, events }) {
   /**
      * @api {get} /hello 验证接口
      * @apiGroup Test
@@ -21,4 +21,8 @@ module.exports = function ({ router, test }) {
       message: 'hello:' + test
     }
   })
+  events.on('hello', function (message) {
+    console.log(message)
+  })
+  events.emit('hello', 'first message')
 }
