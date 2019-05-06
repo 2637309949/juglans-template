@@ -12,8 +12,8 @@ const Limit = require('../../juglans-limit')
 const { mongoose, logger } = require('./addition')
 
 module.exports = function (app) {
-
-  // Limit Plugin
+  // Add Req Rate Limit
+  // Every 1s for `/api\/v1\/user*/`
   app.Use(Limit({
     frequency: {
       passages: [/public\/*/],
