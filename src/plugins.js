@@ -7,17 +7,36 @@ const Captcha = require('../../juglans-captcha')
 const Upload = require('../../juglans-upload')
 const Roles = require('../../juglans-roles')
 const Logs = require('../../juglans-logs')
+const Limit = require('../../juglans-limit')
+
 const { mongoose, logger } = require('./addition')
 
 module.exports = function (app) {
-  // Logs Plugin
-  app.Use(
-    Logs({
-      logger: {
-        path: path.join(__dirname, '../logger')
+
+  // Limit Plugin
+  app.Use(Limit({
+    frequency: {
+      passages: [/public\/*/],
+      rules: [{
+        methods: ['GET'],
+        match: /api\/v1\/user*/,
+        rate: 1
+      }],
+      async failureHandler (ctx) {
+        ctx.status = 500
+        ctx.body = {
+          message: 'Rate Limited access, Pease Check Again Later!!!'
+        }
       }
-    })
-  )
+    }
+  }))
+
+  // Logs Plugin
+  app.Use(Logs({
+    logger: {
+      path: path.join(__dirname, '../logger')
+    }
+  }))
 
   // Delivery Plugin
   app.Use(Delivery({
