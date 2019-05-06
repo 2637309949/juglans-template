@@ -13,7 +13,9 @@ module.exports = function (app) {
   // Logs Plugin
   app.Use(
     Logs({
-      record: async () => { }
+      logger: {
+        path: path.join(__dirname, '../logger')
+      }
     })
   )
 
@@ -62,10 +64,23 @@ module.exports = function (app) {
     fakeUrls: [/\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/]
   }))
 
+  // Upload Plugin
+  Upload.strategys = [...Upload.strategys]
+  app.Use(Upload({
+    urlPrefix: '/public/upload',
+    saveAnalysis: async ret => {
+      console.log(JSON.stringify(ret[0].content))
+    },
+    findAnalysis: async cond => {
+    }
+  }))
+
   // Roles Plugin
   app.Use(Roles({
     roleHandler (ctx, action) {
-      Roles.transformAction(action)
+      // const actions = Roles.transformAction(action)
+      // const roles = actions.roles
+      // const permits = actions.permits
       return true
     }
   }))
@@ -81,15 +96,4 @@ module.exports = function (app) {
       }
     })
   })
-
-  // Upload Plugin
-  Upload.strategys = [...Upload.strategys]
-  app.Use(Upload({
-    saveAnalysis: async ret => {
-      console.log(JSON.stringify(ret[0].content))
-    },
-    findAnalysis: async cond => {
-    },
-    urlPrefix: '/public/upload'
-  }))
 }
