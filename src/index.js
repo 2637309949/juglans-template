@@ -5,23 +5,17 @@
  * @modify date 2019-01-05 14:31:34
  * @desc [Example Instance]
  */
-require('./addition')
+const app = require('./app')
+const utils = require('./utils/tools')
 
-const cfg = require('./config')
-const Juglans = require('./juglans')
-const inject = require('./inject')
-
-const app = new Juglans({ name: 'Juglans V1.0' })
-app.Config(cfg, { name: 'juglans test v1.1' })
-app.Inject(inject, { test: 'xx' }, { test: 'xx' })
-
-require('./plugins')(app)
-app.Run(function (err, config) {
-  if (!err) {
-    console.log(`App:${config.name}`)
-    console.log(`App:${config.NODE_ENV}`)
-    console.log(`App:runing on Port:${config.port}`)
-  } else {
-    console.error(err)
-  }
+app.Run(({ httpProxy, config }) => {
+  httpProxy.listen(utils.someOrElse(config.port, 3000), err => {
+    if (!err) {
+      console.log(`App:${config.name}`)
+      console.log(`App:${config.NODE_ENV}`)
+      console.log(`App:runing on Port:${config.port}`)
+    } else {
+      console.error(err)
+    }
+  })
 })

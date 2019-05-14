@@ -7,6 +7,7 @@
     "lint": "eslint --ext .js src",
     "dev": "export TASK_ENV=1&&nodemon --inspect ./src/index.js",
     "apidoc": "apidoc -i ./src/ -o ./assets/public/apidoc",
+    "test": "cross-env JEST=1 jest",
     "build": "gulp"
   },
   "keywords": [],
@@ -31,9 +32,12 @@
     "gulp-babel": "7.0.0",
     "gulp-sequence": "0.4.6",
     "gulp-uglify": "3.0.0",
-    "mocha": "^5.2.0"
+    "jest": "^24.8.0",
+    "mocha": "^5.2.0",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
+    "cross-env": "^5.2.0",
     "fs-extra": "^7.0.0",
     "juglans": "git+https://github.com/2637309949/juglans.git",
     "moment": "^2.22.2",
