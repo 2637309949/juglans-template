@@ -115,4 +115,7 @@ module.exports = function (app) {
       }
     })
   })
+
+  // Mount auto model routes
+  app.PostUse(mongoose.AutoHook)
 }

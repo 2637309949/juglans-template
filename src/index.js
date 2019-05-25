@@ -7,10 +7,8 @@
  */
 const app = require('./app')
 const utils = require('./utils/tools')
-const mongoose = require('./addition').mongoose
 
 app.Run(({ httpProxy, config, router }) => {
-  mongoose.AutoHook({ router })
   httpProxy.listen(utils.someOrElse(config.port, 3000), err => {
     if (!err) {
       console.log(`App:${config.name}`)
