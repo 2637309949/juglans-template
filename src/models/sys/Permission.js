@@ -1,7 +1,7 @@
 const CommonFields = require('../CommonFields')
 const mongoose = require('../../addition').mongoose
 
-mongoose.model('Permission', new mongoose.Schema(Object.assign({}, CommonFields, {
+const defineSchema = new mongoose.Schema(Object.assign({}, CommonFields, {
   code: {
     type: String,
     unique: true,
@@ -38,11 +38,12 @@ mongoose.model('Permission', new mongoose.Schema(Object.assign({}, CommonFields,
     enum: ['系统', '用户'],
     default: '用户'
   }
-})))
+}))
 
 module.exports = function ({ router }) {
-  const rPath = '/Permission'
-  router.get(rPath, mongoose.hooks.list('Permission'))
-  router.post(rPath, mongoose.hooks.create('Permission'))
-  router.delete(rPath, mongoose.hooks.softDelMany('Permission'))
+  mongoose.Register({
+    name: 'Permission',
+    displayName: '权限配置',
+    schema: defineSchema
+  })
 }

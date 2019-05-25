@@ -1,9 +1,8 @@
 
 const CommonFields = require('../CommonFields')
 const mongoose = require('../../addition').mongoose
-const Schema = mongoose.Schema
 
-const defineSchema = new Schema(Object.assign({}, CommonFields, {
+const defineSchema = new mongoose.Schema(Object.assign({}, CommonFields, {
   username: {
     type: String,
     displayName: '账号',
@@ -85,10 +84,20 @@ defineSchema.statics.isManager = async (username) => {
   return false
 }
 
-mongoose.model('User', defineSchema)
 module.exports = function ({ router }) {
-  const rPath = '/User'
-  router.get(rPath, mongoose.hooks.list('User'))
-  router.post(rPath, mongoose.hooks.create('User'))
-  router.delete(rPath, mongoose.hooks.softDelMany('User'))
+  mongoose.Register({
+    name: 'User',
+    displayName: '参数配置',
+    schema: defineSchema,
+    autoHook: false
+  })
+  mongoose.api.List(router, 'User').Pre(async function (ctx) {
+    console.log('before')
+  }).Post(async function (ctx) {
+    console.log('after')
+  })
+  mongoose.api.One(router, 'User')
+  mongoose.api.Delete(router, 'User')
+  mongoose.api.Update(router, 'User')
+  mongoose.api.Create(router, 'User')
 }

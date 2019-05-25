@@ -1,7 +1,7 @@
 const CommonFields = require('../CommonFields')
 const mongoose = require('../../addition').mongoose
 
-mongoose.model('Role', new mongoose.Schema(Object.assign({}, CommonFields, {
+const defineSchema = new mongoose.Schema(Object.assign({}, CommonFields, {
   name_sc: {
     type: String,
     displayName: '角色名称',
@@ -27,11 +27,12 @@ mongoose.model('Role', new mongoose.Schema(Object.assign({}, CommonFields, {
     ref: 'Permission',
     displayName: '权限列表'
   }]
-})))
+}))
 
 module.exports = function ({ router }) {
-  const rPath = '/Role'
-  router.get(rPath, mongoose.hooks.list('Role'))
-  router.post(rPath, mongoose.hooks.create('Role'))
-  router.delete(rPath, mongoose.hooks.softDelMany('Role'))
+  mongoose.Register({
+    name: 'Role',
+    displayName: '角色配置',
+    schema: defineSchema
+  })
 }

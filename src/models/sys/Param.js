@@ -1,7 +1,7 @@
 const CommonFields = require('../CommonFields')
 const mongoose = require('../../addition').mongoose
 
-mongoose.model('Param', new mongoose.Schema(Object.assign({}, CommonFields, {
+const defineSchema = new mongoose.Schema(Object.assign({}, CommonFields, {
   code: {
     type: String,
     unique: true,
@@ -15,11 +15,12 @@ mongoose.model('Param', new mongoose.Schema(Object.assign({}, CommonFields, {
     type: mongoose.Schema.Types.Mixed,
     displayName: '参数值'
   }
-})))
+}))
 
 module.exports = function ({ router }) {
-  const rPath = '/Param'
-  router.get(rPath, mongoose.hooks.list('Param'))
-  router.post(rPath, mongoose.hooks.create('Param'))
-  router.delete(rPath, mongoose.hooks.softDelMany('Param'))
+  mongoose.Register({
+    name: 'Param',
+    displayName: '参数配置',
+    schema: defineSchema
+  })
 }
