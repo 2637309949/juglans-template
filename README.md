@@ -3,6 +3,29 @@
 ![Juglans flash](./assets/flash.jpeg)
 
 ## Usage
+
+
+### Project structure
+
+    juglans-template
+    ├── assets
+    │   └── public
+    │       ├── apidoc
+    │       └── upload
+    ├── bin
+    ├── logger
+    ├── src
+    │   ├── config
+    │   ├── models
+    │   ├── plugins
+    │   ├── routes
+    │   ├── services
+    │   ├── tasks
+    │   └── utils
+    └── test
+        └── routes
+
+
 #### 1. For Dev
 ```shell
 $ npm install
