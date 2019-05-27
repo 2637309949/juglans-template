@@ -1,3 +1,11 @@
+/**
+ * @author [Double]
+ * @email [2637309949@qq.com]
+ * @create date 2019-01-05 14:31:34
+ * @modify date 2019-01-05 14:31:34
+ * @desc [Example Instance]
+ */
+
 const _ = require('lodash')
 const path = require('path')
 
@@ -16,6 +24,7 @@ module.exports = function (app) {
   // Every 1s for `/api\/v1\/user*/`
   app.Use(Limit({
     frequency: {
+      model: Limit.model.RedisModel({ redis }),
       passages: [/public\/*/],
       rules: [{
         methods: ['GET'],
