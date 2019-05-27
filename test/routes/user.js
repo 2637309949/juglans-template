@@ -8,7 +8,7 @@ describe('Test the user path', () => {
         .then(function (res) {
           expect(res.statusCode).toBe(200)
           var body = JSON.parse(res.text)
-          expect(body.data.length).toBe(0)
+          expect(body.data.length).toBe(1)
           done()
         })
     })
