@@ -5,7 +5,6 @@ module.exports = {
   prefix: '/api/v1',
   port: 3001,
   debug: true,
-  assetsDir: path.join(__dirname, '../../assets'),
   logger: {
     path: path.join(__dirname, '../../logger'),
     maxsize: 1024 * 5
