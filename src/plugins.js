@@ -9,7 +9,7 @@ const Roles = require('../../juglans-roles')
 const Logs = require('../../juglans-logs')
 const Limit = require('../../juglans-limit')
 
-const { mongoose, logger } = require('./addition')
+const { mongoose, logger, redis } = require('./addition')
 
 module.exports = function (app) {
   // Add Req Rate Limit
@@ -80,7 +80,8 @@ module.exports = function (app) {
       }
     },
     fakeTokens: ['DEBUG'],
-    fakeUrls: [/\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/]
+    fakeUrls: [/\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/],
+    model: Identity.model.RedisModel({ redis })
   }))
 
   // Upload Plugin
