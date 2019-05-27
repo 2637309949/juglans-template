@@ -7,7 +7,8 @@ module.exports = {
   debug: true,
   assetsDir: path.join(__dirname, '../../assets'),
   logger: {
-    path: path.join(__dirname, '../../logger')
+    path: path.join(__dirname, '../../logger'),
+    maxsize: 1024 * 5
   },
   mongo: {
     uri: 'mongodb://127.0.0.1:27017/test?authSource=admin',
