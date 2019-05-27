@@ -13,7 +13,7 @@ const { TASK_ENV } = process.env
 
 // 任务实例建议单独部署
 const scheduleJob = schedule.scheduleJob
-schedule.scheduleJob = async function ({ path, name, spec, callback }) {
+schedule.scheduleJob = async function ({ path, name, spec, job }) {
   const Task = mongoose.model('Task')
   if (TASK_ENV) {
     const task = {
@@ -29,15 +29,15 @@ schedule.scheduleJob = async function ({ path, name, spec, callback }) {
       await Task.create([task])
     }
     // 调度任务
-    let job = scheduleJob(task.spec, async function () {
+    let schedule = scheduleJob(task.spec, async function () {
       const doc = await Task.findOne({ name })
       if (doc && doc.enable) {
         if (task.spec === doc.spec) {
           console.info(`Task ${name} schedule.`)
-          await callback()
+          await job()
         } else {
           task.spec = doc.spec
-          job.reschedule(doc.spec)
+          schedule.reschedule(doc.spec)
           console.info(`Task ${name} reschedule.`)
         }
       } else {
