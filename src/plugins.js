@@ -40,14 +40,15 @@ module.exports = function (app) {
     }
   }))
 
-  // Logs Plugin
+  // Http Logs Plugin
   app.Use(Logs({
     logger: {
       path: path.join(__dirname, '../logger')
     }
+    // use default print format
   }))
 
-  // Delivery Plugin
+  // Delivery Plugin for public assert
   app.Use(Delivery({
     urlPrefix: '/public',
     root: path.join(__dirname, '../assets/public')
