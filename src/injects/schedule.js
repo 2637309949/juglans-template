@@ -3,12 +3,12 @@
  * @email [example@mail.com]
  * @create date 2019-01-12 10:26:32
  * @modify date 2019-01-12 10:26:32
- * @desc [简单的后台任务scheduleJob, 复杂的任务管理推荐[http://www.xuxueli.com/xxl-job/#/?id=_35-glue%E6%A8%A1%E5%BC%8Fnodejs]]
+ * @desc 简单的后台任务scheduleJob, 复杂的任务管理推荐http://www.xuxueli.com
  */
 
 const schedule = require('node-schedule')
 const moment = require('moment')
-const mongoose = require('./addition').mongoose
+const mongoose = require('../addition').mongoose
 const { TASK_ENV } = process.env
 
 // 任务实例建议单独部署
@@ -47,7 +47,4 @@ schedule.scheduleJob = async function ({ path, name, spec, job }) {
   }
 }
 
-module.exports = {
-  test: 'test',
-  schedule
-}
+module.exports = schedule
