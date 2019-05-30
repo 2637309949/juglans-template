@@ -20,6 +20,7 @@ const defineSchema = new mongoose.Schema(Object.assign({}, CommonFields, {
   }
 }))
 
+// 建议在这里拓展TASK的GUI管理
 module.exports = function ({ router }) {
   mongoose.Register({
     name: 'Task',

@@ -5,7 +5,6 @@
  * @modify date 2019-01-12 10:26:32
  * @desc 简单的后台任务scheduleJob, 复杂的任务管理推荐http://www.xuxueli.com
  */
-
 const schedule = require('node-schedule')
 const moment = require('moment')
 const mongoose = require('../addition').mongoose

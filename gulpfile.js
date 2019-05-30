@@ -2,12 +2,15 @@ const fsx = require('fs-extra')
 const gulp = require('gulp')
 const exec = require('child_process').exec
 const sequence = require('gulp-sequence')
+const path = require('path')
 
 const dest = 'build'
-const env = process.env.NODE_ENV || 'local'
+const loggerDir = path.join(dest, 'logger')
+const assetsDir = path.join(dest, 'assets')
 
-console.log(`============= ${env} =============\n`)
 gulp.task('clean', function () {
+  fsx.emptyDirSync(dest)
+  fsx.ensureDirSync(dest)
   fsx.emptyDirSync(dest)
   fsx.ensureDirSync(dest)
 })
@@ -25,6 +28,8 @@ gulp.task('build:server', function (cb) {
 })
 
 gulp.task('copy:others', function () {
+  fsx.ensureDirSync(loggerDir)
+  fsx.ensureDirSync(assetsDir)
   return gulp.src([
     'package.json',
     'Dockerfile',
@@ -33,4 +38,5 @@ gulp.task('copy:others', function () {
     '*node_modules/**/*'
   ]).pipe(gulp.dest(dest))
 })
+
 gulp.task('default', sequence('clean', 'build:apidoc', 'build:server', ['copy:others']))

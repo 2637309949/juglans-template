@@ -25,7 +25,6 @@ module.exports = function (app) {
   app.Use(Identity)
   app.Use(Upload)
   app.Use(Roles)
-
   app.Use(function ({ router, roles, events }) {
     events.on('app:events:listen:finish', function (message) {
       console.log(message)
