@@ -8,12 +8,13 @@
 const app = require('./app')
 const utils = require('./utils/tools')
 
-app.Run(({ httpProxy, config, router }) => {
+app.Run(({ httpProxy, config, router, events }) => {
   httpProxy.listen(utils.someOrElse(config.port, 3000), err => {
     if (!err) {
       console.log(`App:${config.name}`)
       console.log(`App:${config.NODE_ENV}`)
       console.log(`App:runing on Port:${config.port}`)
+      events.emit('app:events:listen:finish', 'successful')
     } else {
       console.error(err)
     }

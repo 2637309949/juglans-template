@@ -114,7 +114,10 @@ module.exports = function (app) {
   }))
 
   // Roles Plugin
-  app.Use(function ({ router, roles }) {
+  app.Use(function ({ router, roles, events }) {
+    events.on('app:events:listen:finish', function (message) {
+      console.log(message)
+    })
     router.get('/juglans*', roles.can('tf11@pr44;tf44'), async ctx => {
       logger.error('test error')
       logger.info('test info')
