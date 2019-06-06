@@ -1,5 +1,5 @@
 const mongoose = require('../addition').mongoose
-
+const logger = require('../addition').logger
 const repo = exports
 
 /**
@@ -11,7 +11,7 @@ repo.isManager = async function (username) {
     const isManager = await User.isManager(username)
     return isManager
   } catch (error) {
-    console.error(error.stack)
+    logger.error(error.stack)
     throw error
   }
 }

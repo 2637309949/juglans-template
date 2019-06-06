@@ -5,7 +5,7 @@
  * @modify date 2019-01-12 01:24:19
  * @desc [description]
  */
-
+const logger = require('../addition').logger
 const userServices = require('../services/user')
 module.exports = function ({ router }) {
   /**
@@ -27,7 +27,7 @@ module.exports = function ({ router }) {
       ctx.status = 200
       ctx.body = { isManager }
     } catch (error) {
-      console.error(error.stack)
+      logger.error(error.stack)
       ctx.status = 500
       ctx.body = { message: error.message }
     }

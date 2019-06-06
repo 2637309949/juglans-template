@@ -5,34 +5,53 @@
  * @modify date 2019-01-05 14:31:34
  * @desc [全局引用类]
  */
-
+const winston = require('winston')
+const path = require('path')
 const additions = require('../../juglans-addition')
 const config = require('./config')
 
 const mongoose = additions.mongoose
 const Redis = additions.Redis
-const logger = additions.logger
 const repo = module.exports
 
+const { combine, timestamp, printf, colorize } = winston.format
+
+const format = combine(
+  colorize(),
+  timestamp(),
+  printf(({ level, message, timestamp }) => {
+    return `[${level}]: ${timestamp} ${message}`
+  })
+)
+
 // logger init
-repo.logger = logger.createLogger(config)
+repo.logger = winston.createLogger({
+  level: 'info',
+  format,
+  defaultMeta: { service: config.logger.service },
+  transports: [
+    new winston.transports.File({ filename: path.join(config.logger.path, 'error.log'), level: 'error', maxsize: config.logger.maxsize }),
+    new winston.transports.File({ filename: path.join(config.logger.path, 'combined.log'), maxsize: config.logger.maxsize }),
+    new winston.transports.Console({ format })
+  ]
+})
 
 // redis init
 repo.redis = Redis.retryConnect(config.redis.uri, config.redis.opts, function (err) {
   if (err) {
-    console.log(`Redis:${config.redis.uri} connect failed!`)
-    console.error(err)
+    repo.logger.info(`Redis:${config.redis.uri} connect failed!`)
+    repo.logger.error(err)
   } else {
-    console.log(`Redis:${config.redis.uri} connect successfully!`)
+    repo.logger.info(`Redis:${config.redis.uri} connect successfully!`)
   }
 })
 
 // mongoose init
 repo.mongoose = mongoose.retryConnect(config.mongo.uri, config.mongo.opts, function (err) {
   if (err) {
-    console.log(`Mongodb:${config.mongo.uri} connect failed!`)
-    console.error(err)
+    repo.logger.info(`Mongodb:${config.mongo.uri} connect failed!`)
+    repo.logger.error(err)
   } else {
-    console.log(`Mongodb:${config.mongo.uri} connect successfully!`)
+    repo.logger.info(`Mongodb:${config.mongo.uri} connect successfully!`)
   }
 })
