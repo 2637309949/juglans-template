@@ -29,7 +29,7 @@ module.exports = {
       }
     }
   },
-  dependency: {
+  scan: {
     path: [
       path.join(__dirname, '../models/**/*.js'),
       path.join(__dirname, '../routes/**/*.js'),
