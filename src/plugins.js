@@ -6,15 +6,16 @@
  * @desc [Example Instance]
  */
 
-const Identity = require('./Identity')
-const Captcha = require('./Captcha')
-const Roles = require('./Roles')
-const Logs = require('./Logs')
-const Limit = require('./Limit')
-const Delivery = require('./Delivery')
-const Upload = require('./Upload')
-
-const { mongoose, logger } = require('../addition')
+const { mongoose, logger } = require('./addition')
+const Delivery = require('./plugins/Delivery')
+const Identity = require('./plugins/Identity')
+const OpenApi = require('./plugins/OpenApi')
+const Captcha = require('./plugins/Captcha')
+const Upload = require('./plugins/Upload')
+const Limit = require('./plugins/Limit')
+const Roles = require('./plugins/Roles')
+const Logs = require('./plugins/Logs')
+const openapi = require('./openapi')
 
 module.exports = function (app) {
   app.PostUse(mongoose.AutoHook)
@@ -25,6 +26,8 @@ module.exports = function (app) {
   app.Use(Identity)
   app.Use(Upload)
   app.Use(Roles)
+  app.Use(OpenApi)
+  app.Use(openapi)
   app.Use(function ({ router, roles, events }) {
     events.on('app:events:listen:finish', function (message) {
       console.log(message)
