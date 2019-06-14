@@ -1,10 +1,8 @@
-/**
- * @author [author]
- * @email [example@mail.com]
- * @create date 2019-01-12 10:26:32
- * @modify date 2019-01-12 10:26:32
- * @desc 简单的后台任务scheduleJob, 复杂的任务管理推荐http://www.xuxueli.com
- */
+// Copyright (c) 2018-2020 Double.  All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
+// 简单的后台任务scheduleJob, 复杂的任务管理推荐http://www.xuxueli.com
+
 const schedule = require('node-schedule')
 const moment = require('moment')
 const mongoose = require('../addition').mongoose

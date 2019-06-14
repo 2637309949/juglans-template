@@ -1,10 +1,6 @@
-/**
- * @author [Double]
- * @email [2637309949@qq.com]
- * @create date 2018-10-11 21:13:32
- * @modify date 2018-10-11 21:13:32
- * @desc [模型共同属性]
-*/
+// Copyright (c) 2018-2020 Double.  All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 
 module.exports = {
   _creator: {

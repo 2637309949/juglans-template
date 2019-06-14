@@ -1,10 +1,7 @@
-/**
- * @author [author]
- * @email [example@mail.com]
- * @create date 2019-01-12 01:24:19
- * @modify date 2019-01-12 01:24:19
- * @desc [description]
- */
+// Copyright (c) 2018-2020 Double.  All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
+
 const logger = require('../addition').logger
 const userServices = require('../services/user')
 module.exports = function ({ router }) {
