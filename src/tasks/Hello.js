@@ -4,7 +4,7 @@
 
 const defineSchedule = {
   name: 'Hello',
-  spec: '*/60 * * * * *',
+  spec: '*/120 * * * * *',
   job: async function () {
     console.log('Hello job!')
   }
