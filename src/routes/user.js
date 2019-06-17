@@ -4,18 +4,19 @@
 
 const logger = require('../addition').logger
 const userServices = require('../services/user')
-module.exports = function ({ router }) {
-  /**
-     * @api {get} /user/aux/manager 用户角色
-     * @apiGroup Test
-     * @apiDescription 有Token验证机制
-     * @apiParam {String} username 用户名
-     * @apiSuccessExample {json}
-     *   HTTP/1.1 200 OK
-     *    {
-     *        "isManager": true,
-     *    }
-     */
+
+/**
+   * @api {get} /user/aux/manager 用户角色
+   * @apiGroup Test
+   * @apiDescription 有Token验证机制
+   * @apiParam {String} username 用户名
+   * @apiSuccessExample {json}
+   *   HTTP/1.1 200 OK
+   *    {
+   *        "isManager": true,
+   *    }
+   */
+function isManager ({ router }) {
   router.get('/user/aux/manager', async (ctx) => {
     try {
       let username = ctx.query.username
@@ -29,4 +30,7 @@ module.exports = function ({ router }) {
       ctx.body = { message: error.message }
     }
   })
+}
+module.exports = function ({ router, reverse }) {
+  reverse.Register(isManager)
 }
