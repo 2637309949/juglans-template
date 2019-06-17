@@ -14,7 +14,7 @@ const Logs = require('./plugins/Logs')
 const openapi = require('./openapi')
 
 module.exports = function (app) {
-  app.PostUse(mongoose.AutoHook)
+  app.PostUse(mongoose.plugin)
   app.Use(Limit)
   app.Use(Logs)
   app.Use(Delivery)
