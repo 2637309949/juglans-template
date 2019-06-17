@@ -20,10 +20,14 @@ function hello ({ router }) {
   })
 }
 
-module.exports = function ({ router, test, events, reverse }) {
-  reverse.Register(hello)
+function helloEvent ({ router, test, events, reverse }) {
   events.on('hello', function (message) {
     console.log(message)
   })
   events.emit('hello', 'first message')
+}
+
+module.exports = function ({ router, test, events, reverse }) {
+  reverse.Register(hello)
+  reverse.Register(helloEvent)
 }
