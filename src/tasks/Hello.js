@@ -4,12 +4,12 @@
 
 const defineSchedule = {
   name: 'Hello',
-  spec: '*/120 * * * * *',
+  corn: '*/10 * * * * *',
   job: async function () {
     console.log('Hello job!')
   }
 }
 
 module.exports = function ({ schedule }) {
-  schedule.scheduleJob(defineSchedule)
+  schedule.scheduleJob(defineSchedule.corn, defineSchedule.job)
 }
