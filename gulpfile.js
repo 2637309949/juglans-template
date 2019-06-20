@@ -34,8 +34,7 @@ gulp.task('copy:others', function () {
     'package.json',
     'Dockerfile',
     '*logger/**/*',
-    '*assets/**/*',
-    '*node_modules/**/*'
+    '*assets/**/*'
   ]).pipe(gulp.dest(dest))
 })
 

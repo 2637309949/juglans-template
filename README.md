@@ -25,6 +25,28 @@
     └── test
         └── routes
 
+### Build structure
+
+    build
+    ├── assets
+    │   ├── flash.jpeg
+    │   └── public
+    │       ├── apidoc
+    │       └── upload
+    ├── Dockerfile
+    ├── logger
+    │   ├── error.log
+    │   └── http.log
+    ├── src
+    │   ├── config
+    │   ├── models
+    │   ├── plugins
+    │   ├── routes
+    │   ├── services
+    │   ├── tasks
+    │   └── utils
+    └── test
+        └── routes
 
 #### 1. For Dev
 ```shell
