@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-module.exports = {
+const hello = {
   name: 'test.hello',
   version: '1.0',
   voke: function (appKeySecret, puData) {
@@ -13,4 +13,8 @@ module.exports = {
       }
     }
   }
+}
+
+module.exports = ({ openapi }) => {
+  openapi.registHandler(hello)
 }

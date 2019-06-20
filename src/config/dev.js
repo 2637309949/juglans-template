@@ -35,13 +35,9 @@ module.exports = {
   },
   scan: {
     path: [
-      path.join(__dirname, '../models/**/*.js'),
-      path.join(__dirname, '../routes/**/*.js'),
-      path.join(__dirname, '../tasks/**/*.js')
+      path.join(__dirname, '../{models,routes,tasks,openapi}/**/*.js')
     ],
-    ignore: [
-      '**/node_modules/**'
-    ]
+    ignore: [ '**/node_modules/**' ]
   },
   bodyParser: {
     strict: false,

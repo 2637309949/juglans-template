@@ -11,7 +11,7 @@ const Upload = require('./plugins/Upload')
 const Limit = require('./plugins/Limit')
 const Roles = require('./plugins/Roles')
 const Logs = require('./plugins/Logs')
-const openapi = require('./openapi')
+const MQ = require('./plugins/MQ')
 
 module.exports = function (app) {
   app.PostUse(mongoose.plugin)
@@ -23,7 +23,7 @@ module.exports = function (app) {
   app.Use(Upload)
   app.Use(Roles)
   app.Use(OpenApi)
-  app.Use(openapi)
+  app.Use(MQ)
   app.Use(function ({ router, roles, events }) {
     events.on('app:events:listen:finish', function (message) {
       console.log(message)

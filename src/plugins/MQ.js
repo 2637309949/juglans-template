@@ -2,8 +2,5 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const hello = require('./hello')
-
-module.exports = ({ openapi }) => {
-  openapi.registHandler(hello)
-}
+const MQ = require('../../../juglans-mq')
+module.exports = MQ()

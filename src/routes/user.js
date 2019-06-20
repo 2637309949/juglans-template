@@ -31,6 +31,7 @@ function isManager ({ router }) {
     }
   })
 }
+
 module.exports = function ({ router, reverse }) {
   reverse.Register(isManager)
 }
