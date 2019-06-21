@@ -5,19 +5,19 @@
 const logger = require('../addition').logger
 const userServices = require('../services/user')
 
-/**
-   * @api {get} /user/aux/manager 用户角色
-   * @apiGroup Test
-   * @apiDescription 有Token验证机制
-   * @apiParam {String} username 用户名
-   * @apiSuccessExample {json}
-   *   HTTP/1.1 200 OK
-   *    {
-   *        "isManager": true,
-   *    }
-   */
+/*
+ * @api {get} /user/isManager 用户角色
+ * @apiGroup Test
+ * @apiDescription 有Token验证机制
+ * @apiParam {String} username 用户名
+ * @apiSuccessExample {json}
+ *   HTTP/1.1 200 OK
+ *  {
+ *       "isManager": true,
+ *  }
+ */
 function isManager ({ router }) {
-  router.get('/user/aux/manager', async (ctx) => {
+  router.get('/user/isManager', async (ctx) => {
     try {
       let username = ctx.query.username
       username = username || ctx.request.body.username

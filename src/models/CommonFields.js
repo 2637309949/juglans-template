@@ -2,7 +2,8 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-module.exports = {
+const mongoose = require('../addition').mongoose
+module.exports = Object.assign({
   _creator: {
     type: String,
     displayName: '创建人',
@@ -13,21 +14,5 @@ module.exports = {
     type: String,
     displayName: '修改人',
     ref: 'User'
-  },
-  _createdAt: {
-    type: Number,
-    displayName: '创建时间',
-    require: true
-  },
-  _modifiedAt: {
-    type: Number,
-    displayName: '修改时间',
-    remark: 'UNIX时间戳'
-  },
-  _dr: {
-    type: Boolean,
-    displayName: '删除标记',
-    default: false,
-    require: true
   }
-}
+}, mongoose.ext.CommonFields)

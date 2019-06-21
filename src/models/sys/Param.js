@@ -22,7 +22,7 @@ const schema = new mongoose.Schema(Object.assign({}, CommonFields, {
 }))
 
 module.exports = function ({ router }) {
-  mongoose.Register({
+  mongoose.ext.Register({
     name: 'Param',
     displayName: '参数配置',
     schema: schema

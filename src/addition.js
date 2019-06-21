@@ -44,7 +44,7 @@ repo.redis = Redis.retryConnect(config.redis.uri, config.redis.opts, function (e
 })
 
 // mongoose init
-repo.mongoose = mongoose.retryConnect(config.mongo.uri, config.mongo.opts, function (err) {
+repo.mongoose = mongoose.ext.retryConnect(config.mongo.uri, config.mongo.opts, function (err) {
   if (err) {
     repo.logger.info(`Mongodb:${config.mongo.uri} connect failed!`)
     repo.logger.error(err)

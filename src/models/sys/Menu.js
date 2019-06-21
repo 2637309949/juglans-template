@@ -52,7 +52,7 @@ const defineSchema = new mongoose.Schema(Object.assign({}, CommonFields, {
 }))
 
 module.exports = function ({ router }) {
-  mongoose.Register({
+  mongoose.ext.Register({
     name: 'Menu',
     displayName: '菜单配置',
     schema: defineSchema

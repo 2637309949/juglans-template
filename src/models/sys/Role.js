@@ -34,7 +34,7 @@ const defineSchema = new mongoose.Schema(Object.assign({}, CommonFields, {
 }))
 
 module.exports = function ({ router }) {
-  mongoose.Register({
+  mongoose.ext.Register({
     name: 'Role',
     displayName: '角色配置',
     schema: defineSchema

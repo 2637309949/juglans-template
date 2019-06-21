@@ -2,7 +2,8 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const { mongoose, logger } = require('./addition')
+const logger = require('./addition').logger
+const DefaultAPI = require('./plugins/DefaultAPI')
 const Delivery = require('./plugins/Delivery')
 const Identity = require('./plugins/Identity')
 const OpenApi = require('./plugins/OpenApi')
@@ -14,7 +15,7 @@ const Logs = require('./plugins/Logs')
 const MQ = require('./plugins/MQ')
 
 module.exports = function (app) {
-  app.PostUse(mongoose.plugin)
+  app.PostUse(DefaultAPI)
   app.Use(Limit)
   app.Use(Logs)
   app.Use(Delivery)
