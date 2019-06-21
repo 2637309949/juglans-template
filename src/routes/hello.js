@@ -2,6 +2,8 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
+const logger = require('../addition').logger
+
 /**
    * @api {get} /hello 验证接口
    * @apiGroup Test
@@ -22,7 +24,7 @@ function hello ({ router }) {
 
 function helloEvent ({ router, test, events, reverse }) {
   events.on('hello', function (message) {
-    console.log(message)
+    logger.info(message)
   })
   events.emit('hello', 'first message')
 }

@@ -6,21 +6,20 @@ module.exports = {
   _creator: {
     type: String,
     displayName: '创建人',
-    ref: 'User',
-    require: true
+    require: true,
+    ref: 'User'
   },
   _modifier: {
     type: String,
     displayName: '修改人',
     ref: 'User'
   },
-  _created: {
+  _createdAt: {
     type: Number,
     displayName: '创建时间',
-    remark: 'UNIX时间戳',
     require: true
   },
-  _modified: {
+  _modifiedAt: {
     type: Number,
     displayName: '修改时间',
     remark: 'UNIX时间戳'

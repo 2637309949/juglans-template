@@ -5,7 +5,7 @@
 const CommonFields = require('../CommonFields')
 const mongoose = require('../../addition').mongoose
 
-const defineSchema = new mongoose.Schema(Object.assign({}, CommonFields, {
+const schema = new mongoose.Schema(Object.assign({}, CommonFields, {
   code: {
     type: String,
     unique: true,
@@ -25,6 +25,6 @@ module.exports = function ({ router }) {
   mongoose.Register({
     name: 'Param',
     displayName: '参数配置',
-    schema: defineSchema
+    schema: schema
   })
 }
