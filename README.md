@@ -1,28 +1,6 @@
-# Juglans Framework
+# Project structure
 
-![Juglans flash](./assets/flash.jpeg)
-
-## Usage
-
-```javascript
-/* eslint-disable indent */
-// Copyright (c) 2018-2020 Double.  All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
-
-const app = require('./app')
-const juglans = require('./juglans')
-const logger = require('./addition').logger
-
-app.Use(({ events }) => {
-    events.on(juglans.events.SYS_JUGLANS_PLUGINS_RUNIMMEDIATELY_SUCCEED, function (message) {
-        logger.info(message)
-    })
-})
-app.RunImmediately()
-```
-
-### Project structure
+## Code structure
 
     juglans-template
     ├── assets
@@ -42,7 +20,7 @@ app.RunImmediately()
     └── test
         └── routes
 
-### Build structure
+## Build structure
 
     build
     ├── assets
@@ -65,12 +43,32 @@ app.RunImmediately()
     └── test
         └── routes
 
-#### 1. For Dev
+# Usage
+
+```javascript
+/* eslint-disable indent */
+// Copyright (c) 2018-2020 Double.  All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
+
+const app = require('./app')
+const juglans = require('./juglans')
+const logger = require('./addition').logger
+
+app.Use(({ events }) => {
+    events.on(juglans.events.SYS_JUGLANS_PLUGINS_RUNIMMEDIATELY_SUCCEED, function (message) {
+        logger.info(message)
+    })
+})
+app.RunImmediately()
+```
+
+## 1. For Dev
 ```shell
 $ npm install
 $ npm run dev
 ```
-#### 2. For Prod
+## 2. For Prod
 ```shell
 $ npm install
 $ npm run build
