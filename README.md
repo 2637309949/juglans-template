@@ -1,6 +1,6 @@
-# Project structure
+## Project structure
 
-## Code structure
+### Code structure
 
     juglans-template
     ├── assets
@@ -20,7 +20,7 @@
     └── test
         └── routes
 
-## Build structure
+### Build structure
 
     build
     ├── assets
@@ -43,7 +43,7 @@
     └── test
         └── routes
 
-# Usage
+## Usage
 
 ```javascript
 /* eslint-disable indent */
@@ -63,12 +63,12 @@ app.Use(({ events }) => {
 app.RunImmediately()
 ```
 
-## 1. For Dev
+### 1. For Dev
 ```shell
 $ npm install
 $ npm run dev
 ```
-## 2. For Prod
+### 2. For Prod
 ```shell
 $ npm install
 $ npm run build
