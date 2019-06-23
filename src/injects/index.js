@@ -3,5 +3,4 @@
 // license that can be found in the LICENSE file.
 
 module.exports = {
-  test: 'test'
 }

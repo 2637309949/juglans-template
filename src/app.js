@@ -10,7 +10,7 @@ const injects = require('./injects')
 
 const app = new Juglans({ name: 'Juglans V1.0' })
 app.Config(cfg, { name: 'juglans test v1.1' })
-app.Inject(injects, { test: 'xx' }, { test: 'xx' })
+app.Inject(injects, { test: 'xx' })
 
 require('./plugins')(app)
 
