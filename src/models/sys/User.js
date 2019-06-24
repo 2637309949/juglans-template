@@ -95,13 +95,16 @@ module.exports = function ({ router }) {
     schema: defineSchema,
     autoHook: false
   })
-  mongoose.ext.api.List(router, 'User').Pre(async function (ctx) {
-    console.log('before')
-  }).Post(async function (ctx) {
+  // mongoose.ext.api.List(router, 'User').Pre(async function (ctx) {
+  //   console.log('before')
+  // }).Post(async function (ctx) {
+  //   console.log('after')
+  // })
+  // mongoose.ext.api.One(router, 'User')
+  // mongoose.ext.api.Delete(router, 'User')
+  // mongoose.ext.api.Update(router, 'User')
+  // mongoose.ext.api.Create(router, 'User')
+  mongoose.ext.api.ALL(router, 'User').Post(async function (ctx) {
     console.log('after')
-  })
-  mongoose.ext.api.One(router, 'User')
-  mongoose.ext.api.Delete(router, 'User')
-  mongoose.ext.api.Update(router, 'User')
-  mongoose.ext.api.Create(router, 'User')
+  }).Auth(ctx => true)
 }
