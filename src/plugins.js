@@ -12,7 +12,7 @@ const Upload = require('./plugins/Upload')
 const Limit = require('./plugins/Limit')
 const Roles = require('./plugins/Roles')
 const Logs = require('./plugins/Logs')
-const MQ = require('./plugins/MQ')
+const Queue = require('./plugins/Queue')
 
 module.exports = function (app) {
   app.PostUse(DefaultAPI)
@@ -24,10 +24,10 @@ module.exports = function (app) {
   app.Use(Upload)
   app.Use(Roles)
   app.Use(OpenApi)
-  app.Use(MQ)
+  app.Use(Queue)
   app.Use(function ({ router, roles, events }) {
     events.on('app:events:listen:finish', function (message) {
-      console.log(message)
+      logger.info(message)
     })
     router.get('/juglans*', roles.can('tf11@pr44;tf44'), async ctx => {
       logger.error('test error')

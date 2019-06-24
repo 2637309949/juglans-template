@@ -5,15 +5,15 @@
 const logger = require('../addition').logger
 
 /**
-   * @api {get} /hello 验证接口
-   * @apiGroup Test
-   * @apiDescription 有Token验证机制
-   * @apiSuccessExample {json}
-   *   HTTP/1.1 200 OK
-   *    {
-   *        "message": 'hello:test'
-   *    }
-   */
+ * @api {get} /hello 验证接口
+ * @apiGroup Test
+ * @apiDescription 有Token验证机制
+ * @apiSuccessExample {json}
+ *   HTTP/1.1 200 OK
+ *    {
+ *        "message": 'hello:test'
+ *    }
+ */
 function hello ({ router }) {
   router.get('/hello', (ctx, next) => {
     ctx.body = {
