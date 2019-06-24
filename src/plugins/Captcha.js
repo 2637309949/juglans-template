@@ -6,7 +6,6 @@ const Captcha = require('../../../juglans-captcha')
 
 module.exports = Captcha({
   urlPrefix: '/captcha',
-  maxAge: 60000,
   config: {
     size: 4,
     ignoreChars: '0o1i',
