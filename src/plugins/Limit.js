@@ -12,7 +12,8 @@ module.exports = Limit({
     rules: [{
       methods: ['GET'],
       match: /api\/v1\/user*/,
-      rate: 1
+      // every 10s can req /10
+      rate: 5
     }],
     async failureHandler (ctx) {
       ctx.status = 500
