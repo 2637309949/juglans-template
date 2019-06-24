@@ -40,7 +40,7 @@ module.exports = {
     ignore: [ '**/node_modules/**' ]
   },
   bodyParser: {
-    strict: false,
+    parsedMethods: ['POST', 'PUT', 'PATCH', 'DELETE'],
     jsonLimit: '5mb',
     formLimit: '1mb',
     textLimit: '1mb',
