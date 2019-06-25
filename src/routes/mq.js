@@ -14,19 +14,19 @@ const logger = require('../addition').logger
    *        "message": 'ok'
    *    }
    */
-function helloMq ({ router, Queue }) {
+function helloMq ({ router, queue }) {
+  queue.addTactics('mqTest', { interval: 10, ctCount: 1 })
+  queue.Register('mqTest', function (form) {
+    logger.info(JSON.stringify(form))
+  })
   router.get('/helloMq', async (ctx, next) => {
-    Queue.Push({ type: 'mqTest', body: { 'xx': 'xx' } })
+    queue.Push({ type: 'mqTest', body: { 'xx': 'xx' } })
     ctx.body = {
       'message': 'ok'
     }
   })
 }
 
-module.exports = function ({ Queue, reverse }) {
-  Queue.addTactics('mqTest', { interval: 10, ctCount: 1 })
-  Queue.Register('mqTest', function (form) {
-    logger.info(JSON.stringify(form))
-  })
+module.exports = function ({ queue, reverse }) {
   reverse.Register(helloMq)
 }

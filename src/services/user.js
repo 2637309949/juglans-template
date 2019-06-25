@@ -2,13 +2,14 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const mongoose = require('../addition').mongoose
+const mgoExt = require('../addition').mgoExt
+
 const logger = require('../addition').logger
 const repo = exports
 
 repo.isManager = async function (username) {
   try {
-    const User = mongoose.model('User')
+    const User = mgoExt.Model('User')
     const isManager = await User.isManager(username)
     return isManager
   } catch (error) {

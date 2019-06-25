@@ -2,10 +2,11 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const CommonFields = require('../CommonFields')
-const mongoose = require('../../addition').mongoose
+const common = require('../common')
+const mongoose = require('../../../addition').mongoose
+const mgoExt = require('../../../addition').mgoExt
 
-const schema = new mongoose.Schema(Object.assign({}, CommonFields, {
+const schema = new mongoose.Schema(Object.assign({}, common, {
   code: {
     type: String,
     unique: true,
@@ -21,10 +22,8 @@ const schema = new mongoose.Schema(Object.assign({}, CommonFields, {
   }
 }))
 
-module.exports = function ({ router }) {
-  mongoose.ext.Register({
-    name: 'Param',
-    displayName: '参数配置',
-    schema: schema
-  })
-}
+mgoExt.Register({
+  name: 'Param',
+  displayName: '参数配置',
+  schema: schema
+})

@@ -13,6 +13,12 @@ module.exports = {
     path: path.join(__dirname, '../../logger'),
     maxsize: 1024 * 5
   },
+  sql: {
+    uri: 'mysql://root:111111@/test',
+    opts: {
+      dialect: 'mysql'
+    }
+  },
   mongo: {
     uri: 'mongodb://127.0.0.1:27017/test?authSource=admin',
     retryCount: 5,

@@ -3,10 +3,11 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const CommonFields = require('../CommonFields')
-const mongoose = require('../../addition').mongoose
+const common = require('../common')
+const mongoose = require('../../../addition').mongoose
+const mgoExt = require('../../../addition').mgoExt
 
-const defineSchema = new mongoose.Schema(Object.assign({}, CommonFields, {
+const defineSchema = new mongoose.Schema(Object.assign({}, common, {
   username: {
     type: String,
     displayName: '账号',
@@ -88,13 +89,14 @@ defineSchema.statics.isManager = async (username) => {
   return false
 }
 
+mgoExt.Register({
+  name: 'User',
+  displayName: '参数配置',
+  schema: defineSchema,
+  autoHook: false
+})
+
 module.exports = function ({ router }) {
-  mongoose.ext.Register({
-    name: 'User',
-    displayName: '参数配置',
-    schema: defineSchema,
-    autoHook: false
-  })
   // mongoose.ext.api.List(router, 'User').Pre(async function (ctx) {
   //   console.log('before')
   // }).Post(async function (ctx) {
@@ -104,7 +106,7 @@ module.exports = function ({ router }) {
   // mongoose.ext.api.Delete(router, 'User')
   // mongoose.ext.api.Update(router, 'User')
   // mongoose.ext.api.Create(router, 'User')
-  mongoose.ext.api.ALL(router, 'User').Post(async function (ctx) {
+  mgoExt.api.ALL(router, 'User').Post(async function (ctx) {
     console.log('after')
   }).Auth(ctx => true)
 }

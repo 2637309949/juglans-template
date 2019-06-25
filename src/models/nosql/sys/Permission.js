@@ -2,10 +2,11 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const CommonFields = require('../CommonFields')
-const mongoose = require('../../addition').mongoose
+const common = require('../common')
+const mongoose = require('../../../addition').mongoose
+const mgoExt = require('../../../addition').mgoExt
 
-const defineSchema = new mongoose.Schema(Object.assign({}, CommonFields, {
+const defineSchema = new mongoose.Schema(Object.assign({}, common, {
   code: {
     type: String,
     unique: true,
@@ -44,10 +45,8 @@ const defineSchema = new mongoose.Schema(Object.assign({}, CommonFields, {
   }
 }))
 
-module.exports = function ({ router }) {
-  mongoose.ext.Register({
-    name: 'Permission',
-    displayName: '权限配置',
-    schema: defineSchema
-  })
-}
+mgoExt.Register({
+  name: 'Permission',
+  displayName: '权限配置',
+  schema: defineSchema
+})

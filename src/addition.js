@@ -7,8 +7,10 @@ const path = require('path')
 const additions = require('../../juglans-addition')
 const config = require('./config')
 
-const mongoose = additions.mongoose
 const Redis = additions.Redis
+const seq = additions.seq
+const mgo = additions.mgo
+
 const repo = module.exports
 
 const { combine, timestamp, printf, colorize } = winston.format
@@ -44,11 +46,9 @@ repo.redis = Redis.retryConnect(config.redis.uri, config.redis.opts, function (e
 })
 
 // mongoose init
-repo.mongoose = mongoose.ext.retryConnect(config.mongo.uri, config.mongo.opts, function (err) {
-  if (err) {
-    repo.logger.info(`Mongodb:${config.mongo.uri} connect failed!`)
-    repo.logger.error(err)
-  } else {
-    repo.logger.info(`Mongodb:${config.mongo.uri} connect successfully!`)
-  }
-})
+repo.mongoose = mgo.mongoose
+repo.mgoExt = mgo.Ext.Connect(config.mongo.uri, config.mongo.opts)
+
+// sequelize init
+repo.Sequelize = seq.Sequelize
+repo.SeqExt = seq.Ext.Connect(config.sql.uri, config.sql.opts)

@@ -3,7 +3,8 @@
 // license that can be found in the LICENSE file.
 
 const logger = require('./addition').logger
-const DefaultAPI = require('./plugins/DefaultAPI')
+const NosqlAPI = require('./plugins/NosqlAPI')
+const SqlAPI = require('./plugins/SqlAPI')
 const Delivery = require('./plugins/Delivery')
 const Identity = require('./plugins/Identity')
 const OpenApi = require('./plugins/OpenApi')
@@ -15,7 +16,8 @@ const Logs = require('./plugins/Logs')
 const Queue = require('./plugins/Queue')
 
 module.exports = function (app) {
-  app.PostUse(DefaultAPI)
+  app.PostUse(NosqlAPI)
+  app.PostUse(SqlAPI)
   app.Use(Limit)
   app.Use(Logs)
   app.Use(Delivery)
