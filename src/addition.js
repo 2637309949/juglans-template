@@ -2,17 +2,17 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const winston = require('winston')
 const path = require('path')
-const additions = require('../../juglans-addition')
 const config = require('./config')
+const additions = require('../../juglans-addition')
 
-const Redis = additions.Redis
+const logger = additions.logger
+const winston = logger.winston
+const redis = additions.redis
 const seq = additions.seq
 const mgo = additions.mgo
 
 const repo = module.exports
-
 const { combine, timestamp, printf, colorize } = winston.format
 
 const format = combine(
@@ -36,10 +36,11 @@ repo.logger = winston.createLogger({
 })
 
 // redis init
-repo.redis = Redis.retryConnect(config.redis.uri, config.redis.opts, function (err) {
+repo.Redis = redis.Redis
+repo.redis = redis.Connect(config.redis.uri, config.redis.opts, function (err) {
   if (err) {
     repo.logger.info(`Redis:${config.redis.uri} connect failed!`)
-    repo.logger.error(err)
+    repo.logger.error(err.stack || err.message)
   } else {
     repo.logger.info(`Redis:${config.redis.uri} connect successfully!`)
   }

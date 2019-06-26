@@ -31,12 +31,8 @@ module.exports = {
   },
   redis: {
     uri: 'redis://127.0.0.1:6379',
-    retryCount: 5,
     opts: {
-      maxRetriesPerRequest: 3,
-      retryStrategy: function (times) {
-        return null
-      }
+      maxRetriesPerRequest: 3
     }
   },
   scan: {
