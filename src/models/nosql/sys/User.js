@@ -97,16 +97,21 @@ mgoExt.Register({
 })
 
 module.exports = function ({ router }) {
-  // mongoose.ext.api.List(router, 'User').Pre(async function (ctx) {
-  //   console.log('before')
-  // }).Post(async function (ctx) {
-  //   console.log('after')
-  // })
-  // mongoose.ext.api.One(router, 'User')
-  // mongoose.ext.api.Delete(router, 'User')
-  // mongoose.ext.api.Update(router, 'User')
-  // mongoose.ext.api.Create(router, 'User')
-  mgoExt.api.ALL(router, 'User').Post(async function (ctx) {
+  // routes: api/v1/mgo/user
+  mgoExt.api.List(router, 'User').Pre(async function (ctx) {
+    console.log('before')
+  }).Post(async function (ctx) {
     console.log('after')
-  }).Auth(ctx => true)
+  })
+  // routes: api/v1/mgo/feature1/user
+  mgoExt.api.Feature('feature1').List(router, 'User')
+  // routes: api/v1/mgo/feature1/subFeature1/user
+  mgoExt.api.Feature('feature1').Feature('subFeature1').List(router, 'User')
+  // routes: api/v1/mgo/custom/user
+  mgoExt.api.Feature('feature1').Feature('subFeature1').Name('custom').List(router, 'User')
+
+  mgoExt.api.One(router, 'User')
+  mgoExt.api.Delete(router, 'User')
+  mgoExt.api.Update(router, 'User')
+  mgoExt.api.Create(router, 'User')
 }

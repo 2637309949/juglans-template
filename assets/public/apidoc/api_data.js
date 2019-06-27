@@ -2,8 +2,8 @@ define({ "api": [
   {
     "type": "get",
     "url": "/helloMq",
-    "title": "MQ接口",
-    "group": "MQ",
+    "title": "Queue接口",
+    "group": "Queue",
     "description": "<p>有Token验证机制</p>",
     "success": {
       "examples": [
@@ -16,7 +16,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/mq.js",
-    "groupTitle": "MQ",
+    "groupTitle": "Queue",
     "name": "GetHellomq"
   },
   {

@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 const mgoExt = require('../../addition').mgoExt
+
 module.exports = Object.assign({
   _creator: {
     type: String,
