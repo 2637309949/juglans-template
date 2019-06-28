@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 const CommonFields = require('./common')
+const events = require('../../juglans').events
 const SeqExt = require('../../addition').SeqExt
 const Sequelize = require('../../addition').Sequelize
 
@@ -19,20 +20,40 @@ const defineSchema = Object.assign({}, {
 
 SeqExt.Register({
   name: 'store',
-  displayName: '用户',
+  displayName: '店铺',
   schema: defineSchema,
   autoHook: false,
   opts: {}
+},
+{
+  charset: 'utf8',
+  collate: 'utf8_general_ci'
 })
 
-SeqExt.Model('store').sync({ force: true }).then(() => {
-  return SeqExt.Model('store').create({
-    name: 'John',
-    address: 'gz tianhe'
+SeqExt.sequelize
+  .query('SET FOREIGN_KEY_CHECKS = 0', { raw: true })
+  .then(function () {
+    return SeqExt.Model('store').sync({ force: true }).then(() => {
+      return SeqExt.Model('store').create({
+        name: 'John',
+        _creator: 1,
+        _modifier: 1,
+        address: 'gz tianhe'
+      })
+    })
   })
-})
+  .then(function () {
+    return SeqExt.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', { raw: true })
+  })
 
-module.exports = function ({ router }) {
+function associating () {
+  SeqExt.Model('store').belongsTo(SeqExt.Model('user'), {foreignKey: '_creator', as: 'creator'})
+  SeqExt.Model('store').belongsTo(SeqExt.Model('user'), {foreignKey: '_modifier', as: 'modifier'})
+}
+
+module.exports = function ({ router, events: e }) {
+  // associating model
+  e.on(events.SYS_JUGLANS_SCAN_AFTER, associating)
   // routes: api/v1/mgo/user
   SeqExt.api.List(router, 'store').Pre(async function (ctx) {
     console.log('before')
