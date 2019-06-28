@@ -33,7 +33,21 @@ SeqExt.Model('store').sync({ force: true }).then(() => {
 })
 
 module.exports = function ({ router }) {
-  SeqExt.api.ALL(router, 'store').Post(async function (ctx) {
+  // routes: api/v1/mgo/user
+  SeqExt.api.List(router, 'store').Pre(async function (ctx) {
+    console.log('before')
+  }).Post(async function (ctx) {
     console.log('after')
-  }).Auth(ctx => true)
+  })
+  // routes: api/v1/mgo/feature1/user
+  SeqExt.api.Feature('feature1').List(router, 'store')
+  // routes: api/v1/mgo/feature1/subFeature1/user
+  SeqExt.api.Feature('feature1').Feature('subFeature1').List(router, 'store')
+  // routes: api/v1/mgo/custom/user
+  SeqExt.api.Feature('feature1').Feature('subFeature1').Name('custom').List(router, 'store')
+
+  SeqExt.api.One(router, 'store')
+  SeqExt.api.Delete(router, 'store')
+  SeqExt.api.Update(router, 'store')
+  SeqExt.api.Create(router, 'store')
 }
