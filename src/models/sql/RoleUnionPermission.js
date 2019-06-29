@@ -28,5 +28,5 @@ const RolePermisson = SeqExt.Register({
 
 RolePermisson.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 RolePermisson.belongsTo(User, {foreignKey: '_modifier', as: 'modifier'})
-Role.belongsToMany(Permission, {through: { model: RolePermisson, unique: false }, foreignKey: 'role_id', as: 'permissions'})
-Permission.belongsToMany(Role, {through: { model: RolePermisson, unique: false }, foreignKey: 'permission_id', as: 'roles'})
+Role.belongsToMany(Permission, {through: { model: RolePermisson, unique: false }, foreignKey: '_permission', as: 'permissions'})
+Permission.belongsToMany(Role, {through: { model: RolePermisson, unique: false }, foreignKey: '_role', as: 'roles'})

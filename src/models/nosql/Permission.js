@@ -2,11 +2,11 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const common = require('../common')
-const mongoose = require('../../../addition').mongoose
-const mgoExt = require('../../../addition').mgoExt
+const Base = require('./Base')
+const mongoose = require('../../addition').mongoose
+const mgoExt = require('../../addition').mgoExt
 
-const defineSchema = new mongoose.Schema(Object.assign({}, common, {
+const defineSchema = new mongoose.Schema(mgoExt.DefineSchema(Base, {
   code: {
     type: String,
     unique: true,

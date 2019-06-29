@@ -57,8 +57,8 @@ function Initdb () {
       type: '2'
     })
     await SeqExt.Model('role_permission').create({
-      role_id: roleId.id,
-      permission_id: permissionId.id
+      _permission: roleId.id,
+      _role: permissionId.id
     })
   })
 }

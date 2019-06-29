@@ -4,7 +4,7 @@
 
 const mgoExt = require('../../addition').mgoExt
 
-module.exports = Object.assign({
+module.exports = mgoExt.DefineSchema({
   _creator: {
     type: String,
     displayName: '创建人',
@@ -16,4 +16,4 @@ module.exports = Object.assign({
     displayName: '修改人',
     ref: 'User'
   }
-}, mgoExt.Model)
+})

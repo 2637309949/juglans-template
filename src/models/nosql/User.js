@@ -3,11 +3,11 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const common = require('../common')
-const mongoose = require('../../../addition').mongoose
-const mgoExt = require('../../../addition').mgoExt
+const Base = require('./Base')
+const mongoose = require('../../addition').mongoose
+const mgoExt = require('../../addition').mgoExt
 
-const defineSchema = new mongoose.Schema(Object.assign({}, common, {
+const defineSchema = new mongoose.Schema(mgoExt.DefineSchema(Base, {
   username: {
     type: String,
     displayName: '账号',
@@ -89,7 +89,7 @@ defineSchema.statics.isManager = async (username) => {
   return false
 }
 
-mgoExt.Register({
+const User = mgoExt.Register({
   name: 'User',
   displayName: '参数配置',
   schema: defineSchema,
@@ -115,3 +115,4 @@ module.exports = function ({ router }) {
   mgoExt.api.Update(router, 'User')
   mgoExt.api.Create(router, 'User')
 }
+module.exports.User = User
