@@ -2,11 +2,12 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const CommonFields = require('./common')
+const base = require('./Base')
 const SeqExt = require('../../addition').SeqExt
 const Sequelize = require('../../addition').Sequelize
 
-const defineSchema = Object.assign({}, {
+// defineSchema defined user model
+const defineSchema = SeqExt.DefineSchema(base, {
   name: {
     type: Sequelize.STRING,
     allowNull: false
@@ -15,9 +16,10 @@ const defineSchema = Object.assign({}, {
     type: Sequelize.INTEGER,
     allowNull: false
   }
-}, CommonFields)
+})
 
-SeqExt.Register({
+// Register defined Register user model
+const User = SeqExt.Register({
   schema: defineSchema,
   name: 'user',
   displayName: '用户',
@@ -25,28 +27,10 @@ SeqExt.Register({
   opts: {}
 })
 
-// for dev
-SeqExt.sequelize.transaction(function (t) {
-  var options = { raw: true, transaction: t }
-  return SeqExt.sequelize
-    .query('SET FOREIGN_KEY_CHECKS = 0', null, options)
-    .then(function () {
-      return SeqExt.sequelize.query('DROP TABLE IF EXISTS `users`', null, options)
-    })
-    .then(function () {
-      return SeqExt.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', null, options)
-    })
-}).then(function () {
-  SeqExt.Model('user').sync({ force: true }).then(() => {
-    return SeqExt.Model('user').create({
-      name: 'John',
-      age: 23
-    })
-  })
-})
-// for dev end
+User.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
+User.belongsTo(User, {foreignKey: '_modifier', as: 'modifier'})
 
-module.exports = function ({ router }) {
+module.exports = ({ router, events: e }) => {
   // routes: api/v1/mgo/user
   SeqExt.api.List(router, 'user').Pre(async function (ctx) {
     console.log('before')
@@ -59,9 +43,10 @@ module.exports = function ({ router }) {
   SeqExt.api.Feature('feature1').Feature('subFeature1').List(router, 'user')
   // routes: api/v1/mgo/custom/user
   SeqExt.api.Feature('feature1').Feature('subFeature1').Name('custom').List(router, 'user')
-
   SeqExt.api.One(router, 'user')
   SeqExt.api.Delete(router, 'user')
   SeqExt.api.Update(router, 'user')
   SeqExt.api.Create(router, 'user')
 }
+
+module.exports.User = User

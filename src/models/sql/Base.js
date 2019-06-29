@@ -8,7 +8,7 @@ require('./User')
 const SeqExt = require('../../addition').SeqExt
 const Sequelize = require('../../addition').Sequelize
 
-module.exports = Object.assign({
+module.exports = SeqExt.DefineSchema({
   _creator: {
     type: Sequelize.INTEGER,
     references: {
@@ -23,4 +23,4 @@ module.exports = Object.assign({
       key: 'id'
     }
   }
-}, SeqExt.Model)
+})
