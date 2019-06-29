@@ -24,27 +24,30 @@ SeqExt.Register({
   schema: defineSchema,
   autoHook: false,
   opts: {}
-},
-{
-  charset: 'utf8',
-  collate: 'utf8_general_ci'
 })
 
-SeqExt.sequelize
-  .query('SET FOREIGN_KEY_CHECKS = 0', { raw: true })
-  .then(function () {
-    return SeqExt.Model('store').sync({ force: true }).then(() => {
-      return SeqExt.Model('store').create({
-        name: 'John',
-        _creator: 1,
-        _modifier: 1,
-        address: 'gz tianhe'
-      })
+// for dev
+SeqExt.sequelize.transaction(function (t) {
+  var options = { raw: true, transaction: t }
+  return SeqExt.sequelize
+    .query('SET FOREIGN_KEY_CHECKS = 0', null, options)
+    .then(function () {
+      return SeqExt.sequelize.query('DROP TABLE IF EXISTS `stores`', null, options)
+    })
+    .then(function () {
+      return SeqExt.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', null, options)
+    })
+}).then(function () {
+  SeqExt.Model('store').sync({ force: true }).then(() => {
+    return SeqExt.Model('store').create({
+      name: 'John',
+      _creator: 1,
+      _modifier: 1,
+      address: 'gz tianhe'
     })
   })
-  .then(function () {
-    return SeqExt.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', { raw: true })
-  })
+})
+// for dev end
 
 function associating () {
   SeqExt.Model('store').belongsTo(SeqExt.Model('user'), {foreignKey: '_creator', as: 'creator'})

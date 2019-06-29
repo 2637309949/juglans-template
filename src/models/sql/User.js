@@ -29,19 +29,26 @@ SeqExt.Register({
   collate: 'utf8_general_ci'
 })
 
-SeqExt.sequelize
-  .query('SET foreign_key_checks = 0;', { raw: true })
-  .then(function () {
-    return SeqExt.Model('user').sync({ force: true }).then(() => {
-      return SeqExt.Model('user').create({
-        name: 'John',
-        age: 23
-      })
+// for dev
+SeqExt.sequelize.transaction(function (t) {
+  var options = { raw: true, transaction: t }
+  return SeqExt.sequelize
+    .query('SET FOREIGN_KEY_CHECKS = 0', null, options)
+    .then(function () {
+      return SeqExt.sequelize.query('DROP TABLE IF EXISTS `users`', null, options)
+    })
+    .then(function () {
+      return SeqExt.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', null, options)
+    })
+}).then(function () {
+  SeqExt.Model('user').sync({ force: true }).then(() => {
+    return SeqExt.Model('user').create({
+      name: 'John',
+      age: 23
     })
   })
-  .then(function () {
-    return SeqExt.sequelize.query('SET foreign_key_checks = 1;', { raw: true })
-  })
+})
+// for dev end
 
 module.exports = function ({ router }) {
   // routes: api/v1/mgo/user
