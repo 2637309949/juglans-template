@@ -26,6 +26,7 @@ const RolePermisson = SeqExt.Register({
   autoHook: false
 })
 
+// many2many
 RolePermisson.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 RolePermisson.belongsTo(User, {foreignKey: '_modifier', as: 'modifier'})
 Role.belongsToMany(Permission, {through: { model: RolePermisson, unique: false }, foreignKey: '_permission', as: 'permissions'})
