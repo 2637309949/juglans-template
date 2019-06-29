@@ -19,9 +19,9 @@ const defineSchema = Object.assign({}, {
 }, CommonFields)
 
 SeqExt.Register({
+  schema: defineSchema,
   name: 'store',
   displayName: '店铺',
-  schema: defineSchema,
   autoHook: false,
   opts: {}
 })

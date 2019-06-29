@@ -18,15 +18,11 @@ const defineSchema = Object.assign({}, {
 }, CommonFields)
 
 SeqExt.Register({
+  schema: defineSchema,
   name: 'user',
   displayName: '用户',
-  schema: defineSchema,
   autoHook: false,
   opts: {}
-},
-{
-  charset: 'utf8',
-  collate: 'utf8_general_ci'
 })
 
 // for dev
