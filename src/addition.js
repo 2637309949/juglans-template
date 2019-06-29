@@ -49,7 +49,12 @@ repo.redis = redis.Connect(config.redis.uri, config.redis.opts, function (err) {
 // mongoose init
 repo.mongoose = mgo.mongoose
 repo.mgoExt = mgo.Ext.Connect(config.mongo.uri, config.mongo.opts)
+repo.mgoExt.setApiOpts({
+  prefix: '/template/mgo'
+})
 
 // sequelize init
 repo.Sequelize = seq.Sequelize
 repo.SeqExt = seq.Ext.Connect(config.sql.uri, config.sql.opts)
+repo.SeqExt.setApiOpts({
+})

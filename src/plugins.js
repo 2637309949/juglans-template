@@ -2,9 +2,6 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const logger = require('./addition').logger
-const NosqlAPI = require('./plugins/NosqlAPI')
-const SqlAPI = require('./plugins/SqlAPI')
 const Delivery = require('./plugins/Delivery')
 const Identity = require('./plugins/Identity')
 const OpenApi = require('./plugins/OpenApi')
@@ -15,9 +12,13 @@ const Roles = require('./plugins/Roles')
 const Logs = require('./plugins/Logs')
 const Queue = require('./plugins/Queue')
 
+const {
+  logger, mgoExt, SeqExt
+} = require('./addition')
+
 module.exports = function (app) {
-  app.PostUse(NosqlAPI)
-  app.PostUse(SqlAPI)
+  app.PostUse(mgoExt)
+  app.PostUse(SeqExt)
   app.Use(Limit)
   app.Use(Logs)
   app.Use(Delivery)
