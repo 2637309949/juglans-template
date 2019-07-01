@@ -41,9 +41,11 @@ User.belongsTo(User, {foreignKey: '_modifier', as: 'modifier'})
 
 module.exports = ({ router, events: e }) => {
   // routes: api/v1/mgo/user
-  SeqExt.api.List(router, 'user').Post(async function (ctx) {
-    logger.info('User model post hook')
-  }).Auth(ctx => true)
+  SeqExt.api.List(router, 'user')
+    .Post(async function (ctx) {
+      logger.info('User model post hook')
+    })
+    .Auth(ctx => true)
   // routes: api/v1/mgo/feature1/user
   SeqExt.api.Feature('feature1').List(router, 'user')
   // routes: api/v1/mgo/feature1/subFeature1/user

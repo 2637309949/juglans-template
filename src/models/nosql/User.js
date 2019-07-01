@@ -98,11 +98,13 @@ const User = mgoExt.Register({
 
 module.exports = function ({ router }) {
   // routes: api/v1/mgo/user
-  mgoExt.api.List(router, 'User').Pre(async function (ctx) {
-    console.log('before')
-  }).Post(async function (ctx) {
-    console.log('after')
-  })
+  mgoExt.api.List(router, 'User')
+    .Pre(async function (ctx) {
+      console.log('before')
+    })
+    .Post(async function (ctx) {
+      console.log('after')
+    })
   // routes: api/v1/mgo/feature1/user
   mgoExt.api.Feature('feature1').List(router, 'User')
   // routes: api/v1/mgo/feature1/subFeature1/user
