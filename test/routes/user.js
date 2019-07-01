@@ -8,7 +8,7 @@ describe('Test the user path', () => {
   test('It should response array items', (done) => {
     app.then(proxy => {
       proxy
-        .get('/api/v1/mgo/user?accessToken=DEBUG&size=10')
+        .get('/api/v1/template/mgo/user?accessToken=DEBUG&size=10')
         .then(function (res) {
           expect(res.statusCode).toBe(200)
           var body = JSON.parse(res.text)
