@@ -5,6 +5,7 @@
 const Base = require('./Base')
 const mongoose = require('../../addition').mongoose
 const mgoExt = require('../../addition').mgoExt
+const logger = require('../../addition').logger
 
 const defineSchema = new mongoose.Schema(mgoExt.DefineSchema(Base, {
   name_sc: {
@@ -37,5 +38,14 @@ const defineSchema = new mongoose.Schema(mgoExt.DefineSchema(Base, {
 mgoExt.Register({
   name: 'Role',
   displayName: '角色配置',
-  schema: defineSchema
+  schema: defineSchema,
+  opts: {
+    routeHooks: {
+      list: {
+        pre (ctx) {
+          logger.info('Role model pre hook')
+        }
+      }
+    }
+  }
 })

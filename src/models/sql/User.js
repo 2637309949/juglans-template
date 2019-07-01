@@ -5,6 +5,7 @@
 const base = require('./Base')
 const SeqExt = require('../../addition').SeqExt
 const Sequelize = require('../../addition').Sequelize
+const logger = require('../../addition').logger
 
 // defineSchema defined user model
 const defineSchema = SeqExt.DefineSchema(base, {
@@ -24,7 +25,15 @@ const User = SeqExt.Register({
   name: 'user',
   displayName: '用户',
   autoHook: false,
-  opts: {}
+  opts: {
+    routeHooks: {
+      list: {
+        pre (ctx) {
+          logger.info('User model pre hook')
+        }
+      }
+    }
+  }
 })
 
 User.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
@@ -32,11 +41,9 @@ User.belongsTo(User, {foreignKey: '_modifier', as: 'modifier'})
 
 module.exports = ({ router, events: e }) => {
   // routes: api/v1/mgo/user
-  SeqExt.api.List(router, 'user').Pre(async function (ctx) {
-    console.log('before')
-  }).Post(async function (ctx) {
-    console.log('after')
-  })
+  SeqExt.api.List(router, 'user').Post(async function (ctx) {
+    logger.info('User model post hook')
+  }).Auth(ctx => true)
   // routes: api/v1/mgo/feature1/user
   SeqExt.api.Feature('feature1').List(router, 'user')
   // routes: api/v1/mgo/feature1/subFeature1/user
