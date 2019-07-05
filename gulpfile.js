@@ -33,6 +33,8 @@ gulp.task('copy:others', function () {
   return gulp.src([
     'package.json',
     'Dockerfile',
+    '*doc/api_data.js',
+    '*doc/api_project.js',
     '*logger/**/*',
     '*assets/**/*'
   ]).pipe(gulp.dest(dest))

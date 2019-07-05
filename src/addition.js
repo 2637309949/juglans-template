@@ -11,6 +11,7 @@ const winston = logger.winston
 const redis = additions.redis
 const seq = additions.seq
 const mgo = additions.mgo
+const apidoc = additions.apidoc
 
 const repo = module.exports
 const { combine, timestamp, printf, colorize } = winston.format
@@ -52,3 +53,7 @@ repo.Sequelize = seq.Sequelize
 repo.SeqExt = seq.Ext.Connect(config.sql.uri, config.sql.opts)
 repo.SeqExt.setApiOpts({
 })
+
+// apidoc
+repo.apidoc = apidoc({ prefix: '/docs' })
+repo.apidoc.doc(path.join(__dirname, '../doc'))

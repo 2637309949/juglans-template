@@ -13,7 +13,7 @@ const Logs = require('./plugins/Logs')
 const Queue = require('./plugins/Queue')
 
 const {
-  logger, mgoExt, SeqExt
+  logger, mgoExt, SeqExt, apidoc
 } = require('./addition')
 
 module.exports = function (app) {
@@ -28,6 +28,7 @@ module.exports = function (app) {
   app.Use(Roles)
   app.Use(OpenApi)
   app.Use(Queue)
+  app.PostUse(apidoc)
   app.Use(function ({ router, roles, events }) {
     events.on('app:events:listen:finish', function (message) {
       logger.info(message)

@@ -20,5 +20,9 @@ build
 */assets/public/**
 */apidoc/**
 
+/doc/*
+!/doc/api_data.js
+!/doc/api_project.js
+
 .history
 .vscode

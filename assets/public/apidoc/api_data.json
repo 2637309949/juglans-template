@@ -17,7 +17,12 @@
     "version": "0.0.0",
     "filename": "src/routes/mq.js",
     "groupTitle": "Queue",
-    "name": "GetHellomq"
+    "name": "GetHellomq",
+    "sampleRequest": [
+      {
+        "url": "http://127.0.0.1:3001/api/v1/helloMq"
+      }
+    ]
   },
   {
     "type": "get",
@@ -37,6 +42,11 @@
     "version": "0.0.0",
     "filename": "src/routes/hello.js",
     "groupTitle": "Test",
-    "name": "GetHello"
+    "name": "GetHello",
+    "sampleRequest": [
+      {
+        "url": "http://127.0.0.1:3001/api/v1/hello"
+      }
+    ]
   }
 ]
