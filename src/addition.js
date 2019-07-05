@@ -24,16 +24,10 @@ const format = combine(
 )
 
 // logger init
-repo.logger = winston.createLogger({
-  level: 'info',
-  format,
-  defaultMeta: { service: config.logger.service },
-  transports: [
-    new winston.transports.File({ filename: path.join(config.logger.path, 'error.log'), level: 'error', maxsize: config.logger.maxsize }),
-    new winston.transports.File({ filename: path.join(config.logger.path, 'combined.log'), maxsize: config.logger.maxsize }),
-    new winston.transports.Console({ format })
-  ]
-})
+repo.logger = logger
+  .add(new winston.transports.File({ filename: path.join(config.logger.path, 'error.log'), level: 'error', maxsize: config.logger.maxsize }))
+  .add(new winston.transports.File({ filename: path.join(config.logger.path, 'combined.log'), maxsize: config.logger.maxsize }))
+  .add(new winston.transports.Console({ format }))
 
 // redis init
 repo.Redis = redis.Redis
