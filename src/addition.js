@@ -55,5 +55,5 @@ repo.SeqExt.setApiOpts({
 })
 
 // apidoc
-repo.apidoc = apidoc({ prefix: '/docs' })
+repo.apidoc = apidoc({ prefix: '/docs', mgoExt: repo.mgoExt, seqExt: repo.SeqExt })
 repo.apidoc.doc(path.join(__dirname, '../doc'))
