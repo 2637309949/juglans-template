@@ -25,7 +25,7 @@ const defineSchema = new mongoose.Schema(mgoExt.DefineSchema(Base, {
   type: {
     type: String,
     displayName: '角色类型',
-    enum: [null, '管理角色', '业务角色'],
+    enum: ['管理角色', '业务角色'],
     default: '业务角色'
   },
   permissions: [{
