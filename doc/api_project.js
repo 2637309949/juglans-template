@@ -1,6 +1,6 @@
 define({
   "name": "juglans-template",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "api documentation",
   "title": "juglans-template - api documentation",
   "url": "http://127.0.0.1:3001/api/v1",

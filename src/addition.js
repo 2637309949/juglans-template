@@ -52,6 +52,7 @@ repo.mgoExt.setApiOpts({
 repo.Sequelize = seq.Sequelize
 repo.SeqExt = seq.Ext.Connect(config.sql.uri, config.sql.opts)
 repo.SeqExt.setApiOpts({
+  prefix: '/template/seq'
 })
 
 // apidoc
