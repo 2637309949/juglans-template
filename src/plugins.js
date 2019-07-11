@@ -14,10 +14,11 @@ const Logs = require('./plugins/Logs')
 const Queue = require('./plugins/Queue')
 
 const {
-  logger, mgoExt, SeqExt, apidoc
+  logger, mgoExt, SeqExt, apidoc, I18N
 } = require('./addition')
 
 module.exports = function (app) {
+  app.PreUse(I18N)
   app.PostUse(mgoExt)
   app.PostUse(SeqExt)
   app.Use(Proxy)

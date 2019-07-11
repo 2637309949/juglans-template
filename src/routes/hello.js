@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 const logger = require('../addition').logger
+const I18N = require('../addition').I18N
 
 /**
  * @api {get} /hello 验证接口
@@ -17,7 +18,7 @@ const logger = require('../addition').logger
 function hello ({ router }) {
   router.get('/hello', (ctx, next) => {
     ctx.body = {
-      message: 'hello:' + test
+      message: I18N.i18nLocale('sys_hello')
     }
   })
 }

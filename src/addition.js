@@ -11,6 +11,7 @@ const winston = logger.winston
 const redis = additions.redis
 const seq = additions.seq
 const mgo = additions.mgo
+const i18n = additions.i18n
 const apidoc = additions.apidoc
 
 const repo = module.exports
@@ -55,6 +56,29 @@ repo.SeqExt.setApiOpts({
   prefix: '/template/seq'
 })
 
-// apidoc
+// apidoc init
 repo.apidoc = apidoc({ prefix: '/docs', mgoExt: repo.mgoExt, seqExt: repo.SeqExt })
 repo.apidoc.doc(path.join(__dirname, '../doc'))
+
+// i18n init
+repo.I18N = i18n({
+  prefix: '/i18n',
+  async ctxLocale (ctx) {
+    return ctx.query.locale
+  }
+})
+repo.I18N.initLocal(async function (i18n) {
+  return async function () {
+    i18n.addLocales({
+      'zh_CN': {
+        'sys_hello': '你好'
+      },
+      'en_US': {
+        'sys_hello': 'hello'
+      },
+      'zh_TW': {
+        'sys_hello': '妳好'
+      }
+    })
+  }
+})
