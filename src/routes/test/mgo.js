@@ -2,14 +2,14 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const logger = require('../addition').logger
-const userServices = require('../services/user')
+const logger = require('../../addition').logger
+const userServices = require('../../services/user')
 
 /*
- * @api {get} /user/isManager 用户角色
+ * @api {get} /test/user/isManager  用户角色
  * @apiGroup Test
- * @apiDescription 有Token验证机制
- * @apiParam {String} username 用户名
+ * @apiDescription                  用户角色
+ * @apiParam {String} username      用户名
  * @apiSuccessExample {json}
  *   HTTP/1.1 200 OK
  *  {
@@ -17,7 +17,7 @@ const userServices = require('../services/user')
  *  }
  */
 function isManager ({ router }) {
-  router.get('/user/isManager', async (ctx) => {
+  router.get('/test/mgo/user/isManager', async (ctx) => {
     try {
       let username = ctx.query.username
       username = username || ctx.request.body.username

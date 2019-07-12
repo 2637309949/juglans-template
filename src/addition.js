@@ -15,21 +15,11 @@ const i18n = additions.i18n
 const apidoc = additions.apidoc
 
 const repo = module.exports
-const { combine, timestamp, printf, colorize } = winston.format
-
-const format = combine(
-  colorize(),
-  timestamp(),
-  printf(({ level, message, timestamp }) => {
-    return `[${level}]: ${timestamp} ${message}`
-  })
-)
 
 // logger init
 repo.logger = logger
   .add(new winston.transports.File({ filename: path.join(config.logger.path, 'error.log'), level: 'error', maxsize: config.logger.maxsize }))
   .add(new winston.transports.File({ filename: path.join(config.logger.path, 'combined.log'), maxsize: config.logger.maxsize }))
-  .add(new winston.transports.Console({ format }))
 
 // redis init
 repo.Redis = redis.Redis

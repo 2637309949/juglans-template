@@ -2,12 +2,13 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const logger = require('../addition').logger
+const logger = require('../../addition').logger
+const I18N = require('../../addition').I18N
 
 /**
-   * @api {get} /helloMq Queue接口
-   * @apiGroup Queue
-   * @apiDescription 有Token验证机制
+   * @api {get} /test/mq/hello         队列接口
+   * @apiGroup Test
+   * @apiDescription                   队列接口
    * @apiSuccessExample {json}
    *   HTTP/1.1 200 OK
    *    {
@@ -19,10 +20,10 @@ function helloMq ({ router, queue }) {
   queue.Register('mqTest', function (form) {
     logger.info(JSON.stringify(form))
   })
-  router.get('/helloMq', async (ctx, next) => {
+  router.get('/test/mq/hello', async (ctx, next) => {
     queue.Push({ type: 'mqTest', body: { 'xx': 'xx' } })
     ctx.body = {
-      'message': 'ok'
+      'message': I18N.i18nLocale('ok')
     }
   })
 }

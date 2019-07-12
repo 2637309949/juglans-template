@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint --ext .js src",
     "dev": "export TASK_ENV=1&&nodemon --inspect ./src/index.js",
-    "apidoc": "apidoc -i ./src/",
+    "doc": "apidoc -i ./src/",
     "test": "cross-env JEST=1 jest",
     "build": "gulp"
   },

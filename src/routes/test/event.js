@@ -2,21 +2,21 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const logger = require('../addition').logger
-const I18N = require('../addition').I18N
+const logger = require('../../addition').logger
+const I18N = require('../../addition').I18N
 
 /**
- * @api {get} /hello 验证接口
+ * @api {get} /test/hello  验证接口
  * @apiGroup Test
- * @apiDescription 有Token验证机制
+ * @apiDescription         有Token验证机制
  * @apiSuccessExample {json}
  *   HTTP/1.1 200 OK
  *    {
- *        "message": 'hello:test'
+ *        "message": 'hello'
  *    }
  */
 function hello ({ router }) {
-  router.get('/hello', (ctx, next) => {
+  router.get('/test/hello', (ctx, next) => {
     ctx.body = {
       message: I18N.i18nLocale('sys_hello')
     }

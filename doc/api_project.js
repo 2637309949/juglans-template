@@ -1,6 +1,6 @@
 define({
   "name": "juglans-template",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "api documentation",
   "title": "juglans-template - api documentation",
   "url": "http://127.0.0.1:3001/api/v1",
@@ -14,7 +14,7 @@ define({
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2019-07-07T09:12:15.455Z",
+    "time": "2019-07-12T14:10:50.351Z",
     "url": "http://apidocjs.com",
     "version": "0.17.7"
   }
