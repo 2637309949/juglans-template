@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const Limit = require('../../../juglans-limit')
+const Limit = require('../../../juglans-limit/dist/application')
 const { redis } = require('../addition')
 
 module.exports = Limit({

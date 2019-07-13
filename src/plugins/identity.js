@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const Identity = require('../../../juglans-identity')
+const Identity = require('../../../juglans-identity/dist/application')
 const { mgoExt, redis } = require('../addition')
 const _ = require('lodash')
 

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const Logs = require('../../../juglans-logs')
+const Logs = require('../../../juglans-logs/dist/application')
 const path = require('path')
 
 module.exports = Logs({

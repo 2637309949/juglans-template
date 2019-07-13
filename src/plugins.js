@@ -2,16 +2,16 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const Delivery = require('./plugins/Delivery')
-const Identity = require('./plugins/Identity')
-const OpenApi = require('./plugins/OpenApi')
-const Captcha = require('./plugins/Captcha')
-const Upload = require('./plugins/Upload')
-const Limit = require('./plugins/Limit')
-const Proxy = require('./plugins/Proxy')
-const Roles = require('./plugins/Roles')
-const Logs = require('./plugins/Logs')
-const Queue = require('./plugins/Queue')
+const Delivery = require('./plugins/delivery')
+const Identity = require('./plugins/identity')
+const OpenApi = require('./plugins/openapi')
+const Captcha = require('./plugins/captcha')
+const Upload = require('./plugins/upload')
+const Limit = require('./plugins/limit')
+const Proxy = require('./plugins/proxy')
+const Roles = require('./plugins/roles')
+const Logs = require('./plugins/logs')
+const Queue = require('./plugins/queue')
 
 const {
   logger, mgoExt, SeqExt, apidoc, I18N

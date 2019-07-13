@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const Upload = require('../../../juglans-upload')
+const Upload = require('../../../juglans-upload/dist/application')
 
 Upload.strategys = [...Upload.strategys]
 module.exports = Upload({

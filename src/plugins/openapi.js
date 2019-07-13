@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const OpenApi = require('../../../juglans-openapi')
+const OpenApi = require('../../../juglans-openapi/dist/application')
 module.exports = OpenApi({
   urlPrefix: '/gateway',
   Auth: function (AppId) {
