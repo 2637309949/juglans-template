@@ -3,11 +3,12 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const Base = require('./Base')
+const _ = require('lodash')
+const Model = require('./Model')
 const mongoose = require('../../addition').mongoose
 const mgoExt = require('../../addition').mgoExt
 
-const defineSchema = new mongoose.Schema(mgoExt.DefineSchema(Base, {
+const defineSchema = mgoExt.DefineSchema(_.assign({}, Model, {
   username: {
     type: String,
     displayName: '账号',
@@ -19,6 +20,10 @@ const defineSchema = new mongoose.Schema(mgoExt.DefineSchema(Base, {
     type: String,
     displayName: '密码',
     required: '密码({PATH})不能为空'
+  },
+  birthday: {
+    type: Date,
+    displayName: '生日'
   },
   is_active: {
     type: Boolean,
@@ -72,7 +77,7 @@ const defineSchema = new mongoose.Schema(mgoExt.DefineSchema(Base, {
     displayName: 'signin错误的次数',
     remark: 'signin错误的次数，比如输错密码'
   }
-}))
+}), {})
 
 defineSchema.statics.isManager = async (username) => {
   if (!username) return false
