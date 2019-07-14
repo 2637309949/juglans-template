@@ -7,7 +7,7 @@ const Model = require('./Model')
 const mgoExt = require('../../addition').mgoExt
 const logger = require('../../addition').logger
 
-const defineSchema = mgoExt.DefineSchema(_.assign({}, Model, {
+const defineSchema = mgoExt.DefineSchema(_.assign({
   name_sc: {
     type: String,
     displayName: '角色名称',
@@ -33,7 +33,7 @@ const defineSchema = mgoExt.DefineSchema(_.assign({}, Model, {
     ref: 'Permission',
     displayName: '权限列表'
   }]
-}), {})
+}, Model), {})
 
 mgoExt.Register({
   name: 'Role',

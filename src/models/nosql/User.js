@@ -8,7 +8,7 @@ const Model = require('./Model')
 const mongoose = require('../../addition').mongoose
 const mgoExt = require('../../addition').mgoExt
 
-const defineSchema = mgoExt.DefineSchema(_.assign({}, Model, {
+const defineSchema = mgoExt.DefineSchema(_.assign({
   username: {
     type: String,
     displayName: '账号',
@@ -25,29 +25,6 @@ const defineSchema = mgoExt.DefineSchema(_.assign({}, Model, {
     type: Date,
     displayName: '生日'
   },
-  is_active: {
-    type: Boolean,
-    displayName: '是否启用',
-    default: true
-  },
-  is_repass: {
-    type: Boolean,
-    displayName: '是否已修改过密码',
-    default: false
-  },
-  avatar: {
-    type: String,
-    displayName: '头像'
-  },
-  type: {
-    type: String,
-    displayName: '用户类型',
-    enum: [null, '企业号', '自建']
-  },
-  english_name: {
-    type: String,
-    displayName: '英文名'
-  },
   mobile: {
     type: String,
     displayName: '手机'
@@ -61,23 +38,8 @@ const defineSchema = mgoExt.DefineSchema(_.assign({}, Model, {
     type: String,
     ref: 'Role',
     displayName: '关联角色'
-  }],
-  locale: {
-    type: String,
-    displayName: '当前语言',
-    remark: '需要切换更新'
-  },
-  deactive_time: {
-    type: Number,
-    displayName: '账号被锁定的时间',
-    remark: '输错密码登陆超过次数后账号被锁定的时间'
-  },
-  signin_error_times: {
-    type: Number,
-    displayName: 'signin错误的次数',
-    remark: 'signin错误的次数，比如输错密码'
-  }
-}), {})
+  }]
+}, Model), {})
 
 defineSchema.statics.isManager = async (username) => {
   if (!username) return false

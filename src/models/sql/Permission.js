@@ -2,13 +2,13 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const base = require('./Base')
+const model = require('./Model')
 const SeqExt = require('../../addition').SeqExt
 const User = require('./User').User
 const Sequelize = require('../../addition').Sequelize
 
 // defineSchema defined store model
-const defineSchema = SeqExt.DefineSchema(base, {
+const defineSchema = SeqExt.DefineSchema(model, {
   code: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -43,6 +43,6 @@ const Permission = SeqExt.Register({
 })
 
 Permission.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
-Permission.belongsTo(User, {foreignKey: '_modifier', as: 'modifier'})
+Permission.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
 
 module.exports.Permission = Permission

@@ -17,9 +17,17 @@ module.exports = SeqExt.DefineSchema({
       key: 'id'
     }
   },
-  _modifier: {
+  _updator: {
     type: Sequelize.INTEGER,
     comment: '修改人',
+    references: {
+      model: SeqExt.Model('user'),
+      key: 'id'
+    }
+  },
+  _deleter: {
+    type: Sequelize.INTEGER,
+    comment: '删除人',
     references: {
       model: SeqExt.Model('user'),
       key: 'id'

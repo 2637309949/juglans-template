@@ -34,7 +34,7 @@ function Initdb () {
       return SeqExt.Model('store').create({
         name: 'John',
         _creator: 1,
-        _modifier: 1,
+        _updator: 1,
         address: 'gz tianhe'
       })
     })
@@ -46,14 +46,14 @@ function Initdb () {
       code: 'XDF09E3',
       name: '财务财年统计',
       _creator: 1,
-      _modifier: 1,
+      _updator: 1,
       type: '5',
       holder: '2'
     })
     const roleId = await SeqExt.Model('role').create({
       name: '财务部',
       _creator: 1,
-      _modifier: 1,
+      _updator: 1,
       type: '2'
     })
     await SeqExt.Model('role_permission').create({

@@ -6,7 +6,7 @@ const _ = require('lodash')
 const Model = require('./Model')
 const mgoExt = require('../../addition').mgoExt
 
-const defineSchema = mgoExt.DefineSchema(_.assign({}, Model, {
+const defineSchema = mgoExt.DefineSchema(_.assign({
   code: {
     type: String,
     unique: true,
@@ -30,7 +30,7 @@ const defineSchema = mgoExt.DefineSchema(_.assign({}, Model, {
     enum: ['系统', '用户'],
     default: '用户'
   }
-}), {})
+}, Model), {})
 
 mgoExt.Register({
   name: 'Permission',

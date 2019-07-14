@@ -7,12 +7,12 @@ const Permission = require('./Permission').Permission
 const Role = require('./Role').Role
 const User = require('./User').User
 
-const base = require('./Base')
+const model = require('./Model')
 const SeqExt = require('../../addition').SeqExt
 const Sequelize = require('../../addition').Sequelize
 
 // defineSchema defined RolePermission model
-const defineSchema = SeqExt.DefineSchema(base, {
+const defineSchema = SeqExt.DefineSchema(model, {
   name: {
     type: Sequelize.STRING
   }
@@ -28,6 +28,7 @@ const RolePermisson = SeqExt.Register({
 
 // many2many
 RolePermisson.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
-RolePermisson.belongsTo(User, {foreignKey: '_modifier', as: 'modifier'})
+RolePermisson.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
+
 Role.belongsToMany(Permission, {through: { model: RolePermisson, unique: false }, foreignKey: '_permission', as: 'permissions'})
 Permission.belongsToMany(Role, {through: { model: RolePermisson, unique: false }, foreignKey: '_role', as: 'roles'})
