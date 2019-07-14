@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 const path = require('path')
+const fetch = require('node-fetch')
 const config = require('./config')
 const additions = require('../../juglans-addition')
 
@@ -72,3 +73,6 @@ repo.I18N.initLocal(async function (i18n) {
     })
   }
 })
+
+// global request
+repo.request = fetch

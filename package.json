@@ -42,6 +42,7 @@
     "fs-extra": "^7.0.0",
     "juglans": "git+https://github.com/2637309949/juglans.git",
     "moment": "^2.22.2",
+    "node-fetch": "^2.6.0",
     "node-schedule": "^1.3.0"
   },
   "husky": {
