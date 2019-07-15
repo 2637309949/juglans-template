@@ -14,13 +14,13 @@ module.exports = {
     maxsize: 1024 * 5
   },
   sql: {
-    uri: 'mysql://root:111111@/test',
+    uri: 'mysql://root:111111@/juglans',
     opts: {
       dialect: 'mysql'
     }
   },
   mongo: {
-    uri: 'mongodb://127.0.0.1:27017/test?authSource=admin',
+    uri: 'mongodb://127.0.0.1:27017/juglans?authSource=admin',
     retryCount: 5,
     opts: {
       useCreateIndex: true,

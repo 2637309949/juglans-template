@@ -60,6 +60,15 @@ const User = mgoExt.Register({
   name: 'User',
   displayName: '参数配置',
   schema: defineSchema,
+  opts: {
+    routeHooks: {
+      list: {
+        cond: async function (cond, ctx, opts) {
+          return cond
+        }
+      }
+    }
+  },
   autoHook: false
 })
 
