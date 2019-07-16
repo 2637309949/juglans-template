@@ -10,7 +10,7 @@ describe('Test the user path', () => {
       proxy
         .get('/api/v1/template/mgo/user?accessToken=DEBUG&size=10')
         .then(function (res) {
-          expect(res.statusCode).toBe(200)
+          expect(res.statusCode).toBe(401)
           JSON.parse(res.text)
           done()
         })
