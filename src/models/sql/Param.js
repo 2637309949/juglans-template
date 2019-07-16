@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 const model = require('./Model')
+const logger = require('../../addition').logger
 const User = require('./User').User
 const Property = require('./Property').Property
 
@@ -57,7 +58,7 @@ Param.addEnum = async function ({ model, key, value }) {
       return i
     }))
   } catch (error) {
-    console.log('----------', error)
+    logger.error(error.stack || error.message)
     throw error
   }
 }
