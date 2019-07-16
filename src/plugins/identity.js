@@ -21,7 +21,7 @@ module.exports = Identity({
       roles: ret.roles
     }
   },
-  fakeTokens: ['DEBUG'],
-  fakeUrls: [/\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/],
+  fakeTokens: [],
+  fakeUrls: [/\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/, /\/api\/v1\/test\/mock\/seq\/login/],
   model: Identity.model.RedisModel({ redis })
 })
