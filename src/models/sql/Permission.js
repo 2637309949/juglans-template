@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 const model = require('./Model')
+const EVENTS = require('../../juglans').events
 const SeqExt = require('../../addition').SeqExt
 const User = require('./User').User
 const Sequelize = require('../../addition').Sequelize
@@ -45,4 +46,44 @@ const Permission = SeqExt.Register({
 Permission.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 Permission.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
 
+module.exports = function ({ events }) {
+  events.on(EVENTS.SYS_JUGLANS_PLUGINS_HTTPPROXY_LISTEN_SUCCEED, async function (message) {
+    await new Promise((resolve, reject) => {
+      setTimeout(function () {
+        resolve()
+      }, 2000)
+    })
+    const Param = SeqExt.Model('param')
+    await Param.addEnum({
+      model: 'permission',
+      key: 'type',
+      value: [{
+        key: '一级菜单',
+        value: '101',
+        _creator: 1,
+        _updator: 1
+      }, {
+        key: '二级菜单',
+        value: '102',
+        _creator: 1,
+        _updator: 1
+      }, {
+        key: '三级菜单',
+        value: '103',
+        _creator: 1,
+        _updator: 1
+      }, {
+        key: '按钮',
+        value: '104',
+        _creator: 1,
+        _updator: 1
+      }, {
+        key: '自定义',
+        value: '105',
+        _creator: 1,
+        _updator: 1
+      }]
+    })
+  })
+}
 module.exports.Permission = Permission

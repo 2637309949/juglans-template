@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 const model = require('./Model')
+const EVENTS = require('../../juglans').events
 const User = require('./User').User
 const SeqExt = require('../../addition').SeqExt
 const Sequelize = require('../../addition').Sequelize
@@ -31,4 +32,30 @@ const Role = SeqExt.Register({
 Role.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 Role.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
 
+module.exports = function ({ events }) {
+  events.on(EVENTS.SYS_JUGLANS_PLUGINS_HTTPPROXY_LISTEN_SUCCEED, async function (message) {
+    await new Promise((resolve, reject) => {
+      setTimeout(function () {
+        resolve()
+      }, 2000)
+    })
+    const Param = SeqExt.Model('param')
+    await Param.addEnum({
+      model: 'role',
+      key: 'type',
+      value: [{
+        key: '管理',
+        value: '101',
+        _creator: 1,
+        _updator: 1
+      },
+      {
+        key: '业务',
+        value: '102',
+        _creator: 1,
+        _updator: 1
+      }]
+    })
+  })
+}
 module.exports.Role = Role

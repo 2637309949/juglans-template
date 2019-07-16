@@ -43,3 +43,38 @@ mgoExt.Register({
   displayName: '权限配置',
   schema: defineSchema
 })
+
+module.exports = async function ({ router }) {
+  const Param = mgoExt.Model('Param')
+  await Param.addEnum({
+    model: 'Permission',
+    key: 'type',
+    value: [{
+      key: '一级菜单',
+      value: '101'
+    }, {
+      key: '二级菜单',
+      value: '102'
+    }, {
+      key: '三级菜单',
+      value: '103'
+    }, {
+      key: '按钮',
+      value: '104'
+    }, {
+      key: '自定义',
+      value: '105'
+    }]
+  })
+  await Param.addEnum({
+    model: 'Permission',
+    key: 'holder',
+    value: [{
+      key: '系统',
+      value: '101'
+    }, {
+      key: '用户',
+      value: '102'
+    }]
+  })
+}

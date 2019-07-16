@@ -46,3 +46,18 @@ mgoExt.Register({
     }
   }
 })
+
+module.exports = async function ({ router }) {
+  const Param = mgoExt.Model('Param')
+  await Param.addEnum({
+    model: 'Role',
+    key: 'type',
+    value: [{
+      key: '管理角色',
+      value: '101'
+    }, {
+      key: '业务角色',
+      value: '102'
+    }]
+  })
+}

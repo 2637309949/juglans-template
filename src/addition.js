@@ -44,7 +44,7 @@ repo.mgoExt.setApiOpts({
 repo.Sequelize = seq.Sequelize
 repo.SeqExt = seq.Ext.Connect(config.sql.uri, config.sql.opts)
 // for dev, drop and create table
-repo.SeqExt.sequelize.sync({ force: true }).then(async () => {
+repo.SeqExt.sequelize.sync({}).then(async () => {
   const User = repo.SeqExt.Model('user')
   await User.findOrCreate({
     where: { id: '1' },
