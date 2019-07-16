@@ -13,15 +13,19 @@ const Sequelize = require('../../addition').Sequelize
 
 // defineSchema defined RolePermission model
 const defineSchema = SeqExt.DefineSchema(model, {
-  name: {
-    type: Sequelize.STRING
+  role_id: {
+    type: Sequelize.INTEGER
+  },
+  permission_id: {
+    type: Sequelize.INTEGER,
+    comment: 'Param外键'
   }
 })
 
 // Register defined Register store model
 const RolePermisson = SeqExt.Register({
   schema: defineSchema,
-  name: 'role_permission',
+  name: 'role2permission',
   displayName: '权限与角色关系',
   autoHook: false
 })
@@ -30,5 +34,5 @@ const RolePermisson = SeqExt.Register({
 RolePermisson.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 RolePermisson.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
 
-Role.belongsToMany(Permission, {through: { model: RolePermisson, unique: false }, foreignKey: '_permission', as: 'permissions'})
-Permission.belongsToMany(Role, {through: { model: RolePermisson, unique: false }, foreignKey: '_role', as: 'roles'})
+Role.belongsToMany(Permission, {through: { model: RolePermisson, unique: false }, foreignKey: 'permission_id', as: 'permissions'})
+Permission.belongsToMany(Role, {through: { model: RolePermisson, unique: false }, foreignKey: 'role_id', as: 'roles'})

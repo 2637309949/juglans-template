@@ -15,9 +15,9 @@ const defineSchema = SeqExt.DefineSchema(model, {
     comment: '角色名称'
   },
   type: {
-    type: Sequelize.ENUM('1', '2'),
+    type: Sequelize.ENUM('101', '102'),
     comment: '角色类别: 管理, 业务',
-    defaultValue: '1'
+    defaultValue: '102'
   }
 })
 

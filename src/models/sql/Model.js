@@ -11,26 +11,16 @@ const Sequelize = require('../../addition').Sequelize
 module.exports = SeqExt.DefineSchema({
   _creator: {
     type: Sequelize.INTEGER,
-    comment: '创建人',
-    references: {
-      model: SeqExt.Model('user'),
-      key: 'id'
-    }
+    allowNull: false,
+    comment: '创建人'
   },
   _updator: {
     type: Sequelize.INTEGER,
-    comment: '修改人',
-    references: {
-      model: SeqExt.Model('user'),
-      key: 'id'
-    }
+    allowNull: false,
+    comment: '修改人'
   },
   _deleter: {
     type: Sequelize.INTEGER,
-    comment: '删除人',
-    references: {
-      model: SeqExt.Model('user'),
-      key: 'id'
-    }
+    comment: '删除人'
   }
 })

@@ -12,6 +12,7 @@ const Proxy = require('./plugins/proxy')
 const Roles = require('./plugins/roles')
 const Logs = require('./plugins/logs')
 const Queue = require('./plugins/queue')
+const EVENTS = require('./juglans').events
 
 const {
   logger, mgoExt, SeqExt, apidoc, I18N
@@ -33,7 +34,7 @@ module.exports = function (app) {
   app.Use(Queue)
   app.PostUse(apidoc)
   app.Use(function ({ router, roles, events }) {
-    events.on('app:events:listen:finish', function (message) {
+    events.on(EVENTS.SYS_JUGLANS_PLUGINS_HTTPPROXY_LISTEN_SUCCEED, function (message) {
       logger.info(message)
     })
     router.get('/juglans*', roles.can('tf11@pr44;tf44'), async ctx => {

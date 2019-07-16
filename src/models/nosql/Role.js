@@ -8,30 +8,27 @@ const mgoExt = require('../../addition').mgoExt
 const logger = require('../../addition').logger
 
 const defineSchema = mgoExt.DefineSchema(_.assign({
-  name_sc: {
+  name: {
     type: String,
-    displayName: '角色名称',
+    displayName: '名称',
+    required: '名称({PATH})不能为空'
+  },
+  code: {
+    type: String,
+    displayName: '编码',
     unique: true,
-    required: '预警名称({PATH})不能为空'
-  },
-  name_tc: {
-    type: String,
-    displayName: '繁体名称'
-  },
-  name_en: {
-    type: String,
-    displayName: '英文名称'
+    required: '编码({PATH})不能为空'
   },
   type: {
     type: String,
     displayName: '角色类型',
-    enum: ['管理角色', '业务角色'],
-    default: '业务角色'
+    enum: ['101', '102'],
+    default: '101'
   },
   permissions: [{
     type: String,
-    ref: 'Permission',
-    displayName: '权限列表'
+    displayName: '权限列表',
+    ref: 'Permission'
   }]
 }, Model), {})
 

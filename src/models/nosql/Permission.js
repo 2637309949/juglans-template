@@ -4,31 +4,37 @@
 
 const _ = require('lodash')
 const Model = require('./Model')
-const mgoExt = require('../../addition').mgoExt
+const { mongoose, mgoExt } = require('../../addition')
+const Schema = mongoose.Schema
 
 const defineSchema = mgoExt.DefineSchema(_.assign({
+  name: {
+    type: String,
+    displayName: '名称',
+    required: '名称({PATH})不能为空'
+  },
   code: {
     type: String,
+    displayName: '编码',
     unique: true,
-    displayName: '权限编码',
-    required: '权限编码({PATH})不能为空'
+    required: '编码({PATH})不能为空'
   },
   pid: {
-    type: String,
+    type: Schema.Types.ObjectId,
     displayName: '上级权限',
-    default: null
+    ref: 'Permission'
   },
   type: {
     type: String,
     displayName: '权限类型',
-    enum: ['一级菜单', '二级菜单', '三级菜单', '按钮', '自定义'],
-    default: '自定义'
+    enum: ['101', '102', '103', '104', '105'],
+    default: '105'
   },
   holder: {
     type: String,
     displayName: '权限持有者',
-    enum: ['系统', '用户'],
-    default: '用户'
+    enum: ['101', '102'],
+    default: '101'
   }
 }, Model), {})
 

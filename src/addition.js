@@ -43,6 +43,21 @@ repo.mgoExt.setApiOpts({
 // sequelize init
 repo.Sequelize = seq.Sequelize
 repo.SeqExt = seq.Ext.Connect(config.sql.uri, config.sql.opts)
+// for dev, drop and create table
+repo.SeqExt.sequelize.sync({ force: true }).then(async () => {
+  const User = repo.SeqExt.Model('user')
+  await User.findOrCreate({
+    where: { id: '1' },
+    defaults: {
+      id: 1,
+      name: 'root',
+      password: '111111',
+      _creator: 1,
+      _updator: 1
+    }
+  })
+})
+// for dev, drop and create table end
 repo.SeqExt.setApiOpts({
   prefix: '/template/seq'
 })

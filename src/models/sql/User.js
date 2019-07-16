@@ -6,16 +6,33 @@ const model = require('./Model')
 const SeqExt = require('../../addition').SeqExt
 const Sequelize = require('../../addition').Sequelize
 const logger = require('../../addition').logger
-
 // defineSchema defined user model
 const defineSchema = SeqExt.DefineSchema(model, {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    comment: '名称'
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    comment: '密码'
   },
   age: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    comment: '年龄'
+  },
+  birthday: {
+    type: Sequelize.DATE,
+    comment: '出生日期'
+  },
+  mobile: {
+    type: Sequelize.STRING,
+    comment: '手机号码'
+  },
+  email: {
+    type: Sequelize.STRING,
+    comment: '邮件'
   }
 })
 
@@ -39,7 +56,7 @@ const User = SeqExt.Register({
 User.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 User.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
 
-module.exports = ({ router, events: e }) => {
+module.exports = ({ router, events }) => {
   // routes: api/v1/mgo/user
   SeqExt.api.List(router, 'user')
     .Post(async function (ctx) {

@@ -12,26 +12,26 @@ const defineSchema = SeqExt.DefineSchema(model, {
   code: {
     type: Sequelize.STRING,
     allowNull: false,
-    comment: '权限编码'
+    unique: true,
+    comment: '编码'
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false,
-    comment: '权限名称'
+    comment: '名称'
   },
   pid: {
     type: Sequelize.INTEGER,
     comment: '父级ID'
   },
   type: {
-    type: Sequelize.ENUM('1', '2', '3', '4', '5'),
+    type: Sequelize.ENUM('101', '102', '103', '104', '105'),
     comment: '权限类别: 一级菜单, 二级菜单, 三级菜单, 按钮, 自定义',
-    defaultValue: '5'
+    defaultValue: '105'
   },
   holder: {
-    type: Sequelize.ENUM('1', '2'),
+    type: Sequelize.ENUM('101', '102'),
     comment: '持有者类别: 系统, 用户',
-    defaultValue: '2'
+    defaultValue: '102'
   }
 })
 

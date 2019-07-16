@@ -9,12 +9,11 @@ const mongoose = require('../../addition').mongoose
 const mgoExt = require('../../addition').mgoExt
 
 const defineSchema = mgoExt.DefineSchema(_.assign({
-  username: {
+  name: {
     type: String,
     displayName: '账号',
-    unique: true,
     required: '账号({PATH})不能为空',
-    index: true
+    unique: true
   },
   password: {
     type: String,
@@ -31,13 +30,12 @@ const defineSchema = mgoExt.DefineSchema(_.assign({
   },
   email: {
     type: String,
-    displayName: '邮箱',
-    remark: '冗余设计，同员工档案邮箱'
+    displayName: '邮箱'
   },
   roles: [{
     type: String,
-    ref: 'Role',
-    displayName: '关联角色'
+    displayName: '关联角色',
+    ref: 'Role'
   }]
 }, Model), {})
 
