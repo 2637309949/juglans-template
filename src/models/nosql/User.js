@@ -4,8 +4,7 @@
 // license that can be found in the LICENSE file.
 
 const _ = require('lodash')
-const Model = require('./Model')
-const mongoose = require('../../addition').mongoose
+const Model = require('./Model').Model
 const mgoExt = require('../../addition').mgoExt
 
 const defineSchema = mgoExt.DefineSchema(_.assign({
@@ -41,7 +40,7 @@ const defineSchema = mgoExt.DefineSchema(_.assign({
 
 defineSchema.statics.isManager = async (username) => {
   if (!username) return false
-  const User = mongoose.model('User')
+  const User = mgoExt.Model('User')
   const entity = await User.findOne({ username }, { roles: 1 }).populate('roles', 'roles.type')
   if (entity && Array.isArray(entity.roles) && entity.roles.length > 0) {
     for (const role of entity.roles) {
@@ -54,7 +53,7 @@ defineSchema.statics.isManager = async (username) => {
   return false
 }
 
-const User = mgoExt.Register({
+mgoExt.Register({
   name: 'User',
   displayName: '参数配置',
   schema: defineSchema,
@@ -68,6 +67,23 @@ const User = mgoExt.Register({
     }
   },
   autoHook: false
+}).Init(async function (ext) {
+  const User = mgoExt.Model('User')
+  const id = '5d2fe40d7dead1c7924b3dc2'
+  let ret = await User.findOne({ name: 'preset' })
+  if (ret && `${ret._id}` !== id) {
+    await User.remove({ name: 'preset' })
+    ret = null
+  }
+  if (!ret) {
+    await User.create([{
+      _id: id,
+      name: 'preset',
+      password: '123456',
+      updator: '5d2fe40d7dead1c7924b3dc2',
+      deleter: '5d2fe40d7dead1c7924b3dc2'
+    }])
+  }
 })
 
 module.exports = function ({ router }) {
@@ -91,4 +107,3 @@ module.exports = function ({ router }) {
   mgoExt.api.Update(router, 'User')
   mgoExt.api.Create(router, 'User')
 }
-module.exports.User = User

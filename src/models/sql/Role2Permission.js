@@ -3,13 +3,11 @@
 // license that can be found in the LICENSE file.
 
 // ensure permission model hased been inited
-const Permission = require('./Permission').Permission
-const Role = require('./Role').Role
-const User = require('./User').User
+require('./Role')
+require('./User')
 
-const model = require('./Model')
-const SeqExt = require('../../addition').SeqExt
-const Sequelize = require('../../addition').Sequelize
+const model = require('./Model').Model
+const {SeqExt, Sequelize} = require('../../addition')
 
 // defineSchema defined RolePermission model
 const defineSchema = SeqExt.DefineSchema(model, {
@@ -23,12 +21,17 @@ const defineSchema = SeqExt.DefineSchema(model, {
 })
 
 // Register defined Register store model
-const RolePermisson = SeqExt.Register({
+SeqExt.Register({
   schema: defineSchema,
   name: 'role2permission',
   displayName: '权限与角色关系',
   autoHook: false
 })
+
+const RolePermisson = SeqExt.Model('role2permission')
+const Permission = SeqExt.Model('permission')
+const User = SeqExt.Model('user')
+const Role = SeqExt.Model('role')
 
 // many2many
 RolePermisson.belongsTo(User, {foreignKey: '_creator', as: 'creator'})

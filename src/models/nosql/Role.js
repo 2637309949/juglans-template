@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 const _ = require('lodash')
-const Model = require('./Model')
+const Model = require('./Model').Model
 const mgoExt = require('../../addition').mgoExt
 const logger = require('../../addition').logger
 

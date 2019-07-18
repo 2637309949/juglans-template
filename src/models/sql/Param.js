@@ -2,14 +2,12 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const model = require('./Model')
-const logger = require('../../addition').logger
-const User = require('./User').User
-const Property = require('./Property').Property
+const model = require('./Model').Model
+const withPreset = require('./Model').withPreset
+require('./User')
+require('./Property')
 
-const {
-  SeqExt, Sequelize
-} = require('../../addition')
+const { SeqExt, Sequelize, logger } = require('../../addition')
 
 const defineSchema = SeqExt.DefineSchema(model, {
   name: {
@@ -24,11 +22,15 @@ const defineSchema = SeqExt.DefineSchema(model, {
   }
 })
 
-const Param = SeqExt.Register({
+SeqExt.Register({
   schema: defineSchema,
   name: 'param',
   displayName: '参数配置'
 })
+
+const Property = SeqExt.Model('property')
+const Param = SeqExt.Model('param')
+const User = SeqExt.Model('user')
 
 Param.addEnum = async function ({ model, key, value }) {
   try {
@@ -36,24 +38,22 @@ Param.addEnum = async function ({ model, key, value }) {
     const Property = SeqExt.Model('property')
     const [instance] = await Param.findOrCreate({
       where: { code: 'enum' },
-      defaults: {
+      defaults: withPreset({
         code: 'enum',
-        name: '枚举类型',
-        _creator: 1,
-        _updator: 1
-      }
+        name: '枚举类型'
+      })
     })
     await Promise.all(value.map(async x => {
       const [i] = await Property.findOrCreate({
-        where: { category: 'model', sub_category: key },
-        defaults: {
+        where: { category: model, sub_category: key },
+        defaults: withPreset({
           param_id: instance.id,
           category: model,
           sub_category: key,
           key: x.key,
           value: x.value,
           ...x
-        }
+        })
       })
       return i
     }))
@@ -66,5 +66,3 @@ Param.addEnum = async function ({ model, key, value }) {
 Param.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 Param.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
 Param.hasMany(Property, {foreignKey: 'param_id', sourceKey: 'id', as: 'value'})
-
-module.exports.Param = Param

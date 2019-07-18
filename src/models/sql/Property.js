@@ -2,8 +2,7 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const model = require('./Model')
-const User = require('./User').User
+const model = require('./Model').Model
 const { SeqExt, Sequelize } = require('../../addition')
 
 const defineSchema = SeqExt.DefineSchema(model, {
@@ -22,7 +21,7 @@ const defineSchema = SeqExt.DefineSchema(model, {
   key: {
     type: Sequelize.STRING,
     allowNull: false,
-    comment: '编码'
+    comment: '属性'
   },
   value: {
     type: Sequelize.STRING,
@@ -31,7 +30,7 @@ const defineSchema = SeqExt.DefineSchema(model, {
 })
 
 // Register defined Register store model
-const Property = SeqExt.Register({
+SeqExt.Register({
   schema: defineSchema,
   name: 'property',
   displayName: '配置子项'
@@ -47,7 +46,8 @@ const Property = SeqExt.Register({
   ]
 })
 
+const Property = SeqExt.Model('property')
+const User = SeqExt.Model('user')
+
 Property.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 Property.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
-
-module.exports.Property = Property

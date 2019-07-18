@@ -3,7 +3,8 @@
 // license that can be found in the LICENSE file.
 
 const _ = require('lodash')
-const Model = require('./Model')
+const Model = require('./Model').Model
+const withPreset = require('./Model').withPreset
 const { mongoose, mgoExt } = require('../../addition')
 const Schema = mongoose.Schema
 
@@ -29,7 +30,7 @@ defineSchema.statics.addEnum = async function ({ model, key, value }) {
   const Param = mgoExt.Model('Param')
   let one = await Param.findOne({ code: 'enum' })
   if (!one) {
-    one = new Param({ name: '枚举类型', code: 'enum', value: {} })
+    one = new Param(withPreset({ name: '枚举类型', code: 'enum', value: {} }))
   }
   if (!one.value[model]) {
     one.value[model] = {}

@@ -2,23 +2,22 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const model = require('./Model')
+const model = require('./Model').Model
 const EVENTS = require('../../juglans').events
-const SeqExt = require('../../addition').SeqExt
-const User = require('./User').User
-const Sequelize = require('../../addition').Sequelize
+const {SeqExt, Sequelize} = require('../../addition')
+require('./User')
 
 // defineSchema defined store model
 const defineSchema = SeqExt.DefineSchema(model, {
+  name: {
+    type: Sequelize.STRING,
+    comment: '名称'
+  },
   code: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
     comment: '编码'
-  },
-  name: {
-    type: Sequelize.STRING,
-    comment: '名称'
   },
   pid: {
     type: Sequelize.INTEGER,
@@ -37,11 +36,14 @@ const defineSchema = SeqExt.DefineSchema(model, {
 })
 
 // Register defined Register store model
-const Permission = SeqExt.Register({
+SeqExt.Register({
   schema: defineSchema,
   name: 'permission',
   displayName: '权限'
 })
+
+const Permission = SeqExt.Model('permission')
+const User = SeqExt.Model('user')
 
 Permission.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 Permission.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
@@ -59,31 +61,20 @@ module.exports = function ({ events }) {
       key: 'type',
       value: [{
         key: '一级菜单',
-        value: '101',
-        _creator: 1,
-        _updator: 1
+        value: '101'
       }, {
         key: '二级菜单',
-        value: '102',
-        _creator: 1,
-        _updator: 1
+        value: '102'
       }, {
         key: '三级菜单',
-        value: '103',
-        _creator: 1,
-        _updator: 1
+        value: '103'
       }, {
         key: '按钮',
-        value: '104',
-        _creator: 1,
-        _updator: 1
+        value: '104'
       }, {
         key: '自定义',
-        value: '105',
-        _creator: 1,
-        _updator: 1
+        value: '105'
       }]
     })
   })
 }
-module.exports.Permission = Permission

@@ -5,10 +5,11 @@
 // ensure user model hased been inited
 require('./User')
 
+const _ = require('lodash')
 const SeqExt = require('../../addition').SeqExt
 const Sequelize = require('../../addition').Sequelize
 
-module.exports = SeqExt.DefineSchema({
+module.exports.Model = SeqExt.DefineSchema({
   _creator: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -24,3 +25,7 @@ module.exports = SeqExt.DefineSchema({
     comment: '删除人'
   }
 })
+
+module.exports.withPreset = function (obj) {
+  return _.merge({_creator: 101, _updator: 101}, obj)
+}

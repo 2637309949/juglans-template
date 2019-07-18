@@ -96,7 +96,7 @@ function seqLogin ({ router }) {
   router.get('/test/mock/seq/login', async (ctx, next) => {
     try {
       const User = SeqExt.Model('user')
-      const user = User.findOne({name: 'root'})
+      const user = User.findOne({name: 'preset'})
       if (user) {
         const info = await identity.obtainToken(user)
         ctx.cookies.set('accessToken', info.accessToken,

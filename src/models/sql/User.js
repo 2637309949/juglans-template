@@ -2,10 +2,9 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const model = require('./Model')
-const SeqExt = require('../../addition').SeqExt
-const Sequelize = require('../../addition').Sequelize
-const logger = require('../../addition').logger
+const model = require('./Model').Model
+const {SeqExt, Sequelize, logger} = require('../../addition')
+
 // defineSchema defined user model
 const defineSchema = SeqExt.DefineSchema(model, {
   name: {
@@ -37,7 +36,7 @@ const defineSchema = SeqExt.DefineSchema(model, {
 })
 
 // Register defined Register user model
-const User = SeqExt.Register({
+SeqExt.Register({
   schema: defineSchema,
   name: 'user',
   displayName: '用户',
@@ -51,7 +50,21 @@ const User = SeqExt.Register({
       }
     }
   }
+}).Init(async function (ext) {
+  const User = ext.Model('user')
+  await User.findOrCreate({
+    where: { id: 101 },
+    defaults: {
+      id: 101,
+      name: 'preset',
+      password: '111111',
+      _creator: 101,
+      _updator: 101
+    }
+  })
 })
+
+const User = SeqExt.Model('user')
 
 User.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 User.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
@@ -74,5 +87,3 @@ module.exports = ({ router, events }) => {
   SeqExt.api.Update(router, 'user')
   SeqExt.api.Create(router, 'user')
 }
-
-module.exports.User = User

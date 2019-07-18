@@ -6,7 +6,7 @@ const _ = require('lodash')
 const mongoose = require('../../addition').mongoose
 const Schema = mongoose.Schema
 
-module.exports = _.assign({
+module.exports.Model = _.assign({
   creator: {
     type: Schema.Types.ObjectId,
     displayName: '创建人',
@@ -23,3 +23,7 @@ module.exports = _.assign({
     ref: 'User'
   }
 })
+
+module.exports.withPreset = function (obj) {
+  return _.merge({updator: '5d2fe40d7dead1c7924b3dc2', deleter: '5d2fe40d7dead1c7924b3dc2'}, obj)
+}

@@ -2,32 +2,39 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const model = require('./Model')
+const model = require('./Model').Model
 const EVENTS = require('../../juglans').events
-const User = require('./User').User
-const SeqExt = require('../../addition').SeqExt
-const Sequelize = require('../../addition').Sequelize
+const {SeqExt, Sequelize} = require('../../addition')
+require('./User')
 
 // defineSchema defined store model
 const defineSchema = SeqExt.DefineSchema(model, {
   name: {
     type: Sequelize.STRING,
+    comment: '名称'
+  },
+  code: {
+    type: Sequelize.STRING,
     allowNull: false,
-    comment: '角色名称'
+    unique: true,
+    comment: '编码'
   },
   type: {
     type: Sequelize.ENUM('101', '102'),
-    comment: '角色类别: 管理, 业务',
+    comment: '类别: 管理, 业务',
     defaultValue: '102'
   }
 })
 
 // Register defined Register store model
-const Role = SeqExt.Register({
+SeqExt.Register({
   schema: defineSchema,
   name: 'role',
   displayName: '权限'
 })
+
+const Role = SeqExt.Model('role')
+const User = SeqExt.Model('user')
 
 Role.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 Role.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
@@ -45,15 +52,11 @@ module.exports = function ({ events }) {
       key: 'type',
       value: [{
         key: '管理',
-        value: '101',
-        _creator: 1,
-        _updator: 1
+        value: '101'
       },
       {
         key: '业务',
-        value: '102',
-        _creator: 1,
-        _updator: 1
+        value: '102'
       }]
     })
   })

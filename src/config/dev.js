@@ -11,7 +11,7 @@ module.exports = {
   debug: true,
   logger: {
     path: path.join(__dirname, '../../logger'),
-    maxsize: 1024 * 5
+    maxsize: 5242880
   },
   sql: {
     uri: 'mysql://root:111111@/juglans',
