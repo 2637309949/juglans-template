@@ -22,13 +22,15 @@ app.RunImmediately()
 $ npm install
 $ npm run dev
 ```
-### 2. For Prod
+
+### 2. For ApiDoc
+![Juglans flash](./assets/apidoc.png)
+
+### 3. For Prod
 ```shell
 $ npm install
 $ npm run build
 ```
-
-### 3. For Prod
 
 ### 4. Run Test
 
