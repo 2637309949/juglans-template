@@ -1,52 +1,6 @@
-## Project structure
-
-### Code structure
-
-    juglans-template
-    ├── assets
-    │   └── public
-    │       ├── apidoc
-    │       └── upload
-    ├── bin
-    ├── logger
-    ├── src
-    │   ├── config
-    │   ├── models
-    │   ├── plugins
-    │   ├── routes
-    │   ├── services
-    │   ├── tasks
-    │   └── utils
-    └── test
-        └── routes
-
-### Build structure
-
-    build
-    ├── assets
-    │   ├── flash.jpeg
-    │   └── public
-    │       ├── apidoc
-    │       └── upload
-    ├── Dockerfile
-    ├── logger
-    │   ├── error.log
-    │   └── http.log
-    ├── src
-    │   ├── config
-    │   ├── models
-    │   ├── plugins
-    │   ├── routes
-    │   ├── services
-    │   ├── tasks
-    │   └── utils
-    └── test
-        └── routes
-
 ## Usage
 
 ```javascript
-/* eslint-disable indent */
 // Copyright (c) 2018-2020 Double.  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
@@ -73,6 +27,11 @@ $ npm run dev
 $ npm install
 $ npm run build
 ```
+
+### 3. For Prod
+
+### 4. Run Test
+
 
 ## MIT License
 
