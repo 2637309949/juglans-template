@@ -24,18 +24,18 @@ const defineSchema = SeqExt.DefineSchema(model, {
 
 SeqExt.Register({
   schema: defineSchema,
-  name: 'param',
+  name: 'Param',
   displayName: '参数配置'
 })
 
-const Property = SeqExt.Model('property')
-const Param = SeqExt.Model('param')
-const User = SeqExt.Model('user')
+const Property = SeqExt.Model('Property')
+const Param = SeqExt.Model('Param')
+const User = SeqExt.Model('User')
 
 Param.addEnum = async function ({ model, key, value }) {
   try {
-    const Param = SeqExt.Model('param')
-    const Property = SeqExt.Model('property')
+    const Param = SeqExt.Model('Param')
+    const Property = SeqExt.Model('Property')
     const [instance] = await Param.findOrCreate({
       where: { code: 'enum' },
       defaults: withPreset({

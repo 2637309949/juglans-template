@@ -32,7 +32,7 @@ const defineSchema = SeqExt.DefineSchema(model, {
 // Register defined Register store model
 SeqExt.Register({
   schema: defineSchema,
-  name: 'property',
+  name: 'Property',
   displayName: '配置子项'
 }, {
   indexes: [
@@ -46,8 +46,8 @@ SeqExt.Register({
   ]
 })
 
-const Property = SeqExt.Model('property')
-const User = SeqExt.Model('user')
+const Property = SeqExt.Model('Property')
+const User = SeqExt.Model('User')
 
 Property.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 Property.belongsTo(User, {foreignKey: '_updator', as: 'updator'})

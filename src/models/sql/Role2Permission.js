@@ -23,15 +23,15 @@ const defineSchema = SeqExt.DefineSchema(model, {
 // Register defined Register store model
 SeqExt.Register({
   schema: defineSchema,
-  name: 'role2permission',
+  name: 'Role2Permission',
   displayName: '权限与角色关系',
   autoHook: false
 })
 
-const RolePermisson = SeqExt.Model('role2permission')
-const Permission = SeqExt.Model('permission')
-const User = SeqExt.Model('user')
-const Role = SeqExt.Model('role')
+const RolePermisson = SeqExt.Model('Role2Permission')
+const Permission = SeqExt.Model('Permission')
+const User = SeqExt.Model('User')
+const Role = SeqExt.Model('Role')
 
 // many2many
 RolePermisson.belongsTo(User, {foreignKey: '_creator', as: 'creator'})

@@ -29,12 +29,12 @@ const defineSchema = SeqExt.DefineSchema(model, {
 // Register defined Register store model
 SeqExt.Register({
   schema: defineSchema,
-  name: 'role',
+  name: 'Role',
   displayName: '权限'
 })
 
-const Role = SeqExt.Model('role')
-const User = SeqExt.Model('user')
+const Role = SeqExt.Model('Role')
+const User = SeqExt.Model('User')
 
 Role.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 Role.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
@@ -46,7 +46,7 @@ module.exports = function ({ events }) {
         resolve()
       }, 2000)
     })
-    const Param = SeqExt.Model('param')
+    const Param = SeqExt.Model('Param')
     await Param.addEnum({
       model: 'role',
       key: 'type',

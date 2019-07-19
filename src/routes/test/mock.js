@@ -31,20 +31,20 @@ function init ({ router }) {
           })
       }).then(async function () {
       // 1. create user table
-        const user1 = await SeqExt.Model('user').create({
+        const user1 = await SeqExt.Model('User').create({
           name: 'John',
           age: 23,
           password: '11111234'
         })
         // 2. create store table
-        await SeqExt.Model('store').create({
+        await SeqExt.Model('Store').create({
           name: 'John',
           _creator: user1.id,
           _updator: user1.id,
           address: 'gz tianhe'
         })
         // 3. create permission, role, role2permission table
-        const permissionId = await SeqExt.Model('permission').create({
+        const permissionId = await SeqExt.Model('Permission').create({
           code: 'XDF09E3',
           name: '财务财年统计',
           _creator: user1.id,
@@ -52,26 +52,26 @@ function init ({ router }) {
           type: '5',
           holder: '2'
         })
-        const roleId = await SeqExt.Model('role').create({
+        const roleId = await SeqExt.Model('Role').create({
           name: '财务部',
           _creator: user1.id,
           _updator: user1.id,
           type: '2'
         })
-        await SeqExt.Model('role2permission').create({
+        await SeqExt.Model('Role2Permission').create({
           permission_id: roleId.id,
           role_id: permissionId.id,
           _creator: user1.id,
           _updator: user1.id
         })
         // 4. create params
-        const param1 = await SeqExt.Model('param').create({
+        const param1 = await SeqExt.Model('Param').create({
           name: '测试',
           code: 'test',
           _creator: user1.id,
           _updator: user1.id
         })
-        await SeqExt.Model('paramitem').create({
+        await SeqExt.Model('Paramitem').create({
           param_id: param1.id,
           category: 'Test',
           key: 'test_ket1',
@@ -95,7 +95,7 @@ function init ({ router }) {
 function seqLogin ({ router }) {
   router.get('/test/mock/seq/login', async (ctx, next) => {
     try {
-      const User = SeqExt.Model('user')
+      const User = SeqExt.Model('User')
       const user = User.findOne({name: 'preset'})
       if (user) {
         const info = await identity.obtainToken(user)
