@@ -25,5 +25,26 @@ module.exports.Model = _.assign({
 })
 
 module.exports.withPreset = function (obj) {
-  return _.merge({updator: '5d2fe40d7dead1c7924b3dc2', deleter: '5d2fe40d7dead1c7924b3dc2'}, obj)
+  return _.merge({creator: '5d2fe40d7dead1c7924b3dc2', updator: '5d2fe40d7dead1c7924b3dc2'}, obj)
+}
+
+module.exports.presetUser = function () {
+  return {
+    _id: '5d2fe40d7dead1c7924b3dc2',
+    name: 'preset',
+    password: '123456',
+    creator: '5d2fe40d7dead1c7924b3dc2',
+    updator: '5d2fe40d7dead1c7924b3dc2'
+  }
+}
+
+module.exports.presetRole = function () {
+  return {
+    _id: '1d7fe40d7dead1c7924b6dc2',
+    creator: '5d2fe40d7dead1c7924b3dc2',
+    updator: '5d2fe40d7dead1c7924b3dc2',
+    name: '管理员',
+    code: 'XV67D5',
+    tyle: '101'
+  }
 }

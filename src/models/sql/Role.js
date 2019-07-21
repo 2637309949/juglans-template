@@ -11,6 +11,8 @@ require('./User')
 const defineSchema = SeqExt.DefineSchema(model, {
   name: {
     type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
     comment: '名称'
   },
   code: {

@@ -5,6 +5,7 @@
 
 const _ = require('lodash')
 const Model = require('./Model').Model
+const presetUser = require('./Model').presetUser
 const mgoExt = require('../../addition').mgoExt
 
 const defineSchema = mgoExt.DefineSchema(_.assign({
@@ -69,20 +70,13 @@ mgoExt.Register({
   autoHook: false
 }).Init(async function (ext) {
   const User = mgoExt.Model('User')
-  const id = '5d2fe40d7dead1c7924b3dc2'
-  let ret = await User.findOne({ name: 'preset' })
-  if (ret && `${ret._id}` !== id) {
-    await User.remove({ name: 'preset' })
+  let ret = await User.findOne({ name: presetUser().name })
+  if (ret && `${ret._id}` !== presetUser()._id) {
+    await User.remove({ name: presetUser().name })
     ret = null
   }
   if (!ret) {
-    await User.create([{
-      _id: id,
-      name: 'preset',
-      password: '123456',
-      updator: '5d2fe40d7dead1c7924b3dc2',
-      deleter: '5d2fe40d7dead1c7924b3dc2'
-    }])
+    await User.create([ presetUser() ])
   }
 })
 
