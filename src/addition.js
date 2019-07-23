@@ -47,7 +47,54 @@ repo.SeqExt = seq.Ext.Connect(config.sql.uri, config.sql.opts)
 repo.SeqExt.sequelize.sync({})
 // for dev, drop and create table end
 repo.SeqExt.setApiOpts({
-  prefix: '/template/seq'
+  prefix: '/template/seq',
+  routeHooks: {
+    one: {
+      cond: function (cond, ctx, info) {
+        const token = ctx.state['token']
+        if (token) {
+          cond._creator = token.extra.id
+        }
+        return cond
+      }
+    },
+    list: {
+      cond: function (cond, ctx, info) {
+        const token = ctx.state['token']
+        if (token) {
+          cond._creator = token.extra.id
+        }
+        return cond
+      }
+    },
+    create: {
+      form: function (form, ctx, info) {
+        const token = ctx.state['token']
+        if (token) {
+          form._creator = token.extra.id
+        }
+        return form
+      }
+    },
+    delete: {
+      cond: function (cond, ctx, info) {
+        const token = ctx.state['token']
+        if (token) {
+          cond._creator = token.extra.id
+        }
+        return cond
+      }
+    },
+    update: {
+      cond: function (cond, ctx, info) {
+        const token = ctx.state['token']
+        if (token) {
+          cond._creator = token.extra.id
+        }
+        return cond
+      }
+    }
+  }
 })
 
 // apidoc init

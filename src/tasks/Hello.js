@@ -5,7 +5,7 @@ const logger = require('../addition').logger
 
 const defineSchedule = {
   name: 'Hello',
-  corn: '*/50 * * * * *',
+  corn: '*/90 * * * * *',
   job: async function () {
     logger.info('Hello job!')
   }

@@ -96,7 +96,7 @@ function seqLogin ({ router }) {
   router.get('/test/mock/seq/login', async (ctx, next) => {
     try {
       const User = SeqExt.Model('User')
-      const user = User.findOne({name: 'preset'})
+      const user = await User.findOne({name: 'preset'})
       if (user) {
         const info = await identity.obtainToken(user)
         ctx.cookies.set('accessToken', info.accessToken,
@@ -115,12 +115,7 @@ function seqLogin ({ router }) {
   })
 }
 
-function mgoLogin ({ router }) {
-  router.get('/test/mock/mgo/login', async (ctx, next) => {})
-}
-
 module.exports = function ({ router, reverse }) {
   reverse.Register(init)
   reverse.Register(seqLogin)
-  reverse.Register(mgoLogin)
 }
