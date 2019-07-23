@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const Captcha = require('../../../juglans-captcha/dist/application')
+const Captcha = require('../../../juglans-captcha')
 
 module.exports = Captcha({
   urlPrefix: '/captcha',

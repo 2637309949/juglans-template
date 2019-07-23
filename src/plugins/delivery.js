@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const Delivery = require('../../../juglans-delivery/dist/application')
+const Delivery = require('../../../juglans-delivery')
 const path = require('path')
 
 module.exports = Delivery({
