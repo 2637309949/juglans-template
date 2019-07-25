@@ -54,12 +54,19 @@ ctx.body = {
 ### Global object
 ```javascript
 // ./addition
-repo.logger = logger
-  .add(new winston.transports.File({ filename: path.join(config.logger.path, 'error.log'), level: 'error', maxsize: config.logger.maxsize }))
-  .add(new winston.transports.File({ filename: path.join(config.logger.path, 'combined.log'), maxsize: config.logger.maxsize }))
-
+repo.logger = logger.
+    add(new winston.transports.File({
+      filename: path.join(config.logger.path, 'error.log'),
+      level: 'error',
+      maxsize: config.logger.maxsize
+    })).
+    add(new winston.transports.File({
+      filename: path.join(config.logger.path, 'combined.log'),
+      maxsize: config.logger.maxsize
+    }))
 repo.request = fetch
 ```
+
 ### Logger
 ```javascript
 module.exports = ({ router, events }) => {
