@@ -1,7 +1,6 @@
 // Copyright (c) 2018-2020 Double.  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
-
 const model = require('./Model')
 const {
   mongoose,
@@ -9,8 +8,7 @@ const {
 } = require('../../addition')
 const Schema = mongoose.Schema
 
-// 定义模型结构
-const defineSchema = model.Define({
+const schema = model.Schema({
   name: {
     type: String,
     displayName: '名称'
@@ -27,7 +25,7 @@ const defineSchema = model.Define({
 })
 
 // addEnum defined add enum type
-defineSchema.statics.addEnum = async function ({ model, key, value }) {
+schema.statics.addEnum = async function ({ model, key, value }) {
   const Param = mgoExt.Model('Param')
   let one = await Param.findOne({ code: 'enum' })
   if (!one) {
@@ -44,5 +42,5 @@ defineSchema.statics.addEnum = async function ({ model, key, value }) {
 mgoExt.Register({
   name: 'Param',
   displayName: '参数配置',
-  schema: defineSchema
+  schema
 })

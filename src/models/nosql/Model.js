@@ -1,7 +1,6 @@
 // Copyright (c) 2018-2020 Double.  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
-
 const _ = require('lodash')
 const mongoose = require('../../addition').mongoose
 const mgoExt = require('../../addition').mgoExt
@@ -44,6 +43,6 @@ module.exports.withPreset = function (model) {
   return _.assign(model, { createdAt: new Date(), updatedAt: new Date() })
 }
 
-module.exports.Define = function (model, opts = {}) {
-  return mgoExt.Define(_.assign(model, module.exports.Model), opts)
+module.exports.Schema = function (model, opts = {}) {
+  return mgoExt.Schema(_.assign(model, module.exports.Model), opts)
 }

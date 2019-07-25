@@ -39,6 +39,6 @@ module.exports.withPreset = function (obj) {
   return _.merge(obj, {createdAt: new Date(), updatedAt: new Date()})
 }
 
-module.exports.Define = function (schema, opts = {}) {
-  return SeqExt.Define(_.assign(schema, module.exports.Model), opts)
+module.exports.Schema = function (schema, opts = {}) {
+  return SeqExt.Schema(_.assign(schema, module.exports.Model), opts)
 }

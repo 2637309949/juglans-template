@@ -5,7 +5,7 @@
 const model = require('./Model')
 const { SeqExt, Sequelize } = require('../../addition')
 
-const defineSchema = model.Define({
+const schema = model.Schema({
   param_id: {
     type: Sequelize.INTEGER,
     comment: 'Param外键'
@@ -31,9 +31,9 @@ const defineSchema = model.Define({
 
 // Register defined Register store model
 SeqExt.Register({
-  schema: defineSchema,
   name: 'Property',
-  displayName: '配置子项'
+  displayName: '配置子项',
+  schema
 }, {
   indexes: [
     {

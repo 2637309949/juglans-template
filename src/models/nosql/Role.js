@@ -1,14 +1,13 @@
 // Copyright (c) 2018-2020 Double.  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
-
 const model = require('./Model')
 const {
   logger,
   mgoExt
 } = require('../../addition')
 
-const defineSchema = model.Define({
+const schema = model.Schema({
   name: {
     type: String,
     displayName: '名称',
@@ -37,7 +36,7 @@ const defineSchema = model.Define({
 mgoExt.Register({
   name: 'Role',
   displayName: '角色配置',
-  schema: defineSchema,
+  schema,
   opts: {
     routeHooks: {
       list: {

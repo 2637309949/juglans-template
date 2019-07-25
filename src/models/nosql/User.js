@@ -2,11 +2,10 @@
 // Copyright (c) 2018-2020 Double.  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
-
 const model = require('./Model')
 const mgoExt = require('../../addition').mgoExt
 
-const defineSchema = model.Define({
+const schema = model.Schema({
   name: {
     type: String,
     displayName: '账号',
@@ -37,7 +36,7 @@ const defineSchema = model.Define({
   }]
 })
 
-defineSchema.statics.isManager = async (username) => {
+schema.statics.isManager = async (username) => {
   if (!username) return false
   const User = mgoExt.Model('User')
   const entity = await User.findOne({ username }, { roles: 1 }).populate('roles', 'roles.type')
@@ -55,7 +54,7 @@ defineSchema.statics.isManager = async (username) => {
 mgoExt.Register({
   name: 'User',
   displayName: '参数配置',
-  schema: defineSchema,
+  schema,
   opts: {
     routeHooks: {
       list: {

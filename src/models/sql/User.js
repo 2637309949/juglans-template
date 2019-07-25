@@ -1,16 +1,15 @@
 // Copyright (c) 2018-2020 Double.  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
-
 const model = require('./Model')
+
 const {
   SeqExt,
   Sequelize,
   logger
 } = require('../../addition')
 
-// defineSchema defined user model
-const defineSchema = model.Define({
+const schema = model.Schema({
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -41,10 +40,10 @@ const defineSchema = model.Define({
 
 // Register defined Register user model
 SeqExt.Register({
-  schema: defineSchema,
   name: 'User',
   displayName: '用户',
   autoHook: false,
+  schema,
   opts: {
     routeHooks: {
       list: {

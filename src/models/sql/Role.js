@@ -7,8 +7,7 @@ const EVENTS = require('../../juglans').events
 const {SeqExt, Sequelize} = require('../../addition')
 require('./User')
 
-// defineSchema defined store model
-const defineSchema = model.Define({
+const schema = model.Schema({
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -30,9 +29,9 @@ const defineSchema = model.Define({
 
 // Register defined Register store model
 SeqExt.Register({
-  schema: defineSchema,
   name: 'Role',
-  displayName: '权限'
+  displayName: '权限',
+  schema
 })
 
 const Role = SeqExt.Model('Role')

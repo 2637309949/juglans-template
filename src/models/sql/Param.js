@@ -8,7 +8,7 @@ require('./Property')
 
 const { SeqExt, Sequelize, logger } = require('../../addition')
 
-const defineSchema = model.Define({
+const schema = model.Schema({
   name: {
     type: Sequelize.STRING,
     comment: '名称'
@@ -22,9 +22,9 @@ const defineSchema = model.Define({
 })
 
 SeqExt.Register({
-  schema: defineSchema,
   name: 'Param',
-  displayName: '参数配置'
+  displayName: '参数配置',
+  schema
 })
 
 const Property = SeqExt.Model('Property')

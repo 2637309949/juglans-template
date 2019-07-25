@@ -1,19 +1,16 @@
 // Copyright (c) 2018-2020 Double.  All rights reserved.
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
-
-// ensure permission model hased been inited
+const model = require('./Model')
 require('./Role')
 require('./User')
 
-const model = require('./Model')
 const {
   SeqExt,
   Sequelize
 } = require('../../addition')
 
-// defineSchema defined RolePermission model
-const defineSchema = model.Define({
+const schema = model.Schema({
   role_id: {
     type: Sequelize.INTEGER
   },
@@ -25,10 +22,10 @@ const defineSchema = model.Define({
 
 // Register defined Register store model
 SeqExt.Register({
-  schema: defineSchema,
   name: 'Role2Permission',
   displayName: '权限与角色关系',
-  autoHook: false
+  autoHook: false,
+  schema
 })
 
 const RolePermisson = SeqExt.Model('Role2Permission')
