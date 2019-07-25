@@ -1,14 +1,8 @@
 ## Usage
-
 ```javascript
-// Copyright (c) 2018-2020 Double.  All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
-
 const app = require('./app')
 const juglans = require('./juglans')
 const logger = require('./addition').logger
-
 app.Use(({ events }) => {
     events.on(juglans.events.SYS_JUGLANS_PLUGINS_RUNIMMEDIATELY_SUCCEED, function (message) {
         logger.info(message)
@@ -17,23 +11,76 @@ app.Use(({ events }) => {
 app.RunImmediately()
 ```
 
-### 1. For Dev
+### For Dev
 ```shell
 $ npm install
 $ npm run dev
 ```
 
-### 2. For ApiDoc
+### For ApiDoc
 ![Juglans flash](./assets/apidoc.png)
 
-### 3. For Prod
+### For Prod
 ```shell
 $ npm install
 $ npm run build
 ```
 
-### 4. Run Test
+### For Test
+```shell
+$ npm run test
+```
 
+##  Standard
+### Http status and Http reponse
+#### Reponse Success
+```javascript
+ctx.status = 200
+ctx.body = {
+    message: I18N.i18nLocale('ok')
+}
+```
+
+#### Reponse Error
+```javascript
+logger.error(error.stack)
+ctx.status = 500
+ctx.body = {
+    message: 'the request failed',
+    stack: error.stack || error.message
+}
+```
+
+### Global object
+```javascript
+// ./addition
+repo.logger = logger
+  .add(new winston.transports.File({ filename: path.join(config.logger.path, 'error.log'), level: 'error', maxsize: config.logger.maxsize }))
+  .add(new winston.transports.File({ filename: path.join(config.logger.path, 'combined.log'), maxsize: config.logger.maxsize }))
+
+repo.request = fetch
+```
+### Logger
+```javascript
+module.exports = ({ router, events }) => {
+  // routes: api/v1/mgo/user
+  SeqExt.api.List(router, 'User')
+    .Post(async function (ctx) {
+      logger.info('User model post hook')
+    })
+    .Auth(ctx => true)
+  // routes: api/v1/mgo/feature1/user
+  SeqExt.api.Feature('feature1').List(router, 'User')
+  // routes: api/v1/mgo/feature1/subFeature1/user
+  SeqExt.api.Feature('feature1').Feature('subFeature1').List(router, 'User')
+  // routes: api/v1/mgo/custom/user
+  SeqExt.api.Feature('feature1').Feature('subFeature1').Name('custom').List(router, 'User')
+  SeqExt.api.One(router, 'User')
+  SeqExt.api.Delete(router, 'User')
+  SeqExt.api.Update(router, 'User')
+  SeqExt.api.Create(router, 'User')
+}
+```
 
 ## MIT License
 
