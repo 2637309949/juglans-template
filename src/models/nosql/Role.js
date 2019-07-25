@@ -47,9 +47,7 @@ mgoExt.Register({
       }
     }
   }
-})
-
-module.exports = async function ({ router }) {
+}).Init(async function (ext) {
   const Param = mgoExt.Model('Param')
   await Param.addEnum({
     model: 'Role',
@@ -62,4 +60,4 @@ module.exports = async function ({ router }) {
       value: '102'
     }]
   })
-}
+})
