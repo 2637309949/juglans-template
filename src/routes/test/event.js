@@ -17,8 +17,10 @@ const I18N = require('../../addition').I18N
  */
 function hello ({ router }) {
   router.get('/test/hello', (ctx, next) => {
+    ctx.status = 200
     ctx.body = {
-      message: I18N.i18nLocale('sys_hello')
+      message: I18N.i18nLocale('sys_hello'),
+      stack: null
     }
   })
 }

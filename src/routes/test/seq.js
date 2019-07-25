@@ -63,6 +63,7 @@ function m2m ({ router }) {
         }
       ]
     })
+    ctx.status = 200
     ctx.body = list
   })
 }

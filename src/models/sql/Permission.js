@@ -2,13 +2,13 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const model = require('./Model').Model
+const model = require('./Model')
 const EVENTS = require('../../juglans').events
 const {SeqExt, Sequelize} = require('../../addition')
 require('./User')
 
 // defineSchema defined store model
-const defineSchema = SeqExt.DefineSchema(model, {
+const defineSchema = model.Define({
   name: {
     type: Sequelize.STRING,
     comment: '名称'

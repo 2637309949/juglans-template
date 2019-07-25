@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 const SeqExt = require('../../addition').SeqExt
+const model = require('../../models/sql/Model')
 const logger = require('../../addition').logger
 const identity = require('../../plugins/identity')
 
@@ -96,7 +97,14 @@ function seqLogin ({ router }) {
   router.get('/test/mock/seq/login', async (ctx, next) => {
     try {
       const User = SeqExt.Model('User')
-      const user = await User.findOne({name: 'preset'})
+      const [user] = await User.findOrCreate({
+        where: { name: 'preset' },
+        defaults: model.withPreset({
+          name: 'preset',
+          password: '123456',
+          _creator: 1
+        })
+      })
       if (user) {
         const info = await identity.obtainToken(user)
         ctx.cookies.set('accessToken', info.accessToken,
@@ -109,7 +117,8 @@ function seqLogin ({ router }) {
     } catch (error) {
       logger.error(error.stack || error.message)
       ctx.body = {
-        message: error.stack || error.message
+        message: 'the request failed',
+        stack: error.stack || error.message
       }
     }
   })

@@ -2,10 +2,10 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const model = require('./Model').Model
+const model = require('./Model')
 const { SeqExt, Sequelize } = require('../../addition')
 
-const defineSchema = SeqExt.DefineSchema(model, {
+const defineSchema = model.Define({
   param_id: {
     type: Sequelize.INTEGER,
     comment: 'Param外键'

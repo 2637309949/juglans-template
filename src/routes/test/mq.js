@@ -22,8 +22,9 @@ function helloMq ({ router, queue }) {
   })
   router.get('/test/mq/hello', async (ctx, next) => {
     queue.Push({ type: 'mqTest', body: { 'xx': 'xx' } })
+    ctx.status = 200
     ctx.body = {
-      'message': I18N.i18nLocale('ok')
+      message: I18N.i18nLocale('ok')
     }
   })
 }

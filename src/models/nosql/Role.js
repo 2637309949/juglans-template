@@ -2,13 +2,13 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const _ = require('lodash')
-const Model = require('./Model').Model
-const presetRole = require('./Model').presetRole
-const mgoExt = require('../../addition').mgoExt
-const logger = require('../../addition').logger
+const model = require('./Model')
+const {
+  logger,
+  mgoExt
+} = require('../../addition')
 
-const defineSchema = mgoExt.DefineSchema(_.assign({
+const defineSchema = model.Define({
   name: {
     type: String,
     displayName: '名称',
@@ -32,7 +32,7 @@ const defineSchema = mgoExt.DefineSchema(_.assign({
     displayName: '权限列表',
     ref: 'Permission'
   }]
-}, Model), {})
+})
 
 mgoExt.Register({
   name: 'Role',
@@ -46,16 +46,6 @@ mgoExt.Register({
         }
       }
     }
-  }
-}).Init(async function (ext) {
-  const Role = mgoExt.Model('Role')
-  let ret = await Role.findOne({ name: presetRole().name })
-  if (ret && `${ret._id}` !== presetRole()._id) {
-    await Role.remove({ name: presetRole().name })
-    ret = null
-  }
-  if (!ret) {
-    await Role.create([ presetRole() ])
   }
 })
 

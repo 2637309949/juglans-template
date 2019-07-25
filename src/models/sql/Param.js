@@ -2,14 +2,13 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const model = require('./Model').Model
-const withPreset = require('./Model').withPreset
+const model = require('./Model')
 require('./User')
 require('./Property')
 
 const { SeqExt, Sequelize, logger } = require('../../addition')
 
-const defineSchema = SeqExt.DefineSchema(model, {
+const defineSchema = model.Define({
   name: {
     type: Sequelize.STRING,
     comment: '名称'
@@ -32,23 +31,23 @@ const Property = SeqExt.Model('Property')
 const Param = SeqExt.Model('Param')
 const User = SeqExt.Model('User')
 
-Param.addEnum = async function ({ model, key, value }) {
+Param.addEnum = async function ({ model: m, key, value }) {
   try {
     const Param = SeqExt.Model('Param')
     const Property = SeqExt.Model('Property')
     const [instance] = await Param.findOrCreate({
       where: { code: 'enum' },
-      defaults: withPreset({
+      defaults: model.withPreset({
         code: 'enum',
         name: '枚举类型'
       })
     })
     await Promise.all(value.map(async x => {
       const [i] = await Property.findOrCreate({
-        where: { category: model, sub_category: key },
-        defaults: withPreset({
+        where: { category: m, sub_category: key },
+        defaults: model.withPreset({
           param_id: instance.id,
-          category: model,
+          category: m,
           sub_category: key,
           key: x.key,
           value: x.value,

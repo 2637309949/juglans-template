@@ -6,11 +6,14 @@
 require('./Role')
 require('./User')
 
-const model = require('./Model').Model
-const {SeqExt, Sequelize} = require('../../addition')
+const model = require('./Model')
+const {
+  SeqExt,
+  Sequelize
+} = require('../../addition')
 
 // defineSchema defined RolePermission model
-const defineSchema = SeqExt.DefineSchema(model, {
+const defineSchema = model.Define({
   role_id: {
     type: Sequelize.INTEGER
   },

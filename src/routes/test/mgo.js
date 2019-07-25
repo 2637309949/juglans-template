@@ -27,7 +27,10 @@ function isManager ({ router }) {
     } catch (error) {
       logger.error(error.stack)
       ctx.status = 500
-      ctx.body = { message: error.message }
+      ctx.body = {
+        message: 'the request failed',
+        stack: error.stack || error.message
+      }
     }
   })
 }

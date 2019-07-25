@@ -2,12 +2,11 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const _ = require('lodash')
-const Model = require('./Model').Model
+const model = require('./Model')
 const { mongoose, mgoExt } = require('../../addition')
 const Schema = mongoose.Schema
 
-const defineSchema = mgoExt.DefineSchema(_.assign({
+const defineSchema = model.Define({
   name: {
     type: String,
     displayName: '名称',
@@ -36,7 +35,7 @@ const defineSchema = mgoExt.DefineSchema(_.assign({
     enum: ['101', '102'],
     default: '101'
   }
-}, Model), {})
+})
 
 mgoExt.Register({
   name: 'Permission',

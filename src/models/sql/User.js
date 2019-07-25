@@ -2,11 +2,15 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const model = require('./Model').Model
-const {SeqExt, Sequelize, logger} = require('../../addition')
+const model = require('./Model')
+const {
+  SeqExt,
+  Sequelize,
+  logger
+} = require('../../addition')
 
 // defineSchema defined user model
-const defineSchema = SeqExt.DefineSchema(model, {
+const defineSchema = model.Define({
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -50,22 +54,9 @@ SeqExt.Register({
       }
     }
   }
-}).Init(async function (ext) {
-  const User = ext.Model('User')
-  await User.findOrCreate({
-    where: { id: 101 },
-    defaults: {
-      id: 101,
-      name: 'preset',
-      password: '111111',
-      _creator: 101,
-      _updator: 101
-    }
-  })
 })
 
 const User = SeqExt.Model('User')
-
 User.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 User.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
 

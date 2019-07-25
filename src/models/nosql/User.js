@@ -3,12 +3,10 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const _ = require('lodash')
-const Model = require('./Model').Model
-const presetUser = require('./Model').presetUser
+const model = require('./Model')
 const mgoExt = require('../../addition').mgoExt
 
-const defineSchema = mgoExt.DefineSchema(_.assign({
+const defineSchema = model.Define({
   name: {
     type: String,
     displayName: '账号',
@@ -37,7 +35,7 @@ const defineSchema = mgoExt.DefineSchema(_.assign({
     displayName: '关联角色',
     ref: 'Role'
   }]
-}, Model), {})
+})
 
 defineSchema.statics.isManager = async (username) => {
   if (!username) return false
@@ -68,16 +66,6 @@ mgoExt.Register({
     }
   },
   autoHook: false
-}).Init(async function (ext) {
-  const User = mgoExt.Model('User')
-  let ret = await User.findOne({ name: presetUser().name })
-  if (ret && `${ret._id}` !== presetUser()._id) {
-    await User.remove({ name: presetUser().name })
-    ret = null
-  }
-  if (!ret) {
-    await User.create([ presetUser() ])
-  }
 })
 
 module.exports = function ({ router }) {
