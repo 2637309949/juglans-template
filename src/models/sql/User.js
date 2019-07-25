@@ -66,6 +66,13 @@ module.exports = ({ router, events }) => {
       logger.info('User model post hook')
     })
     .Auth(ctx => true)
+    .RouteHooks({
+      list: {
+        cond: function (cond, ctx, info) {
+          return cond
+        }
+      }
+    })
   // routes: api/v1/mgo/feature1/user
   SeqExt.api.Feature('feature1').List(router, 'User')
   // routes: api/v1/mgo/feature1/subFeature1/user
