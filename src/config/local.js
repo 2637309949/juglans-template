@@ -6,7 +6,7 @@ const path = require('path')
 
 module.exports = {
   name: 'Juglans V1.0',
-  prefix: '/api/v1',
+  prefix: '/api',
   port: 3001,
   debug: true,
   logger: {
