@@ -16,7 +16,7 @@ gulp.task('clean', function () {
 })
 
 gulp.task('build:apidoc', function (cb) {
-  return exec('npm run apidoc', function (err, stdout, stderr) {
+  return exec('npm run doc', function (err, stdout, stderr) {
     console.log(stdout)
     console.log(stderr)
     cb(err)

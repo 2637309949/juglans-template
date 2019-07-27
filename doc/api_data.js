@@ -51,7 +51,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/test/seq/role_permission",
+    "url": "/test/seq/role2permission",
     "title": "角色权限列表",
     "group": "Test",
     "description": "<p>角色权限列表</p>",
@@ -84,7 +84,7 @@ define({ "api": [
       "examples": [
         {
           "title": "正常返回",
-          "content": "HTTP/1.1 200 OK\n[\n    {\n        \"id\": 1,\n        \"createdAt\": \"2019-07-12T14:09:29.000Z\",\n        \"deletedAt\": null,\n        \"updatedAt\": \"2019-07-12T14:09:29.000Z\",\n        \"_creator\": 1,\n        \"_modifier\": 1,\n        \"name\": \"财务部\",\n        \"type\": \"2\",\n        \"permissions\": [\n            {\n                \"id\": 1,\n                \"createdAt\": \"2019-07-12T14:09:29.000Z\",\n                \"deletedAt\": null,\n                \"updatedAt\": \"2019-07-12T14:09:29.000Z\",\n                \"_creator\": 1,\n                \"_modifier\": 1,\n                \"code\": \"XDF09E3\",\n                \"name\": \"财务财年统计\",\n                \"pid\": null,\n                \"type\": \"5\",\n                \"holder\": \"2\",\n                \"role_permission\": {\n                    \"createdAt\": \"2019-07-12T14:09:29.000Z\",\n                    \"deletedAt\": null,\n                    \"updatedAt\": \"2019-07-12T14:09:29.000Z\",\n                    \"_creator\": null,\n                    \"_modifier\": null,\n                    \"name\": null,\n                    \"_permission\": 1,\n                    \"_role\": 1\n                }\n            }\n        ]\n    }\n]",
+          "content": "HTTP/1.1 200 OK\n[\n    {\n        \"id\": 1,\n        \"createdAt\": \"2019-07-12T14:09:29.000Z\",\n        \"deletedAt\": null,\n        \"updatedAt\": \"2019-07-12T14:09:29.000Z\",\n        \"_creator\": 1,\n        \"_modifier\": 1,\n        \"name\": \"财务部\",\n        \"type\": \"2\",\n        \"permissions\": [\n            {\n                \"id\": 1,\n                \"createdAt\": \"2019-07-12T14:09:29.000Z\",\n                \"deletedAt\": null,\n                \"updatedAt\": \"2019-07-12T14:09:29.000Z\",\n                \"_creator\": 1,\n                \"_modifier\": 1,\n                \"code\": \"XDF09E3\",\n                \"name\": \"财务财年统计\",\n                \"pid\": null,\n                \"type\": \"5\",\n                \"holder\": \"2\",\n                \"role2permission\": {\n                    \"createdAt\": \"2019-07-12T14:09:29.000Z\",\n                    \"deletedAt\": null,\n                    \"updatedAt\": \"2019-07-12T14:09:29.000Z\",\n                    \"_creator\": null,\n                    \"_modifier\": null,\n                    \"name\": null,\n                    \"_permission\": 1,\n                    \"_role\": 1\n                }\n            }\n        ]\n    }\n]",
           "type": "json"
         }
       ]
@@ -92,10 +92,25 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "src/routes/test/seq.js",
     "groupTitle": "Test",
-    "name": "GetTestSeqRole_permission",
+    "name": "GetTestSeqRole2permission",
     "sampleRequest": [
       {
-        "url": "http://127.0.0.1:3001/api/v1/test/seq/role_permission"
+        "url": "http://127.0.0.1:3001/api/v1/test/seq/role2permission"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/test/seq/init",
+    "title": "seq数据初始化",
+    "group": "Test_HTTP_1_1_200_OK____message____ok___",
+    "version": "0.0.0",
+    "filename": "src/routes/test/mock.js",
+    "groupTitle": "Test_HTTP_1_1_200_OK____message____ok___",
+    "name": "GetTestSeqInit",
+    "sampleRequest": [
+      {
+        "url": "http://127.0.0.1:3001/api/v1/test/seq/init"
       }
     ]
   }
