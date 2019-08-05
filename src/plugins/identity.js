@@ -22,6 +22,6 @@ module.exports = Identity({
     }
   },
   fakeTokens: [],
-  fakeUrls: [/\/api\/v1\/upload\/.*$/, /\/api\/v1\/favicon\.ico$/, /\/api\/v1\/test\/mock\/seq\/login/],
+  fakeUrls: [/\/api\/upload\/.*$/, /\/api\/favicon\.ico$/, /\/api\/test\/mock\/login/],
   model: Identity.model.RedisModel({ redis })
 })

@@ -4,6 +4,7 @@
 
 const logger = require('../../addition').logger
 const userServices = require('../../services/user')
+const I18N = require('../../addition').I18N
 
 /*
  * @api {get} /test/user/isManager  用户角色
@@ -24,11 +25,12 @@ function isManager ({ router }) {
       const isManager = await userServices.isManager(username)
       ctx.status = 200
       ctx.body = { isManager }
+      throw new Error()
     } catch (error) {
-      logger.error(error.stack)
+      logger.error(error.stack || error.message)
       ctx.status = 500
       ctx.body = {
-        message: 'the request failed',
+        message: I18N.i18nLocale('sys_error', 'Internal Server Error'),
         stack: error.stack || error.message
       }
     }

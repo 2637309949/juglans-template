@@ -6,9 +6,10 @@ const SeqExt = require('../../addition').SeqExt
 const model = require('../../models/sql/Model')
 const logger = require('../../addition').logger
 const identity = require('../../plugins/identity')
+const I18N = require('../../addition').I18N
 
 /**
- * @api {get} /test/seq/init                      seq数据初始化
+ * @api {get} /test/seq/init        seq数据初始化
  * @apiGroup Test
  * HTTP/1.1 200 OK
  *   {
@@ -86,15 +87,17 @@ function init ({ router }) {
       }
     } catch (error) {
       logger.error(error.stack || error.message)
+      ctx.status = 500
       ctx.body = {
-        message: error.stack || error.message
+        message: I18N.i18nLocale('sys_error', 'Internal Server Error'),
+        stack: error.stack || error.message
       }
     }
   })
 }
 
 function seqLogin ({ router }) {
-  router.get('/test/mock/seq/login', async (ctx, next) => {
+  router.get('/test/mock/login', async (ctx, next) => {
     try {
       const User = SeqExt.Model('User')
       const [user] = await User.findOrCreate({
@@ -116,8 +119,9 @@ function seqLogin ({ router }) {
       }
     } catch (error) {
       logger.error(error.stack || error.message)
+      ctx.status = 500
       ctx.body = {
-        message: 'the request failed',
+        message: I18N.i18nLocale('sys_error', 'Internal Server Error'),
         stack: error.stack || error.message
       }
     }

@@ -112,7 +112,8 @@ repo.I18N.initLocal(async function (i18n) {
   return async function () {
     i18n.addLocales({
       'zh_CN': {
-        'sys_hello': '你好'
+        'sys_hello': '你好',
+        'sys_error': '系统异常, 请稍等重试'
       },
       'en_US': {
         'sys_hello': 'hello'
