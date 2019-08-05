@@ -6,7 +6,7 @@ const mongoose = require('../../addition').mongoose
 const mgoExt = require('../../addition').mgoExt
 const Schema = mongoose.Schema
 
-module.exports.Model = {
+const Model = {
   createdAt: {
     type: Date,
     displayName: '创建时间',
@@ -39,10 +39,15 @@ module.exports.Model = {
   }
 }
 
-module.exports.withPreset = function (model) {
-  return _.assign(model, { createdAt: new Date(), updatedAt: new Date() })
+function withPreset (model) {
+  return _.assign(model, {
+    createdAt: new Date(),
+    updatedAt: new Date()
+  })
 }
 
+module.exports.Model = Model
+module.exports.withPreset = withPreset
 module.exports.Schema = function (model, opts = {}) {
-  return mgoExt.Schema(_.assign(model, module.exports.Model), opts)
+  return mgoExt.Schema(_.assign(model, Model), opts)
 }

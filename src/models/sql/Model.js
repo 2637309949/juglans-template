@@ -6,7 +6,7 @@ const _ = require('lodash')
 const SeqExt = require('../../addition').SeqExt
 const Sequelize = require('../../addition').Sequelize
 
-module.exports.Model = {
+const Model = {
   createdAt: {
     type: Sequelize.DATE,
     allowNull: false,
@@ -35,10 +35,12 @@ module.exports.Model = {
   }
 }
 
-module.exports.withPreset = function (obj) {
+function withPreset (obj) {
   return _.merge(obj, {createdAt: new Date(), updatedAt: new Date()})
 }
 
+module.exports.Model = Model
+module.exports.withPreset = withPreset
 module.exports.Schema = function (schema, opts = {}) {
-  return SeqExt.Schema(_.assign(schema, module.exports.Model), opts)
+  return SeqExt.Schema(_.assign(schema, Model), opts)
 }
