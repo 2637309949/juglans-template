@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 const repo = exports
-repo.someOrElse = function (value, initValue) {
+repo.some = function (value, initValue) {
   if (value) {
     return value
   } else {
