@@ -53,12 +53,12 @@ const SeqExt = require('../../addition').SeqExt
 **/
 function m2m ({ router }) {
   router.get('/test/seq/role2permission', async (ctx, next) => {
-    const Model = SeqExt.Model('role')
+    const Model = SeqExt.Model('Role')
     const list = await Model.findAll({
       where: {},
       include: [
         {
-          model: SeqExt.Model('permission'),
+          model: SeqExt.Model('Permission'),
           as: 'permissions'
         }
       ]
