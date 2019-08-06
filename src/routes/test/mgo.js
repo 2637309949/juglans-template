@@ -25,7 +25,6 @@ function isManager ({ router }) {
       const isManager = await userServices.isManager(username)
       ctx.status = 200
       ctx.body = { isManager }
-      throw new Error()
     } catch (error) {
       logger.error(error.stack || error.message)
       ctx.status = 500
