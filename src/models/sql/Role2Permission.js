@@ -33,9 +33,9 @@ const Permission = SeqExt.Model('Permission')
 const User = SeqExt.Model('User')
 const Role = SeqExt.Model('Role')
 
-// many2many
 RolePermisson.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 RolePermisson.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
 
-Role.belongsToMany(Permission, {through: { model: RolePermisson, unique: false }, foreignKey: 'permission_id', as: 'permissions'})
-Permission.belongsToMany(Role, {through: { model: RolePermisson, unique: false }, foreignKey: 'role_id', as: 'roles'})
+// many2many
+Role.belongsToMany(Permission, {through: { model: RolePermisson, unique: false }, foreignKey: 'role_id', as: 'permissions'})
+Permission.belongsToMany(Role, {through: { model: RolePermisson, unique: false }, foreignKey: 'permission_id', as: 'roles'})

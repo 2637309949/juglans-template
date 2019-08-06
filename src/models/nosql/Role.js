@@ -2,6 +2,9 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 const model = require('./Model')
+const mongoose = require('../../addition').mongoose
+const Schema = mongoose.Schema
+
 const {
   logger,
   mgoExt
@@ -27,7 +30,7 @@ const schema = model.Schema({
     default: '101'
   },
   permissions: [{
-    type: String,
+    type: Schema.Types.ObjectId,
     displayName: '权限列表',
     ref: 'Permission'
   }]

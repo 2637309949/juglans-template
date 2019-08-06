@@ -4,6 +4,8 @@
 // license that can be found in the LICENSE file.
 const model = require('./Model')
 const mgoExt = require('../../addition').mgoExt
+const mongoose = require('../../addition').mongoose
+const Schema = mongoose.Schema
 
 const schema = model.Schema({
   name: {
@@ -29,8 +31,13 @@ const schema = model.Schema({
     type: String,
     displayName: '邮箱'
   },
+  permissions: [{
+    type: Schema.Types.ObjectId,
+    displayName: '关联权限',
+    ref: 'Permission'
+  }],
   roles: [{
-    type: String,
+    type: Schema.Types.ObjectId,
     displayName: '关联角色',
     ref: 'Role'
   }]
