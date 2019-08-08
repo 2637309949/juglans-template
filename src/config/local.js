@@ -35,12 +35,6 @@ module.exports = {
       maxRetriesPerRequest: 3
     }
   },
-  scan: {
-    path: [
-      path.join(__dirname, '../{models,routes,tasks,openapi}/**/*.js')
-    ],
-    ignore: [ '**/node_modules/**' ]
-  },
   bodyParser: {
     parsedMethods: ['POST', 'PUT', 'PATCH', 'DELETE'],
     jsonLimit: '5mb',
