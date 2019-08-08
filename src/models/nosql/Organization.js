@@ -25,23 +25,8 @@ const schema = model.Schema({
   }
 })
 
-// addEnum defined add enum type
-schema.statics.addEnum = async function ({ model, key, value }) {
-  const Param = mgoExt.Model('Param')
-  let one = await Param.findOne({ code: 'enum' })
-  if (!one) {
-    one = new Param(model.withPreset({ name: '枚举类型', code: 'enum', value: {} }))
-  }
-  if (!one.value[model]) {
-    one.value[model] = {}
-  }
-  one.value[model][key] = value
-  one.markModified('value')
-  await one.save()
-}
-
 mgoExt.Register({
-  name: 'Param',
-  displayName: '参数配置',
+  name: 'Org',
+  displayName: '组织',
   schema
 })
