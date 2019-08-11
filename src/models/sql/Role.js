@@ -41,7 +41,7 @@ Role.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 Role.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
 
 module.exports = function ({ events }) {
-  events.on(EVENTS.SYS_JUGLANS_PLUGINS_HTTPPROXY_LISTEN_SUCCEED, async function (message) {
+  events.on(EVENTS.EventsRunning, async function (message) {
     await new Promise((resolve, reject) => {
       setTimeout(function () {
         resolve()

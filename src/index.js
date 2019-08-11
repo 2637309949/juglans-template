@@ -8,7 +8,7 @@ const juglans = require('./juglans')
 const logger = require('./addition').logger
 
 app.Use(({ events }) => {
-    events.on(juglans.events.SYS_JUGLANS_PLUGINS_RUNIMMEDIATELY_SUCCEED, function (message) {
+    events.on(juglans.events.EventsRunning, function (message) {
         logger.info(message)
     })
 })

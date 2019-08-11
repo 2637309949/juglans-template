@@ -35,7 +35,7 @@ module.exports = function (app) {
   app.Use(OpenApi)
   app.Use(Queue)
   app.Use(function ({ router, roles, events }) {
-    events.on(EVENTS.SYS_JUGLANS_PLUGINS_HTTPPROXY_LISTEN_SUCCEED, function (message) {
+    events.on(EVENTS.EventsRunning, function (message) {
       logger.info(message)
     })
     router.get('/juglans*', roles.can('tf11@pr44;tf44'), async ctx => {
