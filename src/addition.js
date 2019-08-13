@@ -6,7 +6,7 @@ const path = require('path')
 const fetch = require('node-fetch')
 const config = require('./config')
 const additions = require('../../juglans-addition')
-
+const locales = require('./config/locales.json')
 const logger = additions.logger
 const winston = logger.winston
 const redis = additions.redis
@@ -110,18 +110,7 @@ repo.I18N = i18n({
 })
 repo.I18N.initLocal(async function (i18n) {
   return async function () {
-    i18n.addLocales({
-      'zh_CN': {
-        'sys_hello': '你好',
-        'sys_error': '系统异常, 请稍等重试'
-      },
-      'en_US': {
-        'sys_hello': 'hello'
-      },
-      'zh_TW': {
-        'sys_hello': '妳好'
-      }
-    })
+    i18n.addLocales(locales)
   }
 })
 
