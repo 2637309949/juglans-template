@@ -3,25 +3,28 @@
 // license that can be found in the LICENSE file.
 
 const Identity = require('../../../juglans-identity')
+const {authOption, modelOption} = Identity.options
 const { mgoExt, redis } = require('../addition')
 const _ = require('lodash')
 
 module.exports = Identity({
-  async auth (ctx) {
-    const form = _.pick(ctx.request.body, 'username', 'password')
-    const User = mgoExt.Model('User')
-    // ctx.status.captcha
-    const ret = await User.findOne({ username: form.username, password: form.password })
-    if (!ret) return null
-    return {
-      id: ret._id,
-      email: ret.email,
-      username: ret.username,
-      departments: ret.department,
-      roles: ret.roles
-    }
-  },
   fakeTokens: [],
-  fakeUrls: [/\/api\/upload\/.*$/, /\/api\/favicon\.ico$/, /\/api\/test\/mock\/login/],
-  model: Identity.model.RedisModel({ redis })
-})
+  fakeUrls: [/\/api\/upload\/.*$/, /\/api\/favicon\.ico$/, /\/api\/test\/mock\/login/]
+}).addOptions(authOption(async function (ctx) {
+  const form = _.pick(ctx.request.body, 'username', 'password')
+  const User = mgoExt.Model('User')
+  // ctx.status.captcha
+  const ret = await User.findOne({ username: form.username, password: form.password })
+  // custom error reminder
+  if (!ret) throw new Error(`the user:${form.username} does not exist or password not match`)
+  // use default error reminder
+  // if (!ret) return null
+  return {
+    id: ret._id,
+    email: ret.email,
+    username: ret.username,
+    departments: ret.department,
+    roles: ret.roles
+  }
+}),
+modelOption(Identity.model.RedisModel({ redis })))
