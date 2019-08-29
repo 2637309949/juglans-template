@@ -16,6 +16,7 @@ module.exports = Identity({
   // ctx.status.captcha
   const ret = await User.findOne({ username: form.username, password: form.password })
   // custom error reminder
+  // if not catch in call func, sys will catch and print with stack
   if (!ret) throw new Error(`the user:${form.username} does not exist or password not match`)
   // use default error reminder
   // if (!ret) return null
