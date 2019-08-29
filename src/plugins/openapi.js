@@ -3,19 +3,21 @@
 // license that can be found in the LICENSE file.
 
 const OpenApi = require('../../../juglans-openapi')
+const { authOption } = OpenApi.options
+
 module.exports = OpenApi({
-  urlPrefix: '/gateway',
-  Auth: function (AppId) {
-    return {
-      appID: 'xx',
-      publicKey:
-`MIGJAoGBAL7sHmNyG14oN9H54bM/4D+V5IIeI30mXIrvIAoeB8j/U4d8I7Kdk4CO
+  urlPrefix: '/gateway'
+}).addOptions(authOption(function (AppId) {
+  return {
+    appID: 'xx',
+    publicKey:
+      `MIGJAoGBAL7sHmNyG14oN9H54bM/4D+V5IIeI30mXIrvIAoeB8j/U4d8I7Kdk4CO
 iYW/lqtOph/h/yG55qpe0UEtX2PHA0466yjT/Th69VNCCZpiIq2zTrf6EJHnJdxM
 EUFW8aaLeUsPUnSIJIgoG/ljq9dEyD4GcUQSiFfCgvV9+EbkiRMdAgMBAAE=
 `,
-      // just for test
-      privateKey:
-`MIICXwIBAAKBgQC+7B5jchteKDfR+eGzP+A/leSCHiN9JlyK7yAKHgfI/1OHfCOy
+    // just for test
+    privateKey:
+      `MIICXwIBAAKBgQC+7B5jchteKDfR+eGzP+A/leSCHiN9JlyK7yAKHgfI/1OHfCOy
 nZOAjomFv5arTqYf4f8hueaqXtFBLV9jxwNOOuso0/04evVTQgmaYiKts063+hCR
 5yXcTBFBVvGmi3lLD1J0iCSIKBv5Y6vXRMg+BnFEEohXwoL1ffhG5IkTHQIDAQAB
 AoGBAKOwk5lVkstWlg1MPctOX7iEjidVKb46Lqvbu0+RUcFtz7Lgp0aTvYxCKPxo
@@ -28,6 +30,5 @@ xIQNpZCuDjBHfNmaNtyiAbc8FGz+Av7IrjAawFOi+AJeALg2NHT3MCZDqOURAkEA
 hfeljQdUAk3JTw2R2EYmzIKPwqvTp48D9P8Kvspx3WAE9qZIQdM+lWuoMTE2CNK2
 IfOHbtWe3pFgq6Y14pHt+QJBAMwI44yblF2oLqh1hw5Wd2Xz3SKRUOohEzQ92Psf
 RXsJdjNIfaOLSimxqNGTDDJ7YFV42Ir4G2hLFeLmlbz/oHU=`
-    }
   }
-})
+}))
