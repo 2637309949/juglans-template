@@ -27,7 +27,7 @@ app.Use(({ events }) => {
         logger.info(message)
     })
 })
-app.RunImmediately()
+app.Run()
 ```
 
 ### For Dev
