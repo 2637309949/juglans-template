@@ -33,12 +33,12 @@
     "gulp-sequence": "0.4.6",
     "gulp-uglify": "3.0.0",
     "husky": "^2.7.0",
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "mocha": "^5.2.0",
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "cross-env": "^5.2.0",
+    "cross-env": "^5.2.1",
     "fs-extra": "^7.0.0",
     "juglans": "git+https://github.com/2637309949/juglans.git",
     "moment": "^2.22.2",
