@@ -2,14 +2,13 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
+const path = require('path')
 const Upload = require('../../../juglans-upload')
 
-Upload.strategys = [...Upload.strategys]
 module.exports = Upload({
-  urlPrefix: '/public/upload',
-  saveAnalysis: async ret => {
-    console.log(JSON.stringify(ret[0].content))
-  },
-  findAnalysis: async cond => {
+  prefix: '/upload',
+  assetsPrefix: '/public/upload',
+  uploadPrefix: path.join(__dirname, '../../assets/public/upload'),
+  async save (ctx, ret) {
   }
 })

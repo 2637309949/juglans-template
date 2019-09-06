@@ -39,11 +39,11 @@ module.exports = {
     parsedMethods: ['POST', 'PUT', 'PATCH', 'DELETE'],
     jsonLimit: '5mb',
     formLimit: '1mb',
-    textLimit: '1mb',
-    multipart: true,
-    formidable: {
-      keepExtensions: true,
-      uploadDir: path.join(__dirname, '../../assets/public/upload')
-    }
+    textLimit: '1mb'
+    // multipart: true,
+    // formidable: {
+    //   keepExtensions: true,
+    //   uploadDir: path.join(__dirname, '../../assets/public/upload')
+    // }
   }
 }
