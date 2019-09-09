@@ -27,5 +27,4 @@ module.exports = Identity({
     departments: ret.department,
     roles: ret.roles
   }
-}),
-modelOption(Identity.model.RedisModel({ redis })))
+}), modelOption(Identity.model.RedisModel({ redis })))
