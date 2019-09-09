@@ -3,6 +3,7 @@
 // license that can be found in the LICENSE file.
 
 const model = require('./Model')
+const {withPreset} = model
 const {
   mongoose,
   mgoExt
@@ -30,7 +31,7 @@ schema.statics.addEnum = async function ({ model, key, value }) {
   const Param = mgoExt.Model('Param')
   let one = await Param.findOne({ code: 'enum' })
   if (!one) {
-    one = new Param(model.withPreset({ name: '枚举类型', code: 'enum', value: {} }))
+    one = new Param(withPreset({ name: '枚举类型', code: 'enum', value: {} }))
   }
   if (!one.value[model]) {
     one.value[model] = {}
