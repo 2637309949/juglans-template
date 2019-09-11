@@ -44,5 +44,6 @@ schema.statics.addEnum = async function ({ model, key, value }) {
 mgoExt.Register({
   name: 'Param',
   displayName: '参数配置',
+  autoHook: true,
   schema
 })

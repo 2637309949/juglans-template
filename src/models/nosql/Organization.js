@@ -28,5 +28,6 @@ const schema = model.Schema({
 mgoExt.Register({
   name: 'Org',
   displayName: '组织',
+  autoHook: true,
   schema
 })
