@@ -3,17 +3,20 @@
 // license that can be found in the LICENSE file.
 const cfg = require('../../config')
 const grpc = require('../../addition').grpc
-const smgProto = require('../../grpc/srv//sendmessage').smgProto
+const messages = require('../../grpc/pb/sendmessage_pb')
+const services = require('../../grpc/pb/sendmessage_grpc_pb')
 
 function grpcHello ({ router }) {
   router.get('/test/grpc', async (ctx) => {
-    const ret = await grpc(cfg.grpc.srv1)(smgProto.SendMessage, function (cli) {
+    const ret = await grpc(cfg.grpc.srv1)(services.SendMessageClient, function (cli) {
       return new Promise((resolve, reject) => {
-        cli.SendEmail({to: ['2637309949@qq.com']}, function (err, res) {
+        const request = new messages.EmailRequest()
+        request.setToList(['2637309949@qq.com'])
+        cli.sendEmail(request, function (err, res) {
           if (err != null) {
             reject(err)
           } else {
-            resolve(res)
+            resolve(res.toObject())
           }
         })
       })
