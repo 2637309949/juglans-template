@@ -7,6 +7,7 @@ const fetch = require('node-fetch')
 const config = require('./config')
 const additions = require('../../juglans-addition')
 const locales = require('./config/locales.json')
+const grpc = require('grpc')
 const logger = additions.logger
 const winston = logger.winston
 const redis = additions.redis
@@ -116,3 +117,12 @@ repo.I18N.initLocal(async function (i18n) {
 
 // global request
 repo.request = fetch
+
+// global grpc
+repo.grpc = function (address, opt) {
+  opt = opt || grpc.credentials.createInsecure()
+  return function (Srv, cb) {
+    const client = new Srv(address, opt)
+    return cb(client)
+  }
+}

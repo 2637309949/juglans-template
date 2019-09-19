@@ -23,7 +23,7 @@ module.exports = function (app) {
   app.PostUse(mgoExt)
   app.PostUse(SeqExt)
   app.PostUse(apidoc)
-  app.ScanUse(path.join(__dirname, './{models,routes,tasks,openapi}/**/*.js'))
+  app.ScanUse(path.join(__dirname, './{models,routes,tasks,openapi,grpc}/**/*.js'))
   app.Use(Agent)
   app.Use(Limit)
   app.Use(Logs)
