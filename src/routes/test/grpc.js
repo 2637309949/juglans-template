@@ -16,7 +16,8 @@ function grpcHello ({ router }) {
           if (err != null) {
             reject(err)
           } else {
-            resolve(res.toObject())
+            const reply = res.toObject()
+            resolve(reply)
           }
         })
       })
