@@ -13,6 +13,9 @@ module.exports = {
     path: path.join(__dirname, '../../logger'),
     maxsize: 5242880
   },
+  grpc: {
+    srv1: '127.0.0.1:3002'
+  },
   sql: {
     uri: 'mysql://root:111111@/juglans',
     opts: {

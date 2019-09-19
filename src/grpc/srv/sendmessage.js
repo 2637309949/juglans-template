@@ -6,7 +6,7 @@ const grpc = require('grpc')
 const protoLoader = require('@grpc/proto-loader')
 const path = require('path')
 
-const PROTO_PATH = path.join(__dirname, '../pb/helloworld.proto')
+const PROTO_PATH = path.join(__dirname, '../pb/sendmessage.proto')
 const packageDefinition = protoLoader.loadSync(
   PROTO_PATH,
   {keepCase: true,
@@ -16,16 +16,14 @@ const packageDefinition = protoLoader.loadSync(
     oneofs: true
   })
 
-const helloProto = grpc.loadPackageDefinition(packageDefinition).pb
+const smgProto = grpc.loadPackageDefinition(packageDefinition).pb
 
-/**
- * Implements the SayHello RPC method.
- */
-function sayHello (call, callback) {
-  callback(null, {message: 'Hello ' + call.request.name})
+// SendEmail defined send email
+function SendEmail (call, callback) {
+  callback(null, {status: 1, message: 'send successfully'})
 }
 
 module.exports = function ({ grpcProxy }) {
-  grpcProxy.addService(helloProto.Greeter.service, {sayHello: sayHello})
+  grpcProxy.addService(smgProto.SendMessage.service, {SendEmail: SendEmail})
 }
-module.exports.helloProto = helloProto
+module.exports.smgProto = smgProto
