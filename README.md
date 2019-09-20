@@ -1,22 +1,3 @@
-## Directory
-<!-- TOC -->
-
-- [Directory](#directory)
-- [Usage](#usage)
-    - [For Dev](#for-dev)
-    - [For ApiDoc](#for-apidoc)
-    - [For Prod](#for-prod)
-    - [For Test](#for-test)
-- [Standard](#standard)
-    - [Http status and Http reponse](#http-status-and-http-reponse)
-        - [Reponse Success](#reponse-success)
-        - [Reponse Error](#reponse-error)
-    - [Global object](#global-object)
-    - [Logger](#logger)
-- [MIT License](#mit-license)
-
-<!-- /TOC -->
-
 ## Function list
 | 功能 | 是否集成 |
 | ------ | ------ |
@@ -32,97 +13,31 @@
 | 代理Http | 是 |
 | 角色控制 | 是 |
 | GRPC远程服务 | 是 |
+| 单元测试 | 是 |
+| Api文档 | 是 |
 | GRPC远程调用 | 是 |
 
 ## Usage
-```javascript
-const app = require('./app')
-const juglans = require('./juglans')
-const logger = require('./addition').logger
-app.Use(({ events }) => {
-    events.on(juglans.events.SYS_JUGLANS_PLUGINS_RUNIMMEDIATELY_SUCCEED, function (message) {
-        logger.info(message)
-    })
-})
-app.Run()
-```
 
-### For Dev
+- For Dev
 ```shell
-$ npm install
-$ npm run dev
+npm install
+npm run dev
 ```
 
-### For ApiDoc
-![Juglans flash](./assets/apidoc.png)
+- For ApiDoc
+```sh
+npm run doc
+```
 
-### For Prod
+- For Prod
 ```shell
-$ npm install
-$ npm run build
+npm run build
 ```
 
-### For Test
+- For Test
 ```shell
-$ npm run test
-```
-
-##  Standard
-### Http status and Http reponse
-#### Reponse Success
-```javascript
-ctx.status = 200
-ctx.body = {
-    message: I18N.i18nLocale('ok')
-}
-```
-
-#### Reponse Error
-```javascript
-logger.error(error.stack)
-ctx.status = 500
-ctx.body = {
-    message: 'the request failed',
-    stack: error.stack || error.message
-}
-```
-
-### Global object
-```javascript
-// ./addition
-repo.logger = logger.
-    add(new winston.transports.File({
-      filename: path.join(config.logger.path, 'error.log'),
-      level: 'error',
-      maxsize: config.logger.maxsize
-    })).
-    add(new winston.transports.File({
-      filename: path.join(config.logger.path, 'combined.log'),
-      maxsize: config.logger.maxsize
-    }))
-repo.request = fetch
-```
-
-### Logger
-```javascript
-module.exports = ({ router, events }) => {
-  // routes: api/v1/mgo/user
-  SeqExt.api.List(router, 'User')
-    .Post(async function (ctx) {
-      logger.info('User model post hook')
-    })
-    .Auth(ctx => true)
-  // routes: api/v1/mgo/feature1/user
-  SeqExt.api.Feature('feature1').List(router, 'User')
-  // routes: api/v1/mgo/feature1/subFeature1/user
-  SeqExt.api.Feature('feature1').Feature('subFeature1').List(router, 'User')
-  // routes: api/v1/mgo/custom/user
-  SeqExt.api.Feature('feature1').Feature('subFeature1').Name('custom').List(router, 'User')
-  SeqExt.api.One(router, 'User')
-  SeqExt.api.Delete(router, 'User')
-  SeqExt.api.Update(router, 'User')
-  SeqExt.api.Create(router, 'User')
-}
+npm run test
 ```
 
 ## MIT License
