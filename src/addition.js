@@ -4,6 +4,7 @@
 
 const path = require('path')
 const fetch = require('node-fetch')
+const nodemailer = require('nodemailer')
 const config = require('./config')
 const additions = require('../../juglans-addition')
 const locales = require('./config/locales.json')
@@ -125,4 +126,25 @@ repo.grpc = function (address, opt) {
     const client = new Srv(address, opt)
     return cb(client)
   }
+}
+
+// global email
+const transporter = nodemailer.createTransport({
+  host: 'smtp.ethereal.email',
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: 'xxx',
+    pass: 'xxx'
+  }
+})
+repo.dialEmail = async function (opts = {}) {
+  return transporter.sendMail({
+    from: 'xx',
+    to: 'xx',
+    subject: 'Hello ✔',
+    text: 'Hello world?',
+    html: '<b>Hello world?</b>',
+    ...opts
+  })
 }
