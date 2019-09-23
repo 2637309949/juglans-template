@@ -7,7 +7,7 @@ syntax = "proto3";
 package pb;
 
 // The greeting service definition.
-service SendMessage {
+service Message {
   // Sends a greeting
   rpc SendEmail (EmailRequest) returns (EmailReply) {}
   rpc SendCode (CodeRequest) returns (CodeReply) {}

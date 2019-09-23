@@ -7,73 +7,73 @@
 //
 'use strict';
 var grpc = require('grpc');
-var sendmessage_pb = require('./sendmessage_pb.js');
+var message_pb = require('./message_pb.js');
 
 function serialize_pb_CodeReply(arg) {
-  if (!(arg instanceof sendmessage_pb.CodeReply)) {
+  if (!(arg instanceof message_pb.CodeReply)) {
     throw new Error('Expected argument of type pb.CodeReply');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
 function deserialize_pb_CodeReply(buffer_arg) {
-  return sendmessage_pb.CodeReply.deserializeBinary(new Uint8Array(buffer_arg));
+  return message_pb.CodeReply.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_pb_CodeRequest(arg) {
-  if (!(arg instanceof sendmessage_pb.CodeRequest)) {
+  if (!(arg instanceof message_pb.CodeRequest)) {
     throw new Error('Expected argument of type pb.CodeRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
 function deserialize_pb_CodeRequest(buffer_arg) {
-  return sendmessage_pb.CodeRequest.deserializeBinary(new Uint8Array(buffer_arg));
+  return message_pb.CodeRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_pb_EmailReply(arg) {
-  if (!(arg instanceof sendmessage_pb.EmailReply)) {
+  if (!(arg instanceof message_pb.EmailReply)) {
     throw new Error('Expected argument of type pb.EmailReply');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
 function deserialize_pb_EmailReply(buffer_arg) {
-  return sendmessage_pb.EmailReply.deserializeBinary(new Uint8Array(buffer_arg));
+  return message_pb.EmailReply.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_pb_EmailRequest(arg) {
-  if (!(arg instanceof sendmessage_pb.EmailRequest)) {
+  if (!(arg instanceof message_pb.EmailRequest)) {
     throw new Error('Expected argument of type pb.EmailRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
 function deserialize_pb_EmailRequest(buffer_arg) {
-  return sendmessage_pb.EmailRequest.deserializeBinary(new Uint8Array(buffer_arg));
+  return message_pb.EmailRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 
 // The greeting service definition.
-var SendMessageService = exports.SendMessageService = {
+var MessageService = exports.MessageService = {
   // Sends a greeting
   sendEmail: {
-    path: '/pb.SendMessage/SendEmail',
+    path: '/pb.Message/SendEmail',
     requestStream: false,
     responseStream: false,
-    requestType: sendmessage_pb.EmailRequest,
-    responseType: sendmessage_pb.EmailReply,
+    requestType: message_pb.EmailRequest,
+    responseType: message_pb.EmailReply,
     requestSerialize: serialize_pb_EmailRequest,
     requestDeserialize: deserialize_pb_EmailRequest,
     responseSerialize: serialize_pb_EmailReply,
     responseDeserialize: deserialize_pb_EmailReply,
   },
   sendCode: {
-    path: '/pb.SendMessage/SendCode',
+    path: '/pb.Message/SendCode',
     requestStream: false,
     responseStream: false,
-    requestType: sendmessage_pb.CodeRequest,
-    responseType: sendmessage_pb.CodeReply,
+    requestType: message_pb.CodeRequest,
+    responseType: message_pb.CodeReply,
     requestSerialize: serialize_pb_CodeRequest,
     requestDeserialize: deserialize_pb_CodeRequest,
     responseSerialize: serialize_pb_CodeReply,
@@ -81,4 +81,4 @@ var SendMessageService = exports.SendMessageService = {
   },
 };
 
-exports.SendMessageClient = grpc.makeGenericClientConstructor(SendMessageService);
+exports.MessageClient = grpc.makeGenericClientConstructor(MessageService);

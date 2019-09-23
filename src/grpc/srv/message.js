@@ -2,8 +2,8 @@
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-const messages = require('../pb/sendmessage_pb')
-const services = require('../pb/sendmessage_grpc_pb')
+const messages = require('../pb/message_pb')
+const services = require('../pb/message_grpc_pb')
 
 // 注意： proto3定义的大写函数，grpc_tools_node_protoc插件生成的代码自动转成小写开头
 function sendEmail (call, callback) {
@@ -22,5 +22,5 @@ function sendCode (call, callback) {
 }
 
 module.exports = function ({ grpcProxy }) {
-  grpcProxy.addService(services.SendMessageService, {sendEmail, sendCode})
+  grpcProxy.addService(services.MessageService, {sendEmail, sendCode})
 }
