@@ -5,10 +5,10 @@
 require('./addition')
 
 const cfg = require('./config')
-const Juglans = require('./juglans')
+const juglans = require('./juglans')
 const injects = require('./injects')
 
-const app = new Juglans({ name: 'Juglans V1.0' })
+const app = juglans.Default({ name: 'Juglans V1.0' })
 app.Config(cfg, { name: 'juglans test v1.1' })
 app.Inject(injects, { test: 'xx' })
 
