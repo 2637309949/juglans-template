@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 
 const model = require('./Model')
-const EVENTS = require('../../juglans').events
 const {SeqExt, Sequelize} = require('../../addition')
 require('./User')
 
@@ -47,33 +46,30 @@ const User = SeqExt.Model('User')
 Permission.belongsTo(User, {foreignKey: '_creator', as: 'creator'})
 Permission.belongsTo(User, {foreignKey: '_updator', as: 'updator'})
 
-module.exports = function ({ events }) {
-  events.on(EVENTS.EventsRunning, async function (message) {
-    await new Promise((resolve, reject) => {
-      setTimeout(function () {
-        resolve()
-      }, 2000)
-    })
-    const Param = SeqExt.Model('Param')
-    await Param.addEnum({
-      model: 'permission',
-      key: 'type',
-      value: [{
-        key: '一级菜单',
-        value: '101'
-      }, {
-        key: '二级菜单',
-        value: '102'
-      }, {
-        key: '三级菜单',
-        value: '103'
-      }, {
-        key: '按钮',
-        value: '104'
-      }, {
-        key: '自定义',
-        value: '105'
-      }]
-    })
+module.exports = function ({ lifecycle, events }) {
+  lifecycle.Append({
+    async onStart (ctx) {
+      const Param = SeqExt.Model('Param')
+      await Param.addEnum({
+        model: 'permission',
+        key: 'type',
+        value: [{
+          key: '一级菜单',
+          value: '101'
+        }, {
+          key: '二级菜单',
+          value: '102'
+        }, {
+          key: '三级菜单',
+          value: '103'
+        }, {
+          key: '按钮',
+          value: '104'
+        }, {
+          key: '自定义',
+          value: '105'
+        }]
+      })
+    }
   })
 }

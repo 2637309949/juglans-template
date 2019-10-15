@@ -25,7 +25,21 @@ SeqExt.Register({
   name: 'Param',
   displayName: '参数配置',
   autoHook: true,
-  schema
+  schema,
+  opts: {
+    routeHooks: {
+      one: {
+        cond: function (cond, ctx, info) {
+          return cond
+        }
+      },
+      list: {
+        cond: function (cond, ctx, info) {
+          return cond
+        }
+      }
+    }
+  }
 })
 
 const Property = SeqExt.Model('Property')
